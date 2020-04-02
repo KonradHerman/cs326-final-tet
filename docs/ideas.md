@@ -9,7 +9,7 @@
 
 4. Innovative Idea
 
-Our application can be viewed much like a Tinder or Facebook Groups but for in person board games. You set up a profile with Games you have and games you want to play. You can also search for specific games. When doing so, users that would like to play, whether or not they own the game will show up in search, sorted by distance. You can message people either through discord or the website itself to set up games. Setting up the games will be left mostly to the users themselves, we may implement a groups feature where users can create a group of people they have found to play a particular game. Zoom or discord links can be sent as well in case people want to play a game remotely which is becoming more relevant and realistic with the current crisis. The point of our application is connecting users who want to find other people who enjoy the same games.
+    Our application can be viewed much like a Tinder or Facebook Groups but for in person / online board games. You set up a profile with Games you have and games you want to play. You can also search for specific games. When doing so, users that would like to play, whether or not they own the game will show up in search, sorted by distance. You can message people either through discord or the website itself to set up games. Setting up the games will be left mostly to the users themselves, we may implement a groups feature where users can create a group of people they have found to play a particular game. Zoom or discord links can be sent as well in case people want to play a game remotely which is becoming more relevant and realistic with the current crisis. The point of our application is connecting users who enjoy the same games.
 
 5. Important Components
 
