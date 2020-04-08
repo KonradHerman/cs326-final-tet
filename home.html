@@ -1,77 +1,86 @@
 <html lang="en">
-    <head>
-        <title>Bootstrap Example</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div id="header" class="container-fluid">
-            <div class="col-sm-6 col-sm-offset-1">
-                <h1>BoredGames</h1>
-            </div>
-        </div>
-        <div class="container nav">
-            <ul class="nav navbar-nav">
-                <li>
-                    <h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>
-                </li>
-<!--            <div class="nav-col">-->
-<!--                <h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>-->
-<!--            </div>-->
-            </ul>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search for a game">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-        </div>
-        <div class="container">
-            <div class="row justify-content-around">
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5>Your Games</h5>
-                        </div>
-                        <div class="panel-body">
-                            <button type="button" class="btn btn-primary">Add Games</button>
-                            <table class="table table-borderless">
-                                <thead><tr>
-                                    <th scope="col">Game</th>
-                                    <th scope="col">Players Nearby</th>
-                                </tr></thead>
-                                <tbody>
-                                    <tr>
-                                        <td >Azul</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td >Secret Hitler</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bohnanza</td>
-                                        <td>834N5</td>
-                                    </tr>
-                                </tbody>
 
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5>Messages</h5>
-                        </div>
-                        <div class="panel-body">Will add message implementation later :)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+<head>
+	<title>Home</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div id="header" class="container-fluid">
+		<div class="col-sm-6 col-sm-offset-1">
+			<h1>BoredGames</h1>
+		</div>
+	</div>
+	<div class="container nav">
+		<ul class="nav navbar-nav">
+			<li>
+				<h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>
+			</li>
+			<!--            <div class="nav-col">-->
+			<!--                <h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>-->
+			<!--            </div>-->
+		</ul>
+		<form class="navbar-form navbar-right">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search for a game">
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+	<div class="container">
+		<div class="row justify-content-around">
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5>Your Games</h5>
+					</div>
+					<div class="panel-body">
+						<button type="button" class="btn btn-primary">Add Games</button>
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<th scope="col">Game</th>
+									<th scope="col">Players Nearby</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Azul</td>
+									<td>50</td>
+								</tr>
+								<tr>
+									<td>Secret Hitler</td>
+									<td>100</td>
+								</tr>
+								<tr>
+									<td>Bohnanza</td>
+									<td>834N5</td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5>Messages</h5>
+					</div>
+					<div class="panel-body">Will add message implementation later :)</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>

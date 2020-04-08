@@ -4,33 +4,119 @@
 <head>
 	<title>Profile Page</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
-		</script>
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-	<div class="container-fluid">
-		<nav class="navbar navbar-light bg-light">
-			<a class="navbar-brand" href="#">
-				Bored Games
-			</a>
-		</nav>
-		<div class="col-sm-3">
-			<div class="row">
-				<span class="border border-dark"><img src="#" alt="Profile Picture" class="rounded-circle rounded-sm"
-						style="max-width: 75px">
-				</span>
-
-			</div>
+	<div id="header" class="container-fluid">
+		<div class="col-sm-6 col-sm-offset-1">
+			<h1>BoredGames</h1>
 		</div>
 	</div>
+	<div class="container nav">
+		<ul class="nav navbar-nav">
+			<li>
+				<h3>Your Profile:</h3>
+			</li>
+		</ul>
+		<form class="navbar-form navbar-right">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search for a game">
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+	<div class="container">
+		<div class="col-sm-3">
+			<div class="card" style="width: 18rem;">
+				<img src="default-user.png" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Username</h5>
+					<p class="card-text">User details, and location.
+					</p>
+					<a href="#" class="btn btn-primary">Edit</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-9">
+			<div class="row mb-4">
+				<div class="col">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h5>Games I own</h5>
+						</div>
+						<div class="panel-body">
+							<div class="list-group list-group-flush">
+								<a href="#" class="list-group-item list-group-item-action ">Game 1</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 2</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 3</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 4</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 5</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add Game
+							<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">Game 1</a></li>
+							<li><a href="#">Game 2</a></li>
+							<li class="divider"></li>
+							<li><a href="#" class="text-danger">Cancel</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h5>Games I Want to play</h5>
+						</div>
+						<div class="panel-body">
+							<div class="list-group list-group-flush">
+								<a href="#" class="list-group-item list-group-item-action ">Game 1</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 2</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 3</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 4</a>
+								<a href="#" class="list-group-item list-group-item-action">Game 5</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add Game
+							<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">Game 1</a></li>
+							<li><a href="#">Game 2</a></li>
+							<li class="divider"></li>
+							<li><a href="#" class="text-danger">Cancel</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 
+	</div>
 </body>
 
 </html>
