@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Create Account</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet"
+		href="C:\Users\kashi\OneDrive\Documents\GitHub\cs326-final-tet\font-awesome-4.7.0\css\font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="js/create-account.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+
+</head>
+
+<body>
+	<div id="header" class="container-fluid m-4">
+		<div class="col-sm-6 col-sm-offset-1">
+			<h1>BoredGames</h1>
+		</div>
+	</div>
+	<div class="container nav">
+		<ul class="nav navbar-nav">
+			<li>
+				<h3>Sign Up</h3>
+			</li>
+		</ul>
+	</div>
+	<div class="container">
+		<div class="form-group">
+			<label>Upload Profile Picture</label>
+			<div class="input-group">
+				<span class="input-group-btn">
+					<span class="btn btn-default btn-file">
+						Browse… <input type="file" id="imgInp">
+					</span>
+				</span>
+				<input type="text" class="form-control" readonly>
+			</div>
+			<img id='img-upload' />
+		</div>
+		<form>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Email address</label>
+				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="Enter email">
+				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">Password</label>
+				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<label for="exampleInputPassword2">Confirm Password</label>
+				<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+			</div>
+			<div class="container">
+				<div class="row">
+					<input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+					<div id="map"></div>
+				</div>
+			</div>
+			<div class="form-group form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">I acknowledge that I have read, and do hereby accept the
+					terms
+					and conditions</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+
+</body>
+
+</html>
