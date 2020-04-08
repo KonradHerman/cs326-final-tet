@@ -8,4 +8,5 @@ The only public data will be username and list of games they play/own.
 The geo-location will be provided by the user and they only have to give their town name,
 not street address, although they may use current location to make their experience easier.</p>
 <h2>Part 1: Wireframes</h2>
+![Board of frames](boredgames@2x.png)
 <h2>HTML and CSS</h2>
