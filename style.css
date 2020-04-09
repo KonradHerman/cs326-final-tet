@@ -12,20 +12,24 @@
 
 #nav-bar a{
   color:white;
+  background-color: cornflowerblue;
 }
 
 #nav-bar a:hover {
   background-color: cornflowerblue;
 }
 
-#nav-bar ul:active {
-  background-color: cornflowerblue;
+#nav-dropdown a{
+  background-color: white;
 }
 
+#navbarDropdownMenuLink {
+  overflow: visible;
+}
 
-.btn-file {
+/* .btn-file {
   overflow: hidden;
-}
+} */
 .btn-file input[type="file"] {
   position: absolute;
   top: 0;
