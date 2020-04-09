@@ -3,6 +3,26 @@
   background-color: cornflowerblue;
   color: white;
 }
+
+#nav-bar{
+  background-color: cornflowerblue;
+  color:white;
+  font-size: 14pt;
+}
+
+#nav-bar a{
+  color:white;
+}
+
+#nav-bar a:hover {
+  background-color: cornflowerblue;
+}
+
+#nav-bar ul:active {
+  background-color: cornflowerblue;
+}
+
+
 .btn-file {
   overflow: hidden;
 }
@@ -50,4 +70,13 @@
 }
 #searchInput:focus {
   border-color: #4d90fe;
+}
+
+#search-card {
+  width: 18rem; 
+  background-color:#bbb; 
+  border-radius: 5px; text-align: center; 
+  margin-top: 5px; 
+  padding: 3px; 
+  display: inline-block;
 }
