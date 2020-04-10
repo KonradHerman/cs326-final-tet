@@ -24,31 +24,128 @@
 
 <body>
 
-	<div id="header" class="container-fluid m-4">
-		<div class="col-sm-6 col-sm-offset-1">
-			<h1>BoredGames</h1>
+	<nav class="navbar" id= "nav-bar">
+		<div class="container-fluid">
+		  <div class="navbar-header">
+			<span class="navbar-brand" style="font-size: 20pt;">BoredGames</span>
+		  </div>
+		  <ul class="nav navbar-nav">
+			<li><a href="home.html">Home</a></li>
+			<li><a href="search.html">Search</a></li>
+			<li><a href="discover.html">Discover</a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a href= "#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;">Username
+				</a>
+				<ul class="dropdown-menu" id= "nav-dropdown">
+					<li><a href="profile.html" style="color: cornflowerblue;">profile</a></li>
+					<li><a href="#" style="color: cornflowerblue;">settings</a></li>
+					<li><a href="#" style="color: cornflowerblue;">messages</a></li>
+					<li><a href="#" style="color: cornflowerblue;">log out</a></li>
+				  </ul>
+			  </li>
+		  </ul>
 		</div>
-	</div>
-	<div class="container nav">
-		<div class="md-form">
-			<input class="form-control" type="text" placeholder="Enter an email, game or location" aria-label="Search">
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="default-user.png" alt="Profile Picture">
-					<div class="card-body">
-						<h5 class="card-title">User 1</h5>
-						<p class="card-text">Hi, I am User1! This is my profile!</p>
-						<a href="#" class="btn btn-primary">Visit Profile</a>
-					</div>
-				</div>
-			</div>
+	</nav> 
 
+
+	<div class="container nav" style= "width: 70%">
+		<div class="md-form">
+			<input class="form-control" type="text" placeholder="Enter an email, game or location" aria-label="Search" style= "width: 90%; margin-top: 15px; display: inline-block;">
+				<button type="submit" class="btn btn-primary">Search</button>
+			<br>
+			<div class="dropdown" align= "left" style="margin-top: 15px;">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="display: inline-block;">Change Radius
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+				  <li><a href="#">5 miles</a></li>
+				  <li><a href="#">10 miles</a></li>
+				  <li><a href="#">25 miles</a></li>
+				  <li><a href="#">50 miles</a></li>
+				</ul>
+			</div> 
 		</div>
 	</div>
+	
+	<div style="width: 70%; margin: auto; margin-top: 15px; text-align: left;">
+		<div class="card" id= "search-card"> 
+			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
+			<a href="#" class="btn btn-default">View Profile</a>
+			<div class="card-body" style="margin-left: 4rem; text-align: left;">
+				<h5 class="card-title">Search Result 1</h5>
+				<p class="card-text">Searched Game</p>
+				<p class="card-text">Owns Game</p>
+			</div>
+			<a href="#" class="btn btn-primary">Send Message</a>
+		</div>
+
+		<div style= "width: 1rem; display: inline-block;"></div>
+		<div class="card" id= "search-card"> 
+			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
+			<a href="#" class="btn btn-default">View Profile</a>
+			<div class="card-body" style="margin-left: 4rem; text-align: left;">
+				<h5 class="card-title">Search Result 2</h5>
+				<p class="card-text">Searched Game</p>
+				<p class="card-text">Owns Game</p>
+			</div>
+			<a href="#" class="btn btn-primary">Send Message</a>
+		</div>
+
+		<div style= "width: 1rem; display: inline-block;"></div>
+		<div class="card" id= "search-card"> 
+			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
+			<a href="#" class="btn btn-default">View Profile</a>
+			<div class="card-body" style="margin-left: 4rem; text-align: left;">
+				<h5 class="card-title">Search Result 3</h5>
+				<p class="card-text">Searched Game</p>
+				<p class="card-text">Owns Game</p>
+			</div>
+			<a href="#" class="btn btn-primary">Send Message</a>
+		</div>
+
+		<div style= "width: 1rem; display: inline-block;"></div>
+		<div class="card" id= "search-card"> 
+			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
+			<a href="#" class="btn btn-default">View Profile</a>
+			<div class="card-body" style="margin-left: 4rem; text-align: left;">
+				<h5 class="card-title">Search Result 4</h5>
+				<p class="card-text">Searched Game</p>
+				<p class="card-text">Owns Game</p>
+			</div>
+			<a href="#" class="btn btn-primary">Send Message</a>
+		</div>
+		
+		<div style= "width: 1rem; display: inline-block;"></div>
+		<div class="card" id= "search-card"> 
+			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
+			<a href="#" class="btn btn-default">View Profile</a>
+			<div class="card-body" style="margin-left: 4rem; text-align: left;">
+				<h5 class="card-title">Search Result 5</h5>
+				<p class="card-text">Searched Game</p>
+				<p class="card-text">Owns Game</p>
+			</div>
+			<a href="#" class="btn btn-primary">Send Message</a>
+		</div>
+
+		<div style= "width: 1rem; display: inline-block;"></div>
+
+		<div class="card" id= "search-card">
+			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
+			<a href="#" class="btn btn-default">View Profile</a>
+			<div class="card-body" style="margin-left: 4rem; text-align: left;">
+				<h5 class="card-title">Search Result 6</h5>
+				<p class="card-text">Searched Game</p>
+				<p class="card-text">Owns Game</p>
+			</div>
+			<a href="#" class="btn btn-primary">Send Message</a>
+		</div>
+
+		
+
+	</div>
+
 </body>
 
 </html>

@@ -3,9 +3,33 @@
   background-color: cornflowerblue;
   color: white;
 }
-.btn-file {
-  overflow: hidden;
+
+#nav-bar{
+  background-color: cornflowerblue;
+  color:white;
+  font-size: 14pt;
 }
+
+#nav-bar a{
+  color:white;
+  background-color: cornflowerblue;
+}
+
+#nav-bar a:hover {
+  background-color: cornflowerblue;
+}
+
+#nav-dropdown a{
+  background-color: white;
+}
+
+#navbarDropdownMenuLink {
+  overflow: visible;
+}
+
+/* .btn-file {
+  overflow: hidden;
+} */
 .btn-file input[type="file"] {
   position: absolute;
   top: 0;
@@ -50,4 +74,30 @@
 }
 #searchInput:focus {
   border-color: #4d90fe;
+}
+
+#search-card {
+  width: 18rem; 
+  background-color:#bbb; 
+  border-radius: 5px; 
+  text-align: center; 
+  margin-top: 5px; 
+  padding: 3px; 
+  display: inline-block;
+}
+
+#discover-card {
+  width: 100%;
+  background-color: #bbb;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 15px;
+  display: inline-block;
+}
+
+.game-image {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  text-align: right;
 }
