@@ -1,15 +1,20 @@
 #Tet Milestone 2
 by Konrad, Kash, and Doug
-##API Documentation
+##Games API Documentation
 <!--
 we need an api for get/update game description, and get/update user profile
 i think we should skip delete functionality for now
 for example:
 -->
-###Create Game
-####Overview
+Users will be able to create and read games from the database.
+###Create
+This will allow us to create new games using the information on boardgamegeek.com. The user will put in the games url and using BGG's API will we fetch relevant data about the game so the user does not have to do it themselves.
 ####Endpoint URI and Parameters
+`/games/create?<Parameter>=<Value>`
+
+
 #### Responses
+##Users API Documentation
 <!--
 do this for each API ( read, update, delete, etc.)
 -->
