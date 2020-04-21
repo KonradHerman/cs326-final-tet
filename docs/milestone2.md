@@ -13,11 +13,6 @@ for example:
 <!--
 do this for each API ( read, update, delete, etc.)
 -->
-##Back-end Skeleton Code
-<!--
-server just needs to have the specified calls (put, get, etc)
-we will use fake actual data
--->
 ##Front-end Typescript
 Your team created a polished web interface with HTML and CSS code in the last milestone. Now, you will need to glue them together. In this part, your team will need to implement all functions using TypeScript which the client side uses to perform CRUD operations on the server side, and render it on the HTML page with the fetched data. Once you are done, please take four screenshots with a brief description for your user interface to illustrate each of the Create, Read, Update, and Delete operations and include them in your docs/milestone2.md.
 ##Deployment

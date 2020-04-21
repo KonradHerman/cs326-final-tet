@@ -32,7 +32,6 @@
 		  <ul class="nav navbar-nav">
 			<li><a href="home.html">Home</a></li>
 			<li><a href="search.html">Search</a></li>
-			<li><a href="discover.html">Discover</a></li>
 		  </ul>
 		  <ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
@@ -52,9 +51,9 @@
 
 
 	<div class="container nav" style= "width: 70%">
-		<div class="md-form">
-			<input class="form-control" type="text" placeholder="Enter an email, game or location" aria-label="Search" style= "width: 90%; margin-top: 15px; display: inline-block;">
-				<button type="submit" class="btn btn-primary">Search</button>
+		<form class="md-form" method="GET">
+			<input class="form-control" type="text" name="q" placeholder="Enter an email, game or location" aria-label="Search" style= "width: 90%; margin-top: 15px; display: inline-block;">
+			<button type="submit" class="btn btn-primary">Search</button>
 			<br>
 			<div class="dropdown" align= "left" style="margin-top: 15px;">
 				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="display: inline-block;">Change Radius
@@ -66,7 +65,7 @@
 				  <li><a href="#">50 miles</a></li>
 				</ul>
 			</div> 
-		</div>
+		</form>
 	</div>
 	
 	<div style="width: 70%; margin: auto; margin-top: 15px; text-align: left;">
