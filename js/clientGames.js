@@ -31,11 +31,7 @@ function gameRead() {
 		const j = await resp.json();
 		if (j["result"] !== "error") {
 			document.getElementById("output").innerHTML +=
-				'<option data-tokens="' +
-				counterName +
-				'">' +
-				counterName +
-				"</option>";
+				'<option data-tokens="' + j["value"] + '">' + j["value"] + "</option>";
 		} else {
 			document.getElementById("output").innerHTML =
 				"200: " + userName + ", " + counterName + " not found.</b>";
