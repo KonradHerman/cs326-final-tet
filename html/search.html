@@ -6,11 +6,14 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/js/bootstrap-select.min.js"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/css/bootstrap-select.min.css">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -52,99 +55,14 @@
 
 
 	<div class="container nav" style="width: 70%">
-		<form class="md-form" method="GET">
-			<input class="form-control" type="text" name="q" placeholder="Enter an email, game or location"
-				aria-label="Search" style="width: 90%; margin-top: 15px; display: inline-block;">
-			<button type="submit" class="btn btn-primary">Search</button>
-			<br>
-			<div class="dropdown" align="left" style="margin-top: 15px;">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-					style="display: inline-block;">Change Radius
-					<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a href="#">5 miles</a></li>
-					<li><a href="#">10 miles</a></li>
-					<li><a href="#">25 miles</a></li>
-					<li><a href="#">50 miles</a></li>
-				</ul>
-			</div>
-		</form>
+		<select class="selectpicker w-100" data-live-search="true"
+			style="width: 90%; margin-top: 15px; display: inline-block;">
+			<option data-tokens="ketchup mustard">Azul</option>
+			<option data-tokens="mustard">Chess</option>
+			<option data-tokens="frosting">Secret Hitler</option>
+		</select>
+		<button type="submit" class="btn btn-default">Add Game</button>
 	</div>
-
-	<div style="width: 70%; margin: auto; margin-top: 15px; text-align: left;">
-		<div class="card" id="search-card">
-			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
-			<a href="#" class="btn btn-default">View Profile</a>
-			<div class="card-body" style="margin-left: 4rem; text-align: left;">
-				<h5 class="card-title">Search Result 1</h5>
-				<p class="card-text">Searched Game</p>
-				<p class="card-text">Owns Game</p>
-			</div>
-			<a href="#" class="btn btn-primary">Send Message</a>
-		</div>
-
-		<div style="width: 1rem; display: inline-block;"></div>
-		<div class="card" id="search-card">
-			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
-			<a href="#" class="btn btn-default">View Profile</a>
-			<div class="card-body" style="margin-left: 4rem; text-align: left;">
-				<h5 class="card-title">Search Result 2</h5>
-				<p class="card-text">Searched Game</p>
-				<p class="card-text">Owns Game</p>
-			</div>
-			<a href="#" class="btn btn-primary">Send Message</a>
-		</div>
-
-		<div style="width: 1rem; display: inline-block;"></div>
-		<div class="card" id="search-card">
-			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
-			<a href="#" class="btn btn-default">View Profile</a>
-			<div class="card-body" style="margin-left: 4rem; text-align: left;">
-				<h5 class="card-title">Search Result 3</h5>
-				<p class="card-text">Searched Game</p>
-				<p class="card-text">Owns Game</p>
-			</div>
-			<a href="#" class="btn btn-primary">Send Message</a>
-		</div>
-
-		<div style="width: 1rem; display: inline-block;"></div>
-		<div class="card" id="search-card">
-			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
-			<a href="#" class="btn btn-default">View Profile</a>
-			<div class="card-body" style="margin-left: 4rem; text-align: left;">
-				<h5 class="card-title">Search Result 4</h5>
-				<p class="card-text">Searched Game</p>
-				<p class="card-text">Owns Game</p>
-			</div>
-			<a href="#" class="btn btn-primary">Send Message</a>
-		</div>
-
-		<div style="width: 1rem; display: inline-block;"></div>
-		<div class="card" id="search-card">
-			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
-			<a href="#" class="btn btn-default">View Profile</a>
-			<div class="card-body" style="margin-left: 4rem; text-align: left;">
-				<h5 class="card-title">Search Result 5</h5>
-				<p class="card-text">Searched Game</p>
-				<p class="card-text">Owns Game</p>
-			</div>
-			<a href="#" class="btn btn-primary">Send Message</a>
-		</div>
-
-		<div style="width: 1rem; display: inline-block;"></div>
-
-		<div class="card" id="search-card">
-			<img class="card-img-top" src="default-user.png" alt="Profile Picture" style="align-self: center;">
-			<a href="#" class="btn btn-default">View Profile</a>
-			<div class="card-body" style="margin-left: 4rem; text-align: left;">
-				<h5 class="card-title">Search Result 6</h5>
-				<p class="card-text">Searched Game</p>
-				<p class="card-text">Owns Game</p>
-			</div>
-			<a href="#" class="btn btn-primary">Send Message</a>
-		</div>
-
-
 	</div>
 
 </body>
