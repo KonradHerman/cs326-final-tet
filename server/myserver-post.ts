@@ -107,9 +107,13 @@ export class MyServer {
 
 	public async readCounter(name: string, response): Promise<void> {
 		let values = [];
-		let value = await this.theDatabase.get(name);
+		for (let i = 0; i < 10; ++i) {
+			let num = "" + i;
+			values.push(await this.theDatabase.get(num));
+		}
+
 		response.write(
-			JSON.stringify({ result: "read", name: name, value: value })
+			JSON.stringify({ result: "read", name: name, value: values })
 		);
 		response.end();
 	}

@@ -30,8 +30,10 @@ function gameRead() {
 		const resp = await postData(newURL, data); // used to be fetch -- (3)
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			document.getElementById("output").innerHTML +=
-				'<option data-tokens="' + j["value"] + '">' + j["value"] + "</option>";
+			for (const element of j["value"]) {
+				document.getElementById("output").innerHTML +=
+					'<option data-tokens="' + element + '">' + element + "</option>";
+			}
 		} else {
 			document.getElementById("output").innerHTML =
 				"200: " + userName + ", " + counterName + " not found.</b>";
