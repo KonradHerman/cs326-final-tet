@@ -1,6 +1,6 @@
 "use strict";
 
-import { Database } from "./mongox-database";
+import { Database } from "./mongo-database";
 import { MyServer } from "./myserver-post";
 
 const theDatabase = new Database("kashsomani"); // CHANGE THIS
