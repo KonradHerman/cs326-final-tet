@@ -30,8 +30,9 @@ function gameReadAll() {
 		console.log("counterCreate: fetching " + newURL);
 		const resp = await postData(newURL); // used to be fetch -- (3)
 		const j = await resp.json();
+		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			for (const element of j["value"]) {
+			for (const element of j["games"]) {
 				document.getElementById("output").innerHTML +=
 					'<a class="dropdown-item" href="#">' + element.name + "</a>";
 			}

@@ -27,8 +27,8 @@ export class MyServer {
 		this.router.post("/users/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
 		this.router.post("/games/read", [
-			this.errorHandler.bind(this),
-			this.readHandler.bind(this),
+			//this.errorHandler.bind(this),
+			this.readHandler.bind(this)
 		]);
 		this.router.post("/users/:userId/update", [
 			this.errorHandler.bind(this),
