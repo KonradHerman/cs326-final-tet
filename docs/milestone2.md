@@ -31,22 +31,19 @@ The Games API returns response data in a JSON object. Details below.
 | name   | string     | The name of the game created.                             |
 
 ###Read
-This gives us the data stored in a specific games collection.
+This gives us an array of all the games collection.
 ####Endpoint URI and Parameters
-`{server:port}/games/read?<Parameter>=<Value>`
+`{server:port}/games/read`
 
-| Parameter | Description                       | Example                              |
-|-----------|-----------------------------------|--------------------------------------|
-| id        | (required) The id of the game     | `{server:port}/games/read?id=230802`|
+No parameters. 
+
 #### Responses
 The Games API returns response data in a JSON object. Details below.
 
 | Key    | Value Type | Description                                               |
 |--------|------------|-----------------------------------------------------------|
 | result | string     | The type of operation status: one of "read" or "error"    |
-| id     | number     | The  id used to fetch the information.                    |
-| own    | array      | Array of users who own that game.                         |
-| want   | array      | Array of users who want to play that game.                |
+| games  | array      | An array of objects containing all the games and their data.|
 
 ###Update
 This lets us update the games to add users to either the own or want array using a POST request.

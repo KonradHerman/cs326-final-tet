@@ -6,7 +6,7 @@ function gameCreate() {
 		let userName = document.getElementById("username").value;
 		// NEW: we no longer add info to the URL (for GET) but instead put it in a JSON object.
 		const data = { name: counterName }; // -- (1)
-		const newURL = url + "/users/" + userName + "/create"; // used to be ?name=" + counterName; -- (2)
+		const newURL = url + "/games/" + userName + "/create"; // used to be ?name=" + counterName; -- (2)
 		console.log("counterCreate: fetching " + newURL);
 		const resp = await postData(newURL, data); // used to be fetch -- (3)
 		const j = await resp.json();
@@ -22,12 +22,12 @@ function gameCreate() {
 
 function gameRead() {
 	(async () => {
-		let counterName = document.getElementById("countername").value;
+		//let counterName = document.getElementById("countername").value;
 		let userName = document.getElementById("username").value;
-		const data = { name: counterName }; // -- (1)
-		const newURL = url + "/users/" + userName + "/read"; // used to be ?name=" + counterName; -- (2)
+		//const data = { name: counterName }; // -- (1)
+		const newURL = url + "/games/read"; // used to be ?name=" + counterName; -- (2)
 		console.log("counterCreate: fetching " + newURL);
-		const resp = await postData(newURL, data); // used to be fetch -- (3)
+		const resp = await postData(newURL); // used to be fetch -- (3)
 		const j = await resp.json();
 		if (j["result"] !== "error") {
 			for (const element of j["value"]) {

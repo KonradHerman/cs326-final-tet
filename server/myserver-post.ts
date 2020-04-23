@@ -26,7 +26,7 @@ export class MyServer {
 		// Set a single handler for a route.
 		this.router.post("/users/:userId/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
-		this.router.post("/users/:userId/read", [
+		this.router.post("/games/read", [
 			this.errorHandler.bind(this),
 			this.readHandler.bind(this),
 		]);
@@ -105,15 +105,18 @@ export class MyServer {
 		response.end();
 	}
 
-	public async readCounter(name: string, response): Promise<void> {
-		let values = [];
-		for (let i = 0; i < 10; ++i) {
-			let num = "" + i;
-			values.push(await this.theDatabase.get(num));
-		}
+	public async readGames(name: string, response): Promise<void> {
+		// let values = [];
+		// for (let i = 0; i < 10; ++i) {
+		// 	let num = "" + i;
+		// 	values.push(await this.theDatabase.get(num));
+		// }
+		let games: Array<object> = [{name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443]},
+									{name: "Anomia", id: 23456, own: [59393, 29494], want: [93950, 14054]}
+									]
 
 		response.write(
-			JSON.stringify({ result: "read", name: name, value: values })
+			JSON.stringify({ result: "read", games: games })
 		);
 		response.end();
 	}
