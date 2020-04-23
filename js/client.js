@@ -2,28 +2,29 @@ const url = "http://localhost:8080/counter"; // NOTE NEW URL
 
 function gameCreate() {
 	(async () => {
-		let counterName = document.getElementById("countername").value;
-		let userName = document.getElementById("username").value;
-		// NEW: we no longer add info to the URL (for GET) but instead put it in a JSON object.
-		const data = { name: counterName }; // -- (1)
-		const newURL = url + "/games/" + userName + "/create"; // used to be ?name=" + counterName; -- (2)
+		//when creating a game, input id is "gamename"
+		let gameName = document.getElementById("gamename").value;
+		const data = { name: gameName };
+		const newURL = url + "/games/create"; // used to be ?name=" + counterName; -- (2)
 		console.log("counterCreate: fetching " + newURL);
 		const resp = await postData(newURL, data); // used to be fetch -- (3)
 		const j = await resp.json();
 		if (j["result"] !== "error") {
+			//success
 			document.getElementById("output").innerHTML =
 				"101: <b>" + userName + ", " + counterName + " created.</b>";
 		} else {
+			//error
 			document.getElementById("output").innerHTML =
 				"100: " + userName + ", " + counterName + " not found.</b>";
 		}
 	})();
 }
 
-function gameRead() {
+function gameReadAll() {
 	(async () => {
 		//let counterName = document.getElementById("countername").value;
-		let userName = document.getElementById("username").value;
+		//let userName = document.getElementById("username").value;
 		//const data = { name: counterName }; // -- (1)
 		const newURL = url + "/games/read"; // used to be ?name=" + counterName; -- (2)
 		console.log("counterCreate: fetching " + newURL);

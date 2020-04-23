@@ -24,7 +24,7 @@ export class MyServer {
 		// NEW: handle POST in JSON format
 		this.server.use(express.json());
 		// Set a single handler for a route.
-		this.router.post("/users/:userId/create", this.createHandler.bind(this));
+		this.router.post("/users/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
 		this.router.post("/games/read", [
 			this.errorHandler.bind(this),
@@ -60,8 +60,8 @@ export class MyServer {
 	}
 
 	private async createHandler(request, response): Promise<void> {
-		await this.createCounter(
-			request.params["userId"] + "-" + request.body.name,
+		await this.createGame(
+			request.body.name,
 			response
 		);
 	}
@@ -93,10 +93,10 @@ export class MyServer {
 		this.server.listen(port);
 	}
 
-	public async createCounter(name: string, response): Promise<void> {
+	public async createGame(name: string, response): Promise<void> {
 		console.log("creating counter named '" + name + "'");
-		await this.theDatabase.put(name, 0);
-		response.write(JSON.stringify({ result: "created", name: name, value: 0 }));
+		//await this.theDatabase.put(name, 0);
+		response.write(JSON.stringify({ result: "created", name: name, id: 39475 }));
 		response.end();
 	}
 
