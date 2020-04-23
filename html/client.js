@@ -6,17 +6,17 @@ function gameCreate() {
 		let gameName = document.getElementById("gamename").value;
 		const data = { name: gameName };
 		const newURL = url + "/games/create"; // used to be ?name=" + counterName; -- (2)
-		console.log("counterCreate: fetching " + newURL);
+		console.log("gameCreate: fetching " + newURL);
 		const resp = await postData(newURL, data); // used to be fetch -- (3)
 		const j = await resp.json();
 		if (j["result"] !== "error") {
 			//success
-			document.getElementById("output").innerHTML =
-				"101: <b>" + userName + ", " + counterName + " created.</b>";
+			let out = gameName + "created";
+			console.log(out);
 		} else {
 			//error
-			document.getElementById("output").innerHTML =
-				"100: " + userName + ", " + counterName + " not found.</b>";
+			let out = gameName + "not created";
+			console.log(out);
 		}
 	})();
 }
