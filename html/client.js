@@ -33,11 +33,11 @@ function gameReadAll() {
 		if (j["result"] !== "error") {
 			for (const element of j["value"]) {
 				document.getElementById("output").innerHTML +=
-					'<a class="dropdown-item" href="#">'+ element.name + '</a>';
+					'<a class="dropdown-item" href="#">' + element.name + "</a>";
 			}
 		} else {
 			document.getElementById("output").innerHTML =
-				"200: " + userName + ", " + counterName + " not found.</b>";
+				"200: " + "hi" + ", " + " not found.</b>";
 		}
 	})();
 }

@@ -60,18 +60,12 @@ export class MyServer {
 	}
 
 	private async createHandler(request, response): Promise<void> {
-		await this.createGame(
-			request.body.name,
-			response
-		);
+		await this.createGame(request.body.name, response);
 	}
 
 	private async readHandler(request, response): Promise<void> {
-		console.log(request.params["userId"]);
-		await this.readGames(
-			"test",
-			response
-		);
+		console.log("hi");
+		await this.readGames("test", response);
 	}
 
 	private async updateHandler(request, response): Promise<void> {
@@ -96,7 +90,9 @@ export class MyServer {
 	public async createGame(name: string, response): Promise<void> {
 		console.log("creating counter named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
-		response.write(JSON.stringify({ result: "created", name: name, id: 39475 }));
+		response.write(
+			JSON.stringify({ result: "created", name: name, id: 39475 })
+		);
 		response.end();
 	}
 
