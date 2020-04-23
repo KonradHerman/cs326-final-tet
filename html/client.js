@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/counter"; // NOTE NEW URL
+const url = "http://localhost:8081/counter"; // NOTE NEW URL
 
 function gameCreate() {
 	(async () => {
@@ -33,7 +33,7 @@ function gameReadAll() {
 		if (j["result"] !== "error") {
 			for (const element of j["value"]) {
 				document.getElementById("output").innerHTML +=
-					'<option data-tokens="' + element + '">' + element + "</option>";
+					'<a class="dropdown-item" href="#">'+ element.name + '</a>';
 			}
 		} else {
 			document.getElementById("output").innerHTML =

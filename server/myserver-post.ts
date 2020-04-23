@@ -68,8 +68,8 @@ export class MyServer {
 
 	private async readHandler(request, response): Promise<void> {
 		console.log(request.params["userId"]);
-		await this.readCounter(
-			request.params["userId"] + "-" + request.body.name,
+		await this.readGames(
+			"test",
 			response
 		);
 	}
