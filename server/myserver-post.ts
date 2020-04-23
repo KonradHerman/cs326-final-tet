@@ -111,13 +111,12 @@ export class MyServer {
 		// 	let num = "" + i;
 		// 	values.push(await this.theDatabase.get(num));
 		// }
-		let games: Array<object> = [{name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443]},
-									{name: "Anomia", id: 23456, own: [59393, 29494], want: [93950, 14054]}
-									]
+		let games: Array<object> = [
+			{ name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443] },
+			{ name: "Anomia", id: 23456, own: [59393, 29494], want: [93950, 14054] },
+		];
 
-		response.write(
-			JSON.stringify({ result: "read", games: games })
-		);
+		response.write(JSON.stringify({ result: "read", games: games }));
 		response.end();
 	}
 
