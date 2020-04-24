@@ -75,6 +75,8 @@ function gameUpdate() {
 		let userID = document.getElementById("userid").value;
 		let own = document.getElementById("own").value;
 		let add = document.getElementById("adding").value;
+		console.log(typeof own);
+		console.log(typeof add);
 		const newURL = url + "/games/update";
 		const data = { game: gameID, user: userID, own: own, add: add };
 		console.log("gameUpdate: fetching " + gameName);
