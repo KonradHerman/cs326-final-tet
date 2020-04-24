@@ -1,12 +1,6 @@
 #Tet Milestone 2
 by Konrad, Kash, and Doug
-##Games API Documentation
-game = {
-    name: Azul
-    id  : 1234
-    own : array of user ids
-    want: array of user ids
-}
+##Games API Documentations
 
 <!--
 we need an api for get/update game description, and get/update user profile
@@ -17,11 +11,11 @@ Users will be able to create and read games from the database.
 ###Create
 This will allow us to create new games. The user will put in the games name and a new game will be created with that name.
 ####Endpoint URI and Parameters
-`{server:port}/games/create?<Parameter>=<Value>`
+`{server:port}/games/create`
 
-| Parameter | Description                       | Example                                 |
-|-----------|-----------------------------------|-----------------------------------------|
-| name      | (required) The name of the game.  | `{server:port}/games/create?name=Azul` |
+| Parameter | Description                       | Example             |
+|-----------|-----------------------------------|---------------------|
+| name      | (required) The name of the game.  | `name:Secret Hitler`|
 #### Responses
 The Games API returns response data in a JSON object. Details below.
 
@@ -31,9 +25,28 @@ The Games API returns response data in a JSON object. Details below.
 | name   | string     | The name of the game created.                             |
 
 ###Read
-This gives us an array of all the games collection.
+This will allow us to create new games. The user will put in the games name and a new game will be created with that name.
 ####Endpoint URI and Parameters
 `{server:port}/games/read`
+
+| Parameter | Description                       | Example     |
+|-----------|-----------------------------------|-------------|
+| game      | (required) The id of the game.    | game: 19484 |
+#### Responses
+The Games API returns response data in a JSON object. Details below.
+
+| Key    | Value Type | Description                                            |
+|--------|------------|--------------------------------------------------------|
+| result | string     | The type of operation status: one of "read" or "error" |
+| name   | string     | The name of the game.                                  |
+| id     | number     | The id of the game.                                    |
+| own    | array      | Array of users who own the game.                       |
+| want   | array      | Array of users who want to play the game.              |
+
+###ReadAll
+This gives us an array of all the games collection.
+####Endpoint URI and Parameters
+`{server:port}/games/readall`
 
 No parameters. 
 
@@ -54,8 +67,8 @@ All parameters are required.
 
 | Parameter | Description                                                               | Example        |
 |-----------|---------------------------------------------------------------------------|----------------|
-| game        | The id of the game to update.                                             | id : 12345     |
-| user   | The user id to add/remove from the games collection.                      | user_id : 5678 |
+| game      | The id of the game to update.                                             | id : 12345     |
+| user      | The user id to add/remove from the games collection.                      | user_id : 5678 |
 | own       | Boolean value to determine whether we are updating the own or want array. | own : true     |
 | add       | Boolean value to determine whether we are adding or removing the user.    | add : true     |
 
@@ -67,15 +80,6 @@ All parameters are required.
 | id     | number     | The id of updated game.                                   |
 
 ##Users API Documentation
-
-user = {
-    username    : konrad
-    password    : passw0rd
-    picture     : penis.jpg
-    location    : google map location
-    own         : [{game name, id}, {game name, id}]
-    want        : [{game name, id}, {game name, id}]
-}
 
 ###Create
 This is called when a user creates an account.
@@ -101,7 +105,7 @@ This is called when a user creates an account.
 This will generally be called when viewing a user profile.
 
 ####Endpoint URI and Parameters
-`{server:port}/users/read?<parameter>=<val>`
+`{server:port}/users/read`
 
 | Parameter | Description                      | Example                            |
 |-----------|----------------------------------|------------------------------------|
