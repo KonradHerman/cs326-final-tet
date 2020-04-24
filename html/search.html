@@ -42,8 +42,8 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="default-user.png" alt="Profile Picture"
-							style="width: 25px; height: 25px; margin-right: 5px;">Username
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px"
+							id="username">Username
 					</a>
 					<ul class="dropdown-menu" id="nav-dropdown">
 						<li><a href="profile.html" style="color: cornflowerblue;">profile</a></li>
@@ -55,34 +55,89 @@
 			</ul>
 		</div>
 	</nav>
+	<div class="container">
+		<script>gameReadAll();</script>
 
-	<script>gameReadAll();</script>
-	<div class="dropdown">
-		<button class="btn btn-primary dropdown-toggle" type=" button" id="dropdownMenuButton" data-toggle="dropdown"
-			aria-haspopup="true" aria-expanded="false">
-			Select a game
-		</button>
-		<div class="dropdown-menu" id="output" aria-labelledby="dropdownMenuButton" </div>
+		<div class="dropdown">
+			<button class="btn btn-primary dropdown-toggle" type=" button" id="dropdownMenuButton" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">
+				Select a game
+			</button>
+			<div class="dropdown-menu" id="output" aria-labelledby="dropdownMenuButton" </div>
+			</div>
+			<form>
+				<div class="form-group">
+					<label for="gamename">Or add a game:</label>
+					<input type="text" class="form-control" id="gamename" aria-describedby="emailHelp"
+						placeholder="Enter Game Name">
+				</div>
+				<button type="submit" onclick="gameCreate()" class="btn btn-primary">Submit</button>
+			</form>
 		</div>
 		<form>
-			<div class="form-group">
-				<label for="gamename">Or add a game:</label>
-				<input type="text" class="form-control" id="gamename" aria-describedby="emailHelp"
-					placeholder="Enter Game Name">
+			<div class="row">
+				<h1>
+					Or Edit a game:
+				</h1>
 			</div>
-			<button type="submit" onclick="gameCreate()" class="btn btn-primary">Submit</button>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputEmail4">Email</label>
+					<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputPassword4">Password</label>
+					<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputAddress">Address</label>
+				<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+			</div>
+			<div class="form-group">
+				<label for="inputAddress2">Address 2</label>
+				<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputCity">City</label>
+					<input type="text" class="form-control" id="inputCity">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputState">State</label>
+					<select id="inputState" class="form-control">
+						<option selected>Choose...</option>
+						<option>...</option>
+					</select>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="inputZip">Zip</label>
+					<input type="text" class="form-control" id="inputZip">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="gridCheck">
+					<label class="form-check-label" for="gridCheck">
+						Check me out
+					</label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Sign in</button>
 		</form>
+	</div>
 
-		<!--	<div class="container nav" style="width: 70%">-->
-		<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
-		<!--			style="width: 90%; margin-top: 15px; display: inline-block;" onclick="gameReadAll()">-->
 
-		<!--			<option dataToken="59392">Test Game</option>-->
-		<!--			<option dataToken="3456">Game</option>-->
-		<!--			<option dataToken="39433">Test</option>-->
-		<!--		</select>-->
-		<!--		<button type="submit" class="btn btn-default">Add Game</button>-->
-		<!--	</div>-->
+	<!--	<div class="container nav" style="width: 70%">-->
+	<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
+	<!--			style="width: 90%; margin-top: 15px; display: inline-block;" onclick="gameReadAll()">-->
+
+	<!--			<option dataToken="59392">Test Game</option>-->
+	<!--			<option dataToken="3456">Game</option>-->
+	<!--			<option dataToken="39433">Test</option>-->
+	<!--		</select>-->
+	<!--		<button type="submit" class="btn btn-default">Add Game</button>-->
+	<!--	</div>-->
 
 
 </body>
