@@ -73,8 +73,8 @@ function gameUpdate() {
 		//we need to change this element id based on the html page
 		let gameID = document.getElementById("gameid").value;
 		let userID = document.getElementById("userid").value;
-		let own = document.getElementById("own").value;
-		let add = document.getElementById("adding").value;
+		let own = document.document.getElementById("own").checked;
+		let add = document.getElementById("add").checked;
 		console.log(typeof own);
 		console.log(typeof add);
 		const newURL = url + "/games/update";
@@ -96,7 +96,24 @@ function gameUpdate() {
 		}
 	})();
 }
-
+async function userDelete() {
+	(async () => {
+		let userName = document.getElementById("username").value;
+		let userID = document.getElementById("userID").value;
+		const newURL = url + "/users/delete";
+		const data = { game: gameID, user: userID, own: own, add: add };
+		console.log("gameUpdate: fetching " + gameName);
+		const resp = await postData(newURL, data);
+		const j = await resp.json();
+		if (j["result"] !== "error") {
+			document.getElementById("output").innerHTML =
+				"401: <b>" + userName + ", " + counterName + " deleted.</b>";
+		} else {
+			document.getElementById("output").innerHTML =
+				"400: " + userName + ", " + counterName + " not found.</b>";
+		}
+	})();
+}
 // NEW: helper method for posting data
 async function postData(url, data) {
 	const resp = await fetch(url, {
