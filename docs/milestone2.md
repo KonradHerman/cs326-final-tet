@@ -54,8 +54,8 @@ All parameters are required.
 
 | Parameter | Description                                                               | Example        |
 |-----------|---------------------------------------------------------------------------|----------------|
-| id        | The id of the game to update.                                             | id : 12345     |
-| user_id   | The user id to add/remove from the games collection.                      | user_id : 5678 |
+| game        | The id of the game to update.                                             | id : 12345     |
+| user   | The user id to add/remove from the games collection.                      | user_id : 5678 |
 | own       | Boolean value to determine whether we are updating the own or want array. | own : true     |
 | add       | Boolean value to determine whether we are adding or removing the user.    | add : true     |
 
@@ -113,7 +113,7 @@ This will generally be called when viewing a user profile.
 | result  | string     | The type of operation status: one of "read" or "error".   |
 | name    | string     | The user's name.                                          |
 | id      | number     | The user id.                                              |
-| zip     | number     | The user's zip code.                                      |
+| zip     | string     | The user's zip code.                                      |
 | picture | file       | The users profile picture.                                |
 | own     | array      | Array containing the IDs of games owned by the user.      |
 | want    | array      | Array containing the IDs of games the user wants to play. |

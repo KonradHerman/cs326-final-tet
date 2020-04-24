@@ -23,18 +23,15 @@ function gameCreate() {
 
 function gameReadAll() {
 	(async () => {
-		//let counterName = document.getElementById("countername").value;
-		//let userName = document.getElementById("username").value;
-		//const data = { name: counterName }; // -- (1)
-		const newURL = url + "/games/read"; // used to be ?name=" + counterName; -- (2)
+		const newURL = url + "/games/readall";
 		console.log("counterCreate: fetching " + newURL);
-		const resp = await postData(newURL); // used to be fetch -- (3)
+		const resp = await postData(newURL);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
 				document.getElementById("output").innerHTML +=
-					'<a class="dropdown-item" href="#">' + element.name + "</a>";
+					'<a class="dropdown-item" id="'+element.id+'" href="#">' + element.name + "</a>";
 			}
 		} else {
 			document.getElementById("output").innerHTML =
@@ -45,22 +42,51 @@ function gameReadAll() {
 
 function gameRead() {
 	(async () => {
-		//let counterName = document.getElementById("countername").value;
-		//let userName = document.getElementById("username").value;
-		//const data = { name: counterName }; // -- (1)
-		const newURL = url + "/games/read"; // used to be ?name=" + counterName; -- (2)
-		console.log("counterCreate: fetching " + newURL);
-		const resp = await postData(newURL); // used to be fetch -- (3)
+		//we need to change this element id based on the html page
+		let gameName = document.getElementById("selected").value;
+		const newURL = url + "/games/read";
+		const data = {name : gameName};
+		console.log("gameRead: fetching " + gameName);
+		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			for (const element of j["games"]) {
-				document.getElementById("output").innerHTML +=
-					'<a class="dropdown-item" href="#">' + element.name + "</a>";
-			}
+			console.log("game read successfully");
+			// for (const element of j["games"]) {
+			// 	document.getElementById("output").innerHTML +=
+			// 		'<a class="dropdown-item" href="#">' + element.name + "</a>";
+			// }
 		} else {
-			document.getElementById("output").innerHTML =
-				"200: " + "hi" + ", " + " not found.</b>";
+			console.log("failure reading");
+			// document.getElementById("output").innerHTML =
+			// 	"200: " + "hi" + ", " + " not found.</b>";
+		}
+	})();
+}
+
+function gameUpdate() {
+	(async () => {
+		//we need to change this element id based on the html page
+		let gameID = document.getElementById("gameid").value;
+		let userID = document.getElementById("userid").value;
+		let own = document.getElementById("own").value;
+		let add = document.getElementById("adding").value;
+		const newURL = url + "/games/update";
+		const data = {game : gameID, user : userID, own : own, add: add};
+		console.log("gameUpdate: fetching " + gameName);
+		const resp = await postData(newURL, data);
+		const j = await resp.json();
+		console.log(JSON.stringify(j));
+		if (j["result"] !== "error") {
+			console.log("game updated successfully");
+			// for (const element of j["games"]) {
+			// 	document.getElementById("output").innerHTML +=
+			// 		'<a class="dropdown-item" href="#">' + element.name + "</a>";
+			// }
+		} else {
+			console.log("failure updating");
+			// document.getElementById("output").innerHTML =
+			// 	"200: " + "hi" + ", " + " not found.</b>";
 		}
 	})();
 }
