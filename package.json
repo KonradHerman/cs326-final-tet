@@ -1,20 +1,29 @@
 {
-  "name": "server",
+  "name": "cs326-final-tet",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server-main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KonradHerman/cs326-final-tet.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^13.13.2"
+  "bugs": {
+    "url": "https://github.com/KonradHerman/cs326-final-tet/issues"
   },
+  "homepage": "https://github.com/KonradHerman/cs326-final-tet#readme",
   "dependencies": {
+    "@types/node": "^13.13.2",
     "express": "^4.17.1",
-    "mongodb": "^3.5.6",
-    "typescript": "^3.8.3"
+    "mongodb": "^3.5.6"
   }
 }
