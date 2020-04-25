@@ -96,21 +96,18 @@ function gameUpdate() {
 		}
 	})();
 }
-async function userDelete() {
+function userDelete() {
 	(async () => {
-		let userName = document.getElementById("username").value;
 		let userID = document.getElementById("userID").value;
 		const newURL = url + "/users/delete";
-		const data = { game: gameID, user: userID, own: own, add: add };
-		console.log("gameUpdate: fetching " + gameName);
+		const data = { id: userID};
+		console.log("gameUpdate: fetching " + newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			document.getElementById("output").innerHTML =
-				"401: <b>" + userName + ", " + counterName + " deleted.</b>";
+			console.log("User deleted.");
 		} else {
-			document.getElementById("output").innerHTML =
-				"400: " + userName + ", " + counterName + " not found.</b>";
+			console.log("error could not delete.");
 		}
 	})();
 }
