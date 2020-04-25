@@ -31,7 +31,11 @@ function gameReadAll() {
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
 				document.getElementById("output").innerHTML +=
-					'<a class="dropdown-item" id="'+element.id+'" href="#">' + element.name + "</a>";
+					'<a class="dropdown-item" id="' +
+					element.id +
+					'" href="#">' +
+					element.name +
+					"</a>";
 			}
 		} else {
 			document.getElementById("output").innerHTML =
@@ -45,7 +49,7 @@ function gameRead() {
 		//we need to change this element id based on the html page
 		let gameName = document.getElementById("selected").value;
 		const newURL = url + "/games/read";
-		const data = {name : gameName};
+		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
@@ -69,10 +73,12 @@ function gameUpdate() {
 		//we need to change this element id based on the html page
 		let gameID = document.getElementById("gameid").value;
 		let userID = document.getElementById("userid").value;
-		let own = document.getElementById("own").value;
-		let add = document.getElementById("adding").value;
+		let own = document.document.getElementById("own").checked;
+		let add = document.getElementById("add").checked;
+		console.log(typeof own);
+		console.log(typeof add);
 		const newURL = url + "/games/update";
-		const data = {game : gameID, user : userID, own : own, add: add};
+		const data = { game: gameID, user: userID, own: own, add: add };
 		console.log("gameUpdate: fetching " + gameName);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
@@ -90,7 +96,24 @@ function gameUpdate() {
 		}
 	})();
 }
-
+async function userDelete() {
+	(async () => {
+		let userName = document.getElementById("username").value;
+		let userID = document.getElementById("userID").value;
+		const newURL = url + "/users/delete";
+		const data = { game: gameID, user: userID, own: own, add: add };
+		console.log("gameUpdate: fetching " + gameName);
+		const resp = await postData(newURL, data);
+		const j = await resp.json();
+		if (j["result"] !== "error") {
+			document.getElementById("output").innerHTML =
+				"401: <b>" + userName + ", " + counterName + " deleted.</b>";
+		} else {
+			document.getElementById("output").innerHTML =
+				"400: " + userName + ", " + counterName + " not found.</b>";
+		}
+	})();
+}
 // NEW: helper method for posting data
 async function postData(url, data) {
 	const resp = await fetch(url, {
