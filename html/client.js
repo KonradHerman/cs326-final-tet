@@ -73,7 +73,7 @@ function gameUpdate() {
 		//we need to change this element id based on the html page
 		let gameID = document.getElementById("gameid").value;
 		let userID = document.getElementById("userid").value;
-		let own = document.document.getElementById("own").checked;
+		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
 		console.log(typeof own);
 		console.log(typeof add);
@@ -96,7 +96,7 @@ function gameUpdate() {
 		}
 	})();
 }
-async function userDelete() {
+function userDelete() {
 	(async () => {
 		let userName = document.getElementById("username").value;
 		let userID = document.getElementById("userID").value;
