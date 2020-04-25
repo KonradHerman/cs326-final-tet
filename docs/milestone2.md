@@ -178,20 +178,4 @@ We send the userid to the server and the server deletes that user from the datab
 
 ##Deployment
 
-<!--
-compile ts into js(obviously) and deploy on heroku
--->
-run:
-npm init -y in order to make package.json and package-lock.json
-in the file package.json in the field "scripts", add the line:
-'"start" : "npm server-main.ts"'
-next 
-create a new file called "Procfile" and write "web: node server-main.js"
-
-heroku git:remote -a 326tet
-heroku buildpacks:set heroku/nodejs
-
-git add .
-git commit -m "setting up heroku server"
-git push
-git push heroku master
+https://tet326.herokuapp.com/
