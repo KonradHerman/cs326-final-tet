@@ -24,7 +24,7 @@ function gameCreate() {
 function gameReadAll() {
 	(async () => {
 		const newURL = url + "/games/readall";
-		console.log("counterCreate: fetching " + newURL);
+		console.log("gameReadAll: fetching " + newURL);
 		const resp = await postData(newURL);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
@@ -73,17 +73,17 @@ function gameUpdate() {
 		//we need to change this element id based on the html page
 		let gameID = document.getElementById("gameid").value;
 		let userID = document.getElementById("userid").value;
-		let own = document.document.getElementById("own").checked;
+		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
-		console.log(typeof own);
-		console.log(typeof add);
 		const newURL = url + "/games/update";
 		const data = { game: gameID, user: userID, own: own, add: add };
-		console.log("gameUpdate: fetching " + gameName);
+		console.log("gameUpdate: fetching " + newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
+			document.getElementById("final").innerHTML +=
+				" <p>game updated succesfully</p>";
 			console.log("game updated successfully");
 			// for (const element of j["games"]) {
 			// 	document.getElementById("output").innerHTML +=
@@ -98,7 +98,8 @@ function gameUpdate() {
 }
 function userDelete() {
 	(async () => {
-		let userID = document.getElementById("userID").value;
+		//let userID = document.getElementById("userID").value;
+		let userID = 59392;
 		const newURL = url + "/users/delete";
 		const data = { id: userID};
 		console.log("gameUpdate: fetching " + newURL);

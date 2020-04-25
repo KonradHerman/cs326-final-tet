@@ -160,7 +160,12 @@ This is used when a user wants to delete their account.
 | id     | number     | The id of created user.                                   |
 
 ##Front-end Typescript
-Your team created a polished web interface with HTML and CSS code in the last milestone. Now, you will need to glue them together. In this part, your team will need to implement all functions using TypeScript which the client side uses to perform CRUD operations on the server side, and render it on the HTML page with the fetched data. Once you are done, please take four screenshots with a brief description for your user interface to illustrate each of the Create, Read, Update, and Delete operations and include them in your docs/milestone2.md.
+
+![create game](screenshots/vlcsnap-2020-04-24-21h02m57s760.png)
+![read game](screenshots/Screen%20Shot%202020-04-24%20at%208.59.39%20PM.png)
+![update game](screenshots/vlcsnap-2020-04-24-21h34m20s211.png)
+![delete profile](screenshots/vlcsnap-2020-04-24-21h39m16s682.png)
+
 ##Deployment
 <!--
 compile ts into js(obviously) and deploy on heroku 
