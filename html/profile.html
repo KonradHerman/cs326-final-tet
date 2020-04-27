@@ -4,7 +4,7 @@
 <head>
 	<title>Profile Page</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="style.css">
+
 	<script src="client.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -20,31 +20,32 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
-
+	<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="bg-primary">
 
-	<nav class="navbar" id="nav-bar">
-		<div class="container-fluid">
-			<div class="navbar-header">
+	<nav class="navbar navbar-dark">
+		<div class="container-fluid navbar-dark ">
+			<div class="navbar-header navbar-dark ">
 				<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="home.html">Home</a></li>
-				<li><a href="search.html">Search</a></li>
+				<li><a style="color:white" href="home.html">Home</a></li>
+				<li><a style="color:white" href="search.html">Search</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right navbar-dark ">
 				<li class="dropdown">
-					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="default-user.png" alt="Profile Picture"
-							style="width: 25px; height: 25px; margin-right: 5px;">Username
+					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+						style="color:white">
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
+							style="color:white">Username
 					</a>
-					<ul class="dropdown-menu" id="nav-dropdown">
-						<li><a href="profile.html" style="color: cornflowerblue;">profile</a></li>
-						<li><a href="#" style="color: cornflowerblue;">settings</a></li>
-						<li><a href="#" style="color: cornflowerblue;">messages</a></li>
-						<li><a href="#" style="color: cornflowerblue;">log out</a></li>
+					<ul class="dropdown-menu primary" id="nav-dropdown">
+						<li><a href="profile.html">profile</a></li>
+						<li><a href="#">settings</a></li>
+						<li><a href="#">messages</a></li>
+						<li><a href="#">log out</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -65,33 +66,34 @@
 		</form>
 	</div>
 	<div class="container">
-		<div class="col-sm-3">
-			<div class="card" style="width: 18rem;">
-				<img src="default-user.png" class="card-img-top" alt="...">
+		<div class="col-sm-3 ">
+			<div class="card " style="width: 18rem;">
+				<img src="default-user.png" class="card-img-top " alt="...">
 				<div class="card-body">
-					<h5 class="card-title">Username</h5>
+					<h5 class="card-title ">Username</h5>
 					<p class="card-text">User details, and location.
 					</p>
-					<a href="#" class="btn btn-primary">Edit</a>
+					<a href="#" class="btn btn-block primary">Edit</a>
 					<button type="button" onclick="userDelete();location.href = 'redirect-page.html'"
-						class="btn btn-danger">Delete Your Account</button>
+						class="btn danger btn-block">Delete
+						Your Account</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-9">
 			<div class="row mb-4">
 				<div class="col">
-					<div class="panel panel-default">
-						<div class="panel-heading">
+					<div class="panel ">
+						<div class="panel-heading bg-nav">
 							<h5>Games I own</h5>
 						</div>
-						<div class="panel-body">
-							<div class="list-group list-group-flush">
-								<a href="#" class="list-group-item list-group-item-action ">Game 1</a>
-								<a href="#" class="list-group-item list-group-item-action">Game 2</a>
-								<a href="#" class="list-group-item list-group-item-action">Game 3</a>
-								<a href="#" class="list-group-item list-group-item-action">Game 4</a>
-								<a href="#" class="list-group-item list-group-item-action">Game 5</a>
+						<div class="panel-body ">
+							<div class="list-group list-group-flush ">
+								<a href="#" class="list-group-item list-group-item-action" style="color: #ff5722;">Game 1</a>
+								<a href="#" class="list-group-item list-group-item-action " style="color: #ff5722;">Game 2</a>
+								<a href="#" class="list-group-item list-group-item-action " style="color: #ff5722;">Game 3</a>
+								<a href="#" class="list-group-item list-group-item-action " style="color: #ff5722;">Game 4</a>
+								<a href="#" class="list-group-item list-group-item-action " style="color: #ff5722;">Game 5</a>
 							</div>
 						</div>
 					</div>
@@ -99,8 +101,8 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<div class="panel panel-default">
-						<div class="panel-heading">
+					<div class="panel">
+						<div class="panel-heading bg-nav">
 							<h5>Games I Want to play</h5>
 						</div>
 						<div class="panel-body">
