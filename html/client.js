@@ -1,4 +1,4 @@
-const url = "tet326.herokuapp.com/counter"; // NOTE NEW URL
+const url = "https://tet326.herokuapp.com/counter"; // NOTE NEW URL
 
 function gameCreate() {
 	(async () => {

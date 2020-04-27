@@ -178,9 +178,6 @@ We send the userid to the server and the server deletes that user from the datab
 
 ##Deployment
 
-<!--
-compile ts into js(obviously) and deploy on heroku
--->
 run:
 npm init -y in order to make package.json and package-lock.json
 in the file package.json in the field "scripts", add the line:
@@ -188,10 +185,17 @@ in the file package.json in the field "scripts", add the line:
 next 
 create a new file called "Procfile" and write "web: node server-main.js"
 
-heroku git:remote -a 326tet
+Go to Dashboard on Heroku.com and create a new app called tet326
+link tet326 to our github repository
+changed the url in client.js to "https://tet326.herokuapp.com"
+
+next run the following commands
+heroku git:remote -a tet326
 heroku buildpacks:set heroku/nodejs
 
 git add .
 git commit -m "setting up heroku server"
 git push
 git push heroku master
+
+Tested out the server functionality 
