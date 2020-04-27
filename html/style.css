@@ -2,8 +2,9 @@
 	background-color: #ff5722;
 	color: white;
 }
-#nav-dropdown:hover {
+.nav-dropdown -menu > li > a:hover {
 	background-color: #ff8a65;
+	background-image: none;
 }
 .text-primary {
 	color: #ff5722;

@@ -35,7 +35,7 @@ function gameReadAll() {
 					element.id +
 					'" href="#">' +
 					element.name +
-					"</a>";
+					"</a><br>";
 			}
 		} else {
 			document.getElementById("output").innerHTML =

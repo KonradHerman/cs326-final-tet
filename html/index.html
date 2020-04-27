@@ -4,7 +4,7 @@
 <head>
 	<title>Login Page</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="style.css">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -13,39 +13,43 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-	<div id="header" class="container-fluid">
-		<div class="col-sm-6 col-sm-offset-1">
-			<h1>BoredGames</h1>
+<body class=" bg-primary">
+	<nav class=" navbar navbar-dark">
+		<div class="container-fluid navbar-dark ">
+			<div class="navbar-header navbar-dark ">
+				<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
+			</div>
 		</div>
-	</div>
+	</nav>
 	<div class="col-sm-6 col-sm-offset-3">
 
 
-		<div class="container-fluid">
+		<div class="container-fluid bg-primary">
 			<div class="row text-center">
-				<h1 class="display-1 text-primary ">Login <small class="text-primary"> or </small><a
-						href="create-account.html" class="badge badge-light">Sign
+				<h1 class="display-1 text-primary ">Login <small class="text-primary"> or </small><a href="create-account.html"
+						class="badge badge-light">Sign
 						up</a></h1>
 			</div>
 			<a>
 				<div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else ;)</small>
+					<label class=" text-primary" for="exampleInputEmail1">Email address</label>
+					<input type="email" class="form-control text-primary" id="exampleInputEmail1" aria-describedby="emailHelp">
+					<small id="emailHelp" class="form-text text-primary">We'll never share your email with anyone else
+						;)</small>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
-					<input type="password" class="form-control" id="exampleInputPassword1">
+					<label class="text-primary" for="exampleInputPassword1">Password</label>
+					<input type="password" class="form-control text-primary" id="exampleInputPassword1">
 				</div>
 				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Remeber Me</label>
+					<input type="checkbox" class="form-check-input text-primary" id="exampleCheck1">
+					<label class="form-check-label text-primary" for="exampleCheck1">Remeber Me</label>
 				</div>
-				<a href="home.html"><button type="submit" class="btn btn-secondary btn-outline-primary">Submit</button></a>
-			</form>
+				<a href="home.html"><button type="submit" class="btn primary">Submit</button></a>
+				</form>
 		</div>
 	</div>
 
