@@ -2,6 +2,9 @@
 	background-color: #ff5722;
 	color: white;
 }
+#nav-dropdown:hover {
+	background-color: #ff8a65;
+}
 .text-primary {
 	color: #ff5722;
 }
