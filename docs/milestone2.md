@@ -199,3 +199,13 @@ git push
 git push heroku master
 
 Tested out the server functionality 
+
+##Work done
+
+- Konrad built several serverside handlers and update methods and
+their corresponding clientside methods. He also wrote API in the
+readme.
+- Kash built several serverside handlers and update methods and their
+corresponding clientside methods. He also worked to integrate the client
+js with the html.
+- Doug worked on heroku deployment and some front end CRUD.
