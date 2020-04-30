@@ -2,4 +2,4 @@
 - First you must compile the typescript to JS. using `tsc *.ts`
 in the `html` folder.
 - Then you need to deploy your server locally using
-`ts-node myserver-post.ts`
+`ts-node server-main.ts`

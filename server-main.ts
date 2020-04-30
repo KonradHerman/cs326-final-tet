@@ -3,7 +3,8 @@
 import { Database } from "./mongo-database";
 import { MyServer } from "./myserver-post";
 
-const theDatabase = new Database("kashsomani"); // CHANGE THIS
-const theServer = new MyServer(theDatabase);
+const userDB = new Database("users");
+const gameDB = new Database("games");
+const theServer = new MyServer(userDB, gameDB);
 
 theServer.listen(process.env.PORT);

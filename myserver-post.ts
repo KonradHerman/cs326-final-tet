@@ -3,15 +3,20 @@ let url = require("url");
 let express = require("express");
 
 export class MyServer {
-	private theDatabase;
+	private users;
+	private games;
 
 	// Server stuff: use express instead of http.createServer
 	private server = express();
 	private port = process.env.PORT;
 	private router = express.Router();
 
-	constructor(db) {
-		this.theDatabase = db;
+	// Accepts two arguments:
+	// udb = user database
+	// gdb = games database
+	constructor(udb, gdb) {
+		this.users = udb;
+		this.games = gdb;
 		// from https://enable-cors.org/server_expressjs.html
 		this.router.use((request, response, next) => {
 			response.header("Content-Type", "application/json");
@@ -129,6 +134,7 @@ export class MyServer {
 	public async createGame(name: string, response): Promise<void> {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
+		await this.games.put();
 		response.write(
 			JSON.stringify({ result: "created", name: name, id: 39475 })
 		);
