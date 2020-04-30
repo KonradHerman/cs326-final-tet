@@ -4,84 +4,85 @@
 	<title>Home</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/js/bootstrap-select.min.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet"
-		  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/css/bootstrap-select.min.css">
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/css/bootstrap-select.min.css">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-		  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-			crossorigin="anonymous"></script>
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-	
-	<nav class="navbar" id= "nav-bar">
-		<div class="container-fluid">
-		  <div class="navbar-header">
-			<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
-		  </div>
-		  <ul class="nav navbar-nav">
-			<li><a href="home.html">Home</a></li>
-			<li><a href="search.html">Search</a></li>
-		  </ul>
-			<ul class="nav navbar-nav navbar-right">
+<body class="bg-primary">
+	<nav class="navbar navbar-dark">
+		<div class="container-fluid navbar-dark ">
+			<div class="navbar-header navbar-dark ">
+				<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a style="color:white" href="home.html">Home</a></li>
+				<li><a style="color:white" href="search.html">Search</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right navbar-dark ">
 				<li class="dropdown">
-					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px"
-							 id="username">Username
+					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+						style="color:white">
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
+							style="color:white">Username
 					</a>
-					<ul class="dropdown-menu" id="nav-dropdown">
-						<li><a href="profile.html" style="color: cornflowerblue;">profile</a></li>
-						<li><a href="#" style="color: cornflowerblue;">settings</a></li>
-						<li><a href="#" style="color: cornflowerblue;">messages</a></li>
-						<li><a href="#" style="color: cornflowerblue;">log out</a></li>
+					<ul class="dropdown-menu primary" id="nav-dropdown">
+						<li><a href="profile.html">profile</a></li>
+						<li><a href="#">settings</a></li>
+						<li><a href="#">messages</a></li>
+						<li><a href="#">log out</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
-	  </nav>
+	</nav>
 
 
 
-	<div class="container nav">
-		<ul class="nav navbar-nav">
+	<div class="container nav bg-primary">
+		<ul class="nav navbar-nav bg-primary">
 			<li>
-				<h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>
+				<h3 class="text-light">Welcome, User <small><a class="text-light" href="profile.html">edit profile</a></small>
+				</h3>
 			</li>
 			<!--            <div class="nav-col">-->
 			<!--                <h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>-->
 			<!--            </div>-->
 		</ul>
-		<form class="navbar-form navbar-right">
+		<form class="navbar-form navbar-right bg-primary">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search for a game">
 			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button type="submit" class="btn primary">Submit</button>
 		</form>
 	</div>
-	<div class="container">
+	<div class="container bg-primary">
 		<div class="row justify-content-around">
-			<div class="col-sm-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
+			<div class="col-sm-6 ">
+				<div class="panel text-light">
+					<div class="panel-heading bg-nav">
 						<h5>Your Games</h5>
 					</div>
-					<div class="panel-body">
-						<a href="search.html"><button type="button" class="btn btn-primary">Add Games</button></a>
-						<table class="table table-borderless">
+					<div class="panel-body ">
+						<a href="search.html"><button type="button" class="btn	 primary">Add Games</button></a>
+						<table class="table table-borderless text-primary">
 							<thead>
 								<tr>
 									<th scope="col">Game</th>
@@ -108,11 +109,11 @@
 				</div>
 			</div>
 			<div class="col-sm-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h5>Messages</h5>
+				<div class="panel ">
+					<div class="panel-heading bg-nav">
+						<h5>Jump Back In</h5>
 					</div>
-					<div class="panel-body">Will add message implementation later :)</div>
+					<div class="panel-body text-primary">Will add message implementation later :)</div>
 				</div>
 			</div>
 		</div>

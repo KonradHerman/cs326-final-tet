@@ -31,11 +31,11 @@ function gameReadAll() {
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
 				document.getElementById("output").innerHTML +=
-					'<a class="dropdown-item" id="' +
+					'<a class="dropdown-item text-primary" id="' +
 					element.id +
 					'" href="#">' +
 					element.name +
-					"</a>";
+					"</a><br>";
 			}
 		} else {
 			document.getElementById("output").innerHTML =
@@ -101,7 +101,7 @@ function userDelete() {
 		//let userID = document.getElementById("userID").value;
 		let userID = 59392;
 		const newURL = url + "/users/delete";
-		const data = { id: userID};
+		const data = { id: userID };
 		console.log("gameUpdate: fetching " + newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();

@@ -1,103 +1,111 @@
-#header {
-  width: 100%;
-  background-color: cornflowerblue;
-  color: white;
+.primary {
+	background-color: #ff5722;
+	color: white;
 }
-
-#nav-bar{
-  background-color: cornflowerblue;
-  color:white;
-  font-size: 14pt;
+.nav-dropdown -menu > li > a:hover {
+	background-color: #ff8a65;
+	background-image: none;
 }
-
-#nav-bar a{
-  color:white;
-  background-color: cornflowerblue;
+.text-primary {
+	color: #ff5722;
 }
-
-#nav-bar a:hover {
-  background-color: cornflowerblue;
+.text-light {
+	color: #ffffff;
 }
-
-#nav-dropdown a{
-  background-color: white;
+.text-dark {
+	color: #000000;
 }
-
+.bg-primary {
+	background-color: #263238;
+}
+.bg-light {
+	background-color: #e0f2f1;
+}
+.bg-nav {
+	background-color: #ff5722;
+}
+.navbar {
+	background-color: #ff5722;
+	color: white;
+}
+.danger {
+	background-color: #e53935;
+}
 #navbarDropdownMenuLink {
-  overflow: visible;
+	overflow: visible;
 }
 
 /* .btn-file {
   overflow: hidden;
 } */
 .btn-file input[type="file"] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  outline: none;
-  background: white;
-  cursor: inherit;
-  display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
 }
 
 #img-upload {
-  width: 100%;
+	width: 100%;
 }
 #map {
-  width: 100%;
-  height: 200px;
+	width: 100%;
+	height: 200px;
 }
 .controls {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 #searchInput {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 50%;
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 50%;
 }
 #searchInput:focus {
-  border-color: #4d90fe;
+	border-color: #4d90fe;
 }
 
 #search-card {
-  width: 18rem; 
-  background-color:#bbb; 
-  border-radius: 5px; 
-  text-align: center; 
-  margin-top: 5px; 
-  padding: 3px; 
-  display: inline-block;
+	width: 18rem;
+	background-color: #bbb;
+	border-radius: 5px;
+	text-align: center;
+	margin-top: 5px;
+	padding: 3px;
+	display: inline-block;
 }
 
 #discover-card {
-  width: 100%;
-  background-color: #bbb;
-  border-radius: 5px;
-  text-align: left;
-  padding-left: 15px;
-  display: inline-block;
+	width: 100%;
+	background-color: #bbb;
+	border-radius: 5px;
+	text-align: left;
+	padding-left: 15px;
+	display: inline-block;
 }
 
 .game-image {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  text-align: right;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	text-align: right;
 }
