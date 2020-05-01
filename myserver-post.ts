@@ -57,7 +57,7 @@ export class MyServer {
 		this.server.use("/counter", this.router);
 	}
 	private async loginHandler(request, response) {
-		response.redirect("./html/login.html");
+		response.redirect("./html/index.html");
 	}
 	private async errorHandler(request, response, next): Promise<void> {
 		let value: boolean = await this.users.isFound(
