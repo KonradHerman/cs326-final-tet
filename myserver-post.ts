@@ -28,24 +28,26 @@ export class MyServer {
 		this.server.use("/", express.static("./html"));
 		// NEW: handle POST in JSON format
 		this.server.use(express.json());
+		//login
+		this.router.post("/login", this.loginHandler.bind(this));
 		// Set a single handler for a route.
 		this.router.post("/games/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
 		this.router.post("/games/readall", [
 			//this.errorHandler.bind(this),
-			this.readallHandler.bind(this)
+			this.readallHandler.bind(this),
 		]);
 		this.router.post("/games/read", this.readHandler.bind(this));
 		this.router.post("/games/update", [
 			// this.errorHandler.bind(this),
-			this.updateHandler.bind(this)
+			this.updateHandler.bind(this),
 		]);
 		this.router.post("/users/create", this.createUserHandler.bind(this));
 		this.router.post("/users/read", this.readUserHandler.bind(this));
 		this.router.post("/users/update", this.updateUserHandler.bind(this));
 		this.router.post("/users/delete", [
 			// this.errorHandler.bind(this),
-			this.deleteHandler.bind(this)
+			this.deleteHandler.bind(this),
 		]);
 		// Set a fall-through handler if nothing matches.
 		this.router.post("*", async (request, response) => {
@@ -54,9 +56,11 @@ export class MyServer {
 		// Start up the counter endpoint at '/counter'.
 		this.server.use("/counter", this.router);
 	}
-
+	private async loginHandler(request, response) {
+		response.redirect("./html/login.html");
+	}
 	private async errorHandler(request, response, next): Promise<void> {
-		let value: boolean = await this.theDatabase.isFound(
+		let value: boolean = await this.users.isFound(
 			request.params["userId"] + "-" + request.body.name
 		);
 		//	console.log("result from database.isFound: " + JSON.stringify(value));
@@ -102,10 +106,7 @@ export class MyServer {
 	}
 
 	private async readUserHandler(request, response): Promise<void> {
-		await this.readUser(
-			request.body.id,
-			response
-		);
+		await this.readUser(request.body.id, response);
 	}
 
 	private async updateUserHandler(request, response): Promise<void> {
@@ -121,10 +122,7 @@ export class MyServer {
 	}
 
 	private async deleteHandler(request, response): Promise<void> {
-		await this.deleteUser(
-			request.body.id,
-			response
-		);
+		await this.deleteUser(request.body.id, response);
 	}
 
 	public listen(port): void {
@@ -153,8 +151,18 @@ export class MyServer {
 		// 	values.push(await this.theDatabase.get(num));
 		// }
 		let games: Array<object> = [
-			{ name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443] },
-			{ name: "Anomia", id: 23456, own: [59393, 29494], want: [93950, 14054] },
+			{
+				name: "Azul",
+				id: 12345,
+				own: [90876, 27465],
+				want: [16254, 26443],
+			},
+			{
+				name: "Anomia",
+				id: 23456,
+				own: [59393, 29494],
+				want: [93950, 14054],
+			},
 		];
 
 		response.write(JSON.stringify({ result: "read", games: games }));
@@ -162,8 +170,13 @@ export class MyServer {
 	}
 
 	public async readGame(name: string, response): Promise<void> {
-		let game: object = { name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443] };
-		response.write(JSON.stringify({result: "read", game: game}));
+		let game: object = {
+			name: "Azul",
+			id: 12345,
+			own: [90876, 27465],
+			want: [16254, 26443],
+		};
+		response.write(JSON.stringify({ result: "read", game: game }));
 		response.end();
 	}
 
@@ -175,9 +188,7 @@ export class MyServer {
 		response
 	): Promise<void> {
 		//await this.theDatabase.put(name, value);
-		response.write(
-			JSON.stringify({ result: "updated", game: game})
-		);
+		response.write(JSON.stringify({ result: "updated", game: game }));
 		response.end();
 	}
 
@@ -189,15 +200,12 @@ export class MyServer {
 		response
 	): Promise<void> {
 		response.write(
-			JSON.stringify({result: "created", name: name, id: 17435})
+			JSON.stringify({ result: "created", name: name, id: 17435 })
 		);
 		response.end();
 	}
 
-	public async readUser(
-		id: number,
-		response
-	): Promise<void> {
+	public async readUser(id: number, response): Promise<void> {
 		let user: Object = {
 			name: "ChessFreak",
 			id: 69420,
@@ -206,9 +214,7 @@ export class MyServer {
 			own: [65554, 92845],
 			want: [29999],
 		};
-		response.write(
-			JSON.stringify({result: "read", user: user})
-		);
+		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}
 
@@ -221,9 +227,7 @@ export class MyServer {
 		game: number,
 		response
 	): Promise<void> {
-		response.write(
-			JSON.stringify({result: "updated", id: id})
-		);
+		response.write(JSON.stringify({ result: "updated", id: id }));
 		response.end();
 	}
 
