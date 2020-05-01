@@ -1,7 +1,14 @@
+if (process.env.NODE_ENV !== "production") {
+	require("dotenv'").config();
+}
 let http = require("http");
 let url = require("url");
 let express = require("express");
-
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session");
+const initializePassport = require("passport-config");
 export class MyServer {
 	private users;
 	private games;
@@ -17,6 +24,8 @@ export class MyServer {
 	constructor(udb, gdb) {
 		this.users = udb;
 		this.games = gdb;
+
+		initializePassport(passport, (username) => this.users.get(username));
 		// from https://enable-cors.org/server_expressjs.html
 		this.router.use((request, response, next) => {
 			response.header("Content-Type", "application/json");
@@ -24,12 +33,26 @@ export class MyServer {
 			response.header("Access-Control-Allow-Headers", "*");
 			next();
 		});
+
 		// Serve static pages from a particular path.
 		this.server.use("/", express.static("./html"));
 		// NEW: handle POST in JSON format
 		this.server.use(express.json());
+		//flash
+		this.server.use(flash());
+		this.server.use(
+			session({
+				secre: process.env.SESSION_SECRET,
+				resave: false,
+				saveUninitialized: false,
+			})
+		);
+		this.server.use(passport.initialize());
+		this.server.use(passport.session());
 		//login
 		this.router.post("/login", this.loginHandler.bind(this));
+		//register
+		this.router.post("/register", this.registerHandler.bind(this));
 		// Set a single handler for a route.
 		this.router.post("/games/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
@@ -56,8 +79,36 @@ export class MyServer {
 		// Start up the counter endpoint at '/counter'.
 		this.server.use("/counter", this.router);
 	}
+	private async registerHandler(request, response) {
+		await this.registerUser(
+			request.body.email,
+			request.body.name,
+			request.body.password,
+			response
+		);
+	}
 	private async loginHandler(request, response) {
-		response.redirect("index.html");
+		passport.authenticate("local", {
+			successRedirect: "/home",
+			failureRedirect: "/login",
+			failureFlash: true,
+		});
+	}
+	public async registerUser(
+		name: string,
+		email: string,
+		password: string,
+		response
+	) {
+		try {
+			const hashedPassword = await bcrypt.hash(password, 10);
+			this.users.put(
+				name,
+				`{name:${name},email:${email}, password:${hashedPassword} }`
+			);
+		} catch {
+			response.redirect("/register");
+		}
 	}
 	private async errorHandler(request, response, next): Promise<void> {
 		let value: boolean = await this.users.isFound(
