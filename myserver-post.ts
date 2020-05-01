@@ -51,6 +51,8 @@ export class MyServer {
 		this.server.use(passport.session());
 		//login
 		this.router.post("/login", this.loginHandler.bind(this));
+		//home
+		this.router.post("/home", this.homeHandler.bind(this));
 		//register
 		this.router.post("/register", this.registerHandler.bind(this));
 		// Set a single handler for a route.
@@ -86,6 +88,9 @@ export class MyServer {
 			request.body.password,
 			response
 		);
+	}
+	private async homeHandler(request, response) {
+		response.redirect("html/home.html");
 	}
 	private async loginHandler(request, response) {
 		passport.authenticate("local", {
