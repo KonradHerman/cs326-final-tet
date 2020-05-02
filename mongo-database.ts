@@ -71,10 +71,13 @@ export class Database {
 	}
 
 	public async getAll(): Promise<string | null> {
+		console.log(this.dbName);
 		let db = this.client.db(this.dbName);
+		console.log(this.collectionName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
-		let result = await collection.find();
+		let result = await collection.find({});
+		console.log(result);
 		console.log("getAll returned");
 		if (result) {
 			return result;

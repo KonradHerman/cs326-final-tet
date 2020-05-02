@@ -140,12 +140,15 @@ var Database = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        console.log(this.dbName);
                         db = this.client.db(this.dbName);
+                        console.log(this.collectionName);
                         collection = db.collection(this.collectionName);
                         console.log("getting all games");
-                        return [4 /*yield*/, collection.find()];
+                        return [4 /*yield*/, collection.find({})];
                     case 1:
                         result = _a.sent();
+                        console.log(result);
                         console.log("getAll returned");
                         if (result) {
                             return [2 /*return*/, result];
