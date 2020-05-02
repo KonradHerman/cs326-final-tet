@@ -38,10 +38,7 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("put: key = " + key + ", value = " + value);
-		let result = await collection.insertOne(
-			{ name: key },
-			{ value: value }
-		);
+		let result = await collection.insertOne({ name: key }, { value: value });
 		console.log("result = " + result);
 	}
 
@@ -76,8 +73,10 @@ export class Database {
 		console.log(this.collectionName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
-		let result = await collection.find( );
-		console.log(result);
+		let result = await collection.find();
+		while (result.hasNext()) {
+			console.log(result.next().json());
+		}
 		console.log("getAll returned");
 		if (result) {
 			return result;

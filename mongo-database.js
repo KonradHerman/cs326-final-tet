@@ -148,7 +148,9 @@ var Database = /** @class */ (function () {
                         return [4 /*yield*/, collection.find()];
                     case 1:
                         result = _a.sent();
-                        console.log(result);
+                        while (result.hasNext()) {
+                            console.log(result.next().json());
+                        }
                         console.log("getAll returned");
                         if (result) {
                             return [2 /*return*/, result];
