@@ -34,6 +34,18 @@ export class Database {
 		})();
 	}
 
+	public async add(key: string, value: string): Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("put: key = " + key + ", value = " + value);
+		let result = await collection.updateOne(
+			{ name: key },
+			{ value: value },
+			{ upsert: true }
+		);
+		console.log("result = " + result);
+	}
+
 	public async put(key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
