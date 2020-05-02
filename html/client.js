@@ -34,9 +34,9 @@ function gameCreate() {
 			let out = gameName + "created";
 			document.getElementById("gameCreate-output").innerHTML += 
 					'<p class="text-primary" id="' +
-					j["result"].id +
+					j.id +
 					'" href="#">' +
-					j["result"].name +
+					j.name +
 					"</p><br>";
 			console.log(out);
 		} else {
