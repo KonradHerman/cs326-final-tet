@@ -107,7 +107,7 @@ export class MyServer {
 	) {
 		try {
 			const hashedPassword = await bcrypt.hash(password, 10);
-			this.users.put(
+			await this.users.put(
 				name,
 				`{name:${name},email:${email}, password:${hashedPassword} }`
 			);
