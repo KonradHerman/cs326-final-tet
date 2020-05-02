@@ -40,7 +40,7 @@ var Database = /** @class */ (function () {
     function Database(collectionName) {
         var _this = this;
         this.MongoClient = require("mongodb").MongoClient;
-        this.uri = "mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
+        this.uri = "mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
         this.dbName = "boredgames";
         this.collectionName = collectionName;
         this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
@@ -83,7 +83,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("put: key = " + key + ", value = " + value);
-                        return [4 /*yield*/, collection.inserOne({ name: key }, { value: value })];
+                        return [4 /*yield*/, collection.insertOne({ name: key }, { value: value })];
                     case 1:
                         result = _a.sent();
                         console.log("result = " + result);
@@ -136,14 +136,14 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var db, result;
+            var db, collection, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         db = this.client.db(this.dbName);
-                        // let collection = db.collection(this.collectionName);
+                        collection = db.collection(this.collectionName);
                         console.log("getting all games");
-                        return [4 /*yield*/, db.getCollection(this.collectionName)];
+                        return [4 /*yield*/, collection.find({})];
                     case 1:
                         result = _a.sent();
                         console.log("getAll returned" + JSON.stringify(result));

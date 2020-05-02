@@ -1,7 +1,7 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
 	private uri =
-		"mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
+		"mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 	private client;
 	private collectionName: string;
 	private dbName: string = "boredgames";
