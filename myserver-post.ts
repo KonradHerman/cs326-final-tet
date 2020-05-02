@@ -131,6 +131,7 @@ export class MyServer {
 	}
 
 	private async createHandler(request, response): Promise<void> {
+		console.log(request);
 		await this.createGame(request.body.name, response);
 	}
 

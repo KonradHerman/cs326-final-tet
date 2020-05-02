@@ -202,7 +202,9 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.createGame(request.body.name, response)];
+                    case 0:
+                        console.log(request);
+                        return [4 /*yield*/, this.createGame(request.body.name, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
