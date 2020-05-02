@@ -132,7 +132,7 @@ export class MyServer {
 
 	private async createHandler(request, response): Promise<void> {
 		console.log(request);
-		await this.createGame(request.body.name, response);
+		//await this.createGame(request.body.name, response);
 	}
 
 	private async readallHandler(request, response): Promise<void> {
