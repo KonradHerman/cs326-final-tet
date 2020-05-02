@@ -59,6 +59,19 @@ export class Database {
 		}
 	}
 
+	public async getAll(): Promise<string> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("getting all games");
+		let result = await collection.find({});
+		console.log("getAll returned" + JSON.stringify(result));
+		if (result) {
+			return result.value;
+		} else {
+			return null;
+		}
+	}
+
 	public async del(key: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);

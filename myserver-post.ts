@@ -134,8 +134,7 @@ export class MyServer {
 	}
 
 	private async readallHandler(request, response): Promise<void> {
-		console.log("hi");
-		await this.readallGames("test", response);
+		await this.readallGames(request, response);
 	}
 
 	private async readHandler(request, response): Promise<void> {
@@ -201,26 +200,13 @@ export class MyServer {
 		response.end();
 	}
 
-	public async readallGames(name: string, response): Promise<void> {
+	public async readallGames(request, response): Promise<void> {
 		// let values = [];
 		// for (let i = 0; i < 10; ++i) {
 		// 	let num = "" + i;
 		// 	values.push(await this.theDatabase.get(num));
 		// }
-		let games: Array<object> = [
-			{
-				name: "Azul",
-				id: 12345,
-				own: [90876, 27465],
-				want: [16254, 26443],
-			},
-			{
-				name: "Anomia",
-				id: 23456,
-				own: [59393, 29494],
-				want: [93950, 14054],
-			},
-		];
+		let games = await this.games.getAll();
 
 		response.write(JSON.stringify({ result: "read", games: games }));
 		response.end();
