@@ -74,9 +74,8 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
 		let result = await collection.find();
-		while (result.hasNext()) {
-			console.log(result.next().json());
-		}
+		result.toArray();
+		console.log(result);
 		console.log("getAll returned");
 		if (result) {
 			return result;
