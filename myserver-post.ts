@@ -42,7 +42,7 @@ export class MyServer {
 		this.server.use(flash());
 		this.server.use(
 			session({
-				secre: process.env.SESSION_SECRET,
+				secret: process.env.SESSION_SECRET,
 				resave: false,
 				saveUninitialized: false,
 			})
