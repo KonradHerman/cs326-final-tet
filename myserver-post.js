@@ -326,17 +326,28 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.readallGames = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
+            // let values = [];
+            // for (let i = 0; i < 10; ++i) {
+            // 	let num = "" + i;
+            // values.push(await this.theDatabase.get(num));
+            // }
+            function get() {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, this.games.getAll()];
+                            case 1: return [2 /*return*/, _a.sent()];
+                        }
+                    });
+                });
+            }
             var games;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.games.getAll()];
-                    case 1:
-                        games = _a.sent();
-                        console.log(games.data);
-                        response.write(JSON.stringify({ result: "read", games: games.data }));
-                        response.end();
-                        return [2 /*return*/];
-                }
+                games = get();
+                console.log(games);
+                response.write(JSON.stringify({ result: "read", games: games }));
+                response.end();
+                return [2 /*return*/];
             });
         });
     };
