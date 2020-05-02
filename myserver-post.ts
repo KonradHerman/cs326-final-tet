@@ -62,10 +62,11 @@ export class MyServer {
 		// Set a single handler for a route.
 		this.router.post("/games/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
-		this.router.post("/games/readall", [
+		this.router.post(
+			"/games/readall",
 			//this.errorHandler.bind(this),
-			this.readallHandler.bind(this),
-		]);
+			this.readallHandler.bind(this)
+		);
 		this.router.post("/games/read", this.readHandler.bind(this));
 		this.router.post("/games/update", [
 			// this.errorHandler.bind(this),
@@ -204,9 +205,10 @@ export class MyServer {
 		// let values = [];
 		// for (let i = 0; i < 10; ++i) {
 		// 	let num = "" + i;
-		// 	values.push(await this.theDatabase.get(num));
+		// values.push(await this.theDatabase.get(num));
 		// }
 		let games = await this.games.getAll();
+		console.log(games);
 		response.write(JSON.stringify({ result: "read", games: games }));
 		response.end();
 	}
