@@ -190,9 +190,7 @@ export class MyServer {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
 		await this.games.put(name, `{name:${name},own:[],want:[]}`);
-		response.write(
-			JSON.stringify({ result: "created", name: name })
-		);
+		response.write(JSON.stringify({ result: "created", name: name }));
 		response.end();
 	}
 
@@ -208,8 +206,8 @@ export class MyServer {
 		// values.push(await this.theDatabase.get(num));
 		// }
 		let games = await this.games.getAll();
-		console.log(games.data);
-		response.write(JSON.stringify({ result: "read", games: games.data }));
+		console.log(games);
+		response.write(JSON.stringify({ result: "read", games: games }));
 		response.end();
 	}
 
