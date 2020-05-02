@@ -1,5 +1,24 @@
 const url = "https://tet326.herokuapp.com/counter"; // NOTE NEW URL
 
+function login() {
+	(async () => {
+		let userName = document.getElementById("username").value;
+		let password = document.getElementById("password").value;
+		const data = {name: userName, password: password};
+		const newURL = url + "/users/login";
+		console.log("logging in: fetching" + newURL);
+		const resp = await postData(newURL, data);
+		const j = await resp.json();
+		if (j["result"] !== "error") {
+			let out = userName + "logged in";
+			console.log(out);
+		} else {
+			let out = userName + "couldn't log in";
+			console.log(out);
+		}
+	})();
+}
+
 function gameCreate() {
 	(async () => {
 		//when creating a game, input id is "gamename"

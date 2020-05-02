@@ -50,7 +50,9 @@ export class MyServer {
 		this.server.use(passport.initialize());
 		this.server.use(passport.session());
 		//login
-		this.router.post("/login", this.loginHandler.bind(this));
+		this.router.post("/users/login",
+			passport.authenticate('local'),
+			this.loginHandler.bind(this));
 		//home
 		this.router.post("/home", this.homeHandler.bind(this));
 		//register
@@ -90,15 +92,12 @@ export class MyServer {
 		);
 	}
 	private async homeHandler(request, response) {
-		response.redirect("html/home.html");
+		await response.redirect("html/home.html");
 	}
 	private async loginHandler(request, response) {
-		await passport.authenticate("local", {
-			successRedirect: "/home",
-			failureRedirect: "/login",
-			failureFlash: true,
-		});
+		response.redirect('/home.html');
 	}
+	
 	public async registerUser(
 		name: string,
 		email: string,
