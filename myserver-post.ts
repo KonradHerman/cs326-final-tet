@@ -42,7 +42,7 @@ export class MyServer {
 		this.server.use(flash());
 		this.server.use(
 			session({
-				secre: process.env.SESSION_SECRET,
+				secret: process.env.SESSION_SECRET,
 				resave: false,
 				saveUninitialized: false,
 			})
@@ -97,7 +97,7 @@ export class MyServer {
 	private async loginHandler(request, response) {
 		response.redirect('/home.html');
 	}
-	
+
 	public async registerUser(
 		name: string,
 		email: string,
@@ -189,7 +189,7 @@ export class MyServer {
 		//await this.theDatabase.put(name, 0);
 		await this.games.put(name,
 			`{name:${name},own:[],want;{}}`
-			);
+		);
 		response.write(
 			JSON.stringify({ result: "created", name: name, id: 39475 })
 		);
