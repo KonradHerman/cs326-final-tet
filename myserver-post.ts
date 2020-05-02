@@ -112,7 +112,7 @@ export class MyServer {
 				`{name:${name},email:${email}, password:${hashedPassword} }`
 			);
 		} catch {
-			response.redirect("/register");
+			await response.redirect("/register");
 		}
 	}
 	private async errorHandler(request, response, next): Promise<void> {
