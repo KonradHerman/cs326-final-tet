@@ -50,9 +50,11 @@ export class MyServer {
 		this.server.use(passport.initialize());
 		this.server.use(passport.session());
 		//login
-		this.router.post("/users/login",
-			passport.authenticate('local'),
-			this.loginHandler.bind(this));
+		this.router.post(
+			"/users/login",
+			passport.authenticate("local"),
+			this.loginHandler.bind(this)
+		);
 		//home
 		this.router.post("/home", this.homeHandler.bind(this));
 		//register
@@ -83,7 +85,7 @@ export class MyServer {
 		// Start up the counter endpoint at '/counter'.
 		this.server.use("/counter", this.router);
 	}
-	private async registerHandler(request, response) {
+	private async registerHandler(request, response): Promise<void> {
 		await this.registerUser(
 			request.body.email,
 			request.body.name,
@@ -91,11 +93,11 @@ export class MyServer {
 			response
 		);
 	}
-	private async homeHandler(request, response) {
+	private async homeHandler(request, response): Promise<void> {
 		await response.redirect("html/home.html");
 	}
-	private async loginHandler(request, response) {
-		await response.redirect('/home.html');
+	private async loginHandler(request, response): Promise<void> {
+		await response.redirect("/home.html");
 	}
 
 	public async registerUser(
@@ -103,7 +105,7 @@ export class MyServer {
 		email: string,
 		password: string,
 		response
-	) {
+	): Promise<void> {
 		try {
 			const hashedPassword = await bcrypt.hash(password, 10);
 			await this.users.put(
@@ -187,9 +189,7 @@ export class MyServer {
 	public async createGame(name: string, response): Promise<void> {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
-		await this.games.put(name,
-			`{name:${name},own:[],want;{}}`
-		);
+		await this.games.put(name, `{name:${name},own:[],want;{}}`);
 		response.write(
 			JSON.stringify({ result: "created", name: name, id: 39475 })
 		);
