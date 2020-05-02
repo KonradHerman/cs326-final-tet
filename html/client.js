@@ -33,9 +33,7 @@ function gameCreate() {
 			//success
 			let out = gameName + "created";
 			document.getElementById("gameCreate-output").innerHTML += 
-					'<p class="text-primary" id="' +
-					j.id +
-					'>' +
+					'<p class="text-primary">' +
 					j.name +
 					"</p><br>";
 			console.log(out);

@@ -304,11 +304,11 @@ var MyServer = /** @class */ (function () {
                     case 0:
                         console.log("creating game named '" + name + "'");
                         //await this.theDatabase.put(name, 0);
-                        return [4 /*yield*/, this.games.put(name, "{name:" + name + ",own:[],want;{}}")];
+                        return [4 /*yield*/, this.games.put(name, "{name:" + name + ",own:[],want:[]}")];
                     case 1:
                         //await this.theDatabase.put(name, 0);
                         _a.sent();
-                        response.write(JSON.stringify({ result: "created", name: name, id: 39475 }));
+                        response.write(JSON.stringify({ result: "created", name: name }));
                         response.end();
                         return [2 /*return*/];
                 }

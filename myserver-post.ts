@@ -189,9 +189,9 @@ export class MyServer {
 	public async createGame(name: string, response): Promise<void> {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
-		await this.games.put(name, `{name:${name},own:[],want;{}}`);
+		await this.games.put(name, `{name:${name},own:[],want:[]}`);
 		response.write(
-			JSON.stringify({ result: "created", name: name, id: 39475 })
+			JSON.stringify({ result: "created", name: name })
 		);
 		response.end();
 	}
