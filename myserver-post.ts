@@ -205,10 +205,7 @@ export class MyServer {
 		// 	let num = "" + i;
 		// values.push(await this.theDatabase.get(num));
 		// }
-		async function get() {
-			return await this.games.getAll();
-		}
-		let games = get();
+		let games = await this.games.getAll();
 		console.log(games);
 		response.write(JSON.stringify({ result: "read", games: games }));
 		response.end();
