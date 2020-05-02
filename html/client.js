@@ -4,6 +4,7 @@ function gameCreate() {
 	(async () => {
 		//when creating a game, input id is "gamename"
 		let gameName = document.getElementById("gamename").value;
+		console.log(gameName);
 		const data = { name: gameName };
 		const newURL = url + "/games/create"; // used to be ?name=" + counterName; -- (2)
 		console.log("gameCreate: fetching " + newURL);
@@ -12,10 +13,18 @@ function gameCreate() {
 		if (j["result"] !== "error") {
 			//success
 			let out = gameName + "created";
+			document.getElementById("gameCreate-output").innerHTML += 
+					'<p class="text-primary" id="' +
+					j["result"].id +
+					'" href="#">' +
+					j["result"].name +
+					"</p><br>";
 			console.log(out);
 		} else {
 			//error
 			let out = gameName + "not created";
+			document.getElementById("gameCreate-output").innerHTML = 
+				"200: " + "gameName" + ", " + " not found.</b>";
 			console.log(out);
 		}
 	})();
@@ -30,7 +39,7 @@ function gameReadAll() {
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
-				document.getElementById("output").innerHTML +=
+				document.getElementById("dropdown-output").innerHTML += // (1) changed id output to dropdown-output
 					'<a class="dropdown-item text-primary" id="' +
 					element.id +
 					'" href="#">' +
@@ -38,7 +47,7 @@ function gameReadAll() {
 					"</a><br>";
 			}
 		} else {
-			document.getElementById("output").innerHTML =
+			document.getElementById("dropdown-output").innerHTML =  // (1) changed id output to dropdown-output
 				"200: " + "hi" + ", " + " not found.</b>";
 		}
 	})();
