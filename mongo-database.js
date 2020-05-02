@@ -94,19 +94,24 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.put = function (key, value) {
         return __awaiter(this, void 0, void 0, function () {
+            function add() {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, collection.insertOne(JSON.parse(value))];
+                            case 1: return [2 /*return*/, _a.sent()];
+                        }
+                    });
+                });
+            }
             var db, collection, result;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("put: key = " + key + ", value = " + value);
-                        return [4 /*yield*/, collection.updateOne({ name: key }, { value: value }, { upsert: true })];
-                    case 1:
-                        result = _a.sent();
-                        console.log("result = " + result);
-                        return [2 /*return*/];
-                }
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("put: key = " + key + ", value = " + value);
+                result = add();
+                console.log("result = " + result);
+                return [2 /*return*/];
             });
         });
     };

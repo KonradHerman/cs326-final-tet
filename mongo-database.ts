@@ -46,11 +46,10 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("put: key = " + key + ", value = " + value);
-		let result = await collection.updateOne(
-			{ name: key },
-			{ value: value },
-			{ upsert: true }
-		);
+		async function add() {
+			return await collection.insertOne(JSON.parse(value));
+		}
+		let result = add();
 		console.log("result = " + result);
 	}
 

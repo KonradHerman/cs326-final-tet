@@ -132,7 +132,7 @@ export class MyServer {
 
 	private async createHandler(request, response): Promise<void> {
 		console.log(request);
-		//await this.createGame(request.body.name, response);
+		await this.createGame(request.body.name, response);
 	}
 
 	private async readallHandler(request, response): Promise<void> {
@@ -190,6 +190,7 @@ export class MyServer {
 	public async createGame(name: string, response): Promise<void> {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
+		console.log("start");
 		await this.games.put(name, `{name:${name},own:[],want:[]}`);
 		response.write(JSON.stringify({ result: "created", name: name }));
 		response.end();

@@ -201,8 +201,14 @@ var MyServer = /** @class */ (function () {
     MyServer.prototype.createHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log(request);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        console.log(request);
+                        return [4 /*yield*/, this.createGame(request.body.name, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -300,9 +306,9 @@ var MyServer = /** @class */ (function () {
                     case 0:
                         console.log("creating game named '" + name + "'");
                         //await this.theDatabase.put(name, 0);
+                        console.log("start");
                         return [4 /*yield*/, this.games.put(name, "{name:" + name + ",own:[],want:[]}")];
                     case 1:
-                        //await this.theDatabase.put(name, 0);
                         _a.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
                         response.end();
