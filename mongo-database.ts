@@ -71,7 +71,7 @@ export class Database {
 		console.log(this.dbName);
 		let db = this.client.db(this.dbName);
 		console.log(this.collectionName);
-		let collection = db.collection(this.collectionName);
+		let collection = await db.collection(this.collectionName);
 		console.log("getting all games");
 		let result = await collection.find();
 
