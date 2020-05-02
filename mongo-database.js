@@ -143,7 +143,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("getting all games");
-                        return [4 /*yield*/, collection.find({})];
+                        return [4 /*yield*/, collection.find()];
                     case 1:
                         result = _a.sent();
                         console.log("getAll returned" + JSON.stringify(result));
