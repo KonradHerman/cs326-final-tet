@@ -35,7 +35,7 @@ function gameCreate() {
 			document.getElementById("gameCreate-output").innerHTML += 
 					'<p class="text-primary" id="' +
 					j.id +
-					'" href="#">' +
+					'>' +
 					j.name +
 					"</p><br>";
 			console.log(out);
