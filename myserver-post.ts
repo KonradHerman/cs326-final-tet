@@ -95,7 +95,7 @@ export class MyServer {
 	private async loginHandler(request, response) {
 		await passport.authenticate("local", {
 			successRedirect: "/home",
-			failureRedirect: "/login",
+			failureRedirect: "/login.html",
 			failureFlash: true,
 		});
 	}
