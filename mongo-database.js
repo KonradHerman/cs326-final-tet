@@ -41,9 +41,10 @@ var Database = /** @class */ (function () {
         var _this = this;
         this.MongoClient = require("mongodb").MongoClient;
         this.uri = "mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
-        this.dbName = "boredgames";
+        this.dbName = "emery";
         this.collectionName = collectionName;
         this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
+        // Open up a connection to the client.
         // Open up a connection to the client.
         // The connection is asynchronous, but we can't call await directly
         // in the constructor, which cannot be async. So, we use "IIFE". Explanation below.
@@ -83,7 +84,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("put: key = " + key + ", value = " + value);
-                        return [4 /*yield*/, collection.updateOne({ name: key }, { value: value }, { upsert: true })];
+                        return [4 /*yield*/, collection.updateOne({ name: key }, { $set: { value: value } }, { upsert: true })];
                     case 1:
                         result = _a.sent();
                         console.log("result = " + result);
