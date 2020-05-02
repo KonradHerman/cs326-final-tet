@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-	require("dotenv'").config();
+	require("dotenv").config();
 }
 let http = require("http");
 let url = require("url");
@@ -42,7 +42,7 @@ export class MyServer {
 		this.server.use(flash());
 		this.server.use(
 			session({
-				secre: process.env.SESSION_SECRET,
+				secret: process.env.SESSION_SECRET,
 				resave: false,
 				saveUninitialized: false,
 			})
@@ -50,7 +50,9 @@ export class MyServer {
 		this.server.use(passport.initialize());
 		this.server.use(passport.session());
 		//login
-		this.router.post("/login", this.loginHandler.bind(this));
+		this.router.post("/users/login",
+			passport.authenticate('local'),
+			this.loginHandler.bind(this));
 		//home
 		this.router.post("/home", this.homeHandler.bind(this));
 		//register
@@ -90,15 +92,12 @@ export class MyServer {
 		);
 	}
 	private async homeHandler(request, response) {
-		response.redirect("html/home.html");
+		await response.redirect("html/home.html");
 	}
 	private async loginHandler(request, response) {
-		passport.authenticate("local", {
-			successRedirect: "/home",
-			failureRedirect: "/login",
-			failureFlash: true,
-		});
+		await response.redirect('/home.html');
 	}
+
 	public async registerUser(
 		name: string,
 		email: string,
@@ -107,12 +106,12 @@ export class MyServer {
 	) {
 		try {
 			const hashedPassword = await bcrypt.hash(password, 10);
-			this.users.put(
+			await this.users.put(
 				name,
 				`{name:${name},email:${email}, password:${hashedPassword} }`
 			);
 		} catch {
-			response.redirect("/register");
+			await response.redirect("/register");
 		}
 	}
 	private async errorHandler(request, response, next): Promise<void> {
@@ -188,7 +187,9 @@ export class MyServer {
 	public async createGame(name: string, response): Promise<void> {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
-		await this.games.put();
+		await this.games.put(name,
+			`{name:${name},own:[],want;{}}`
+		);
 		response.write(
 			JSON.stringify({ result: "created", name: name, id: 39475 })
 		);
