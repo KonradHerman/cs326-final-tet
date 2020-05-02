@@ -96,12 +96,9 @@ var Database = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             function add() {
                 return __awaiter(this, void 0, void 0, function () {
-                    var val;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0:
-                                val = JSON.parse(value);
-                                return [4 /*yield*/, collection.insertOne(val)];
+                            case 0: return [4 /*yield*/, collection.insertOne(value)];
                             case 1: return [2 /*return*/, _a.sent()];
                         }
                     });
