@@ -208,8 +208,8 @@ export class MyServer {
 		// values.push(await this.theDatabase.get(num));
 		// }
 		let games = await this.games.getAll();
-		console.log(games);
-		response.write(JSON.stringify({ result: "read", games: games }));
+		console.log(games.data);
+		response.write(JSON.stringify({ result: "read", games: games.data }));
 		response.end();
 	}
 

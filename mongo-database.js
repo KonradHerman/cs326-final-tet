@@ -146,9 +146,9 @@ var Database = /** @class */ (function () {
                         return [4 /*yield*/, collection.find()];
                     case 1:
                         result = _a.sent();
-                        console.log("getAll returned" + JSON.stringify(result));
+                        console.log("getAll returned");
                         if (result) {
-                            return [2 /*return*/, result.value];
+                            return [2 /*return*/, result];
                         }
                         else {
                             return [2 /*return*/, null];
