@@ -47,7 +47,7 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("put: key = " + key + ", value = " + value);
 		async function add() {
-			return await collection.insertOne(JSON.parse(value));
+			return await collection.insertOne(value);
 		}
 		let result = add();
 		console.log("result = " + result);
