@@ -4,12 +4,11 @@ export class Database {
 		"mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
 	private client;
 	private collectionName: string;
-	private dbName: string = "emery";
+	private dbName: string = "boredgames";
 
 	constructor(collectionName) {
 		this.collectionName = collectionName;
 		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
-		// Open up a connection to the client.
 		// Open up a connection to the client.
 		// The connection is asynchronous, but we can't call await directly
 		// in the constructor, which cannot be async. So, we use "IIFE". Explanation below.
@@ -41,7 +40,7 @@ export class Database {
 		console.log("put: key = " + key + ", value = " + value);
 		let result = await collection.updateOne(
 			{ name: key },
-			{ $set: { value: value } },
+			{ value: value },
 			{ upsert: true }
 		);
 		console.log("result = " + result);
