@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 let http = require("http");
 let url = require("url");
 let express = require("express");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");

@@ -42,7 +42,7 @@ if (process.env.NODE_ENV !== "production") {
 var http = require("http");
 var url = require("url");
 var express = require("express");
-var bcrypt = require("bcryptjs");
+var bcrypt = require("bcrypt");
 var passport = require("passport");
 var flash = require("express-flash");
 var session = require("express-session");
