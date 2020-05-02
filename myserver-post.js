@@ -332,8 +332,8 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.games.getAll()];
                     case 1:
                         games = _a.sent();
-                        console.log(games.data);
-                        response.write(JSON.stringify({ result: "read", games: games.data }));
+                        console.log(games);
+                        response.write(JSON.stringify({ result: "read", games: games }));
                         response.end();
                         return [2 /*return*/];
                 }
