@@ -59,7 +59,7 @@ var MyServer = /** @class */ (function () {
         this.router = express.Router();
         this.users = udb;
         this.games = gdb;
-        initializePassport(passport, function (username) { return _this.users.get(username); });
+        // initializePassport(passport, (username) => this.users.get(username));
         // from https://enable-cors.org/server_expressjs.html
         this.router.use(function (request, response, next) {
             response.header("Content-Type", "application/json");
@@ -73,13 +73,15 @@ var MyServer = /** @class */ (function () {
         this.server.use(express.json());
         //flash
         this.server.use(flash());
-        this.server.use(session({
-            secret: process.env.SESSION_SECRET,
-            resave: false,
-            saveUninitialized: false
-        }));
-        this.server.use(passport.initialize());
-        this.server.use(passport.session());
+        // this.server.use(
+        // 	session({
+        // 		secret: process.env.SESSION_SECRET,
+        // 		resave: false,
+        // 		saveUninitialized: false,
+        // 	})
+        // );
+        // this.server.use(passport.initialize());
+        // this.server.use(passport.session());
         //login
         this.router.post("/users/login", passport.authenticate("local"), this.loginHandler.bind(this));
         //home

@@ -25,7 +25,7 @@ export class MyServer {
 		this.users = udb;
 		this.games = gdb;
 
-		initializePassport(passport, (username) => this.users.get(username));
+		// initializePassport(passport, (username) => this.users.get(username));
 		// from https://enable-cors.org/server_expressjs.html
 		this.router.use((request, response, next) => {
 			response.header("Content-Type", "application/json");
@@ -40,15 +40,15 @@ export class MyServer {
 		this.server.use(express.json());
 		//flash
 		this.server.use(flash());
-		this.server.use(
-			session({
-				secret: process.env.SESSION_SECRET,
-				resave: false,
-				saveUninitialized: false,
-			})
-		);
-		this.server.use(passport.initialize());
-		this.server.use(passport.session());
+		// this.server.use(
+		// 	session({
+		// 		secret: process.env.SESSION_SECRET,
+		// 		resave: false,
+		// 		saveUninitialized: false,
+		// 	})
+		// );
+		// this.server.use(passport.initialize());
+		// this.server.use(passport.session());
 		//login
 		this.router.post(
 			"/users/login",
