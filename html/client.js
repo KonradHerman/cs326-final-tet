@@ -52,7 +52,7 @@ function gameReadAll() {
 		const newURL = url + "/games/readall";
 		console.log("gameReadAll: fetching " + newURL);
 		const resp = await postData(newURL);
-		console.log(resp.data);
+		console.log(resp);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
