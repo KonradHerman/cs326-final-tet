@@ -136,6 +136,13 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
+            function getResults() {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2 /*return*/, collection.find().toArray()];
+                    });
+                });
+            }
             var db, collection, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -145,10 +152,10 @@ var Database = /** @class */ (function () {
                         console.log(this.collectionName);
                         collection = db.collection(this.collectionName);
                         console.log("getting all games");
-                        return [4 /*yield*/, collection.find()];
+                        return [4 /*yield*/, getResults()];
                     case 1:
                         result = _a.sent();
-                        console.log(result.toArray());
+                        console.log(result);
                         console.log("getAll returned");
                         if (result) {
                             return [2 /*return*/, result];
