@@ -52,20 +52,20 @@ function gameReadAll() {
 		const newURL = url + "/games/readall";
 		console.log("gameReadAll: fetching " + newURL);
 		const resp = await postData(newURL);
+		console.log(resp.data);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			for (const element of j["games"]) {
-				document.getElementById("dropdown-output").innerHTML += // (1) changed id output to dropdown-output
-					'<a class="dropdown-item text-primary" id="' +
-					element.id +
-					'" href="#">' +
-					element.name +
-					"</a><br>";
-			}
+			// for (const element of j["games"]) {
+			// 	document.getElementById("dropdown-output").innerHTML += // (1) changed id output to dropdown-output
+			// 		'<a class="dropdown-item text-primary" id="' +
+			// 		element.id +
+			// 		'" href="#">' +
+			// 		element.name +
+			// 		"</a><br>";
+			// }
 		} else {
-			document.getElementById("dropdown-output").innerHTML =  // (1) changed id output to dropdown-output
-				"200: " + "hi" + ", " + " not found.</b>";
+			console.log("failure to read all");
 		}
 	})();
 }
