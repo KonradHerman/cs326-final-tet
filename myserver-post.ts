@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
-const initializePassport = require("passport-config");
+const initializePassport = require("./passport-config");
 export class MyServer {
 	private users;
 	private games;

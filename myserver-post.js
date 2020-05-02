@@ -46,7 +46,7 @@ var bcrypt = require("bcryptjs");
 var passport = require("passport");
 var flash = require("express-flash");
 var session = require("express-session");
-var initializePassport = require("passport-config");
+var initializePassport = require("./passport-config");
 var MyServer = /** @class */ (function () {
     // Accepts two arguments:
     // udb = user database
