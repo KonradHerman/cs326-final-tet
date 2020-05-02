@@ -207,7 +207,6 @@ export class MyServer {
 		// 	values.push(await this.theDatabase.get(num));
 		// }
 		let games = await this.games.getAll();
-
 		response.write(JSON.stringify({ result: "read", games: games }));
 		response.end();
 	}

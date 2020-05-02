@@ -1,1 +1,1 @@
-web: node server-main.js
+tsweb: node server-main.js
