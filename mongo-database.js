@@ -83,7 +83,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("put: key = " + key + ", value = " + value);
-                        return [4 /*yield*/, collection.updateOne({ name: key }, { value: value }, { upsert: true })];
+                        return [4 /*yield*/, collection.inserOne({ name: key }, { value: value })];
                     case 1:
                         result = _a.sent();
                         console.log("result = " + result);
@@ -136,14 +136,14 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
+            var db, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
+                        // let collection = db.collection(this.collectionName);
                         console.log("getting all games");
-                        return [4 /*yield*/, collection.find({})];
+                        return [4 /*yield*/, db.getCollection(this.collectionName)];
                     case 1:
                         result = _a.sent();
                         console.log("getAll returned" + JSON.stringify(result));
