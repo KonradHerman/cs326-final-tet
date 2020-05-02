@@ -64,7 +64,7 @@
 				aria-haspopup="true" aria-expanded="false">
 				Select a game
 			</button>
-			<div class="dropdown-menu" id="dropdown-output" aria-labelledby="dropdownMenuButton"></div>	<!-- (1)  added a > and changed id to dropdown-output-->
+			<div class="dropdown-menu" id="dropdown-output" aria-labelledby="dropdownMenuButton">	<!-- (1)  added a > and changed id to dropdown-output-->
 			</div>
 		</div>
 		<form>
@@ -73,7 +73,7 @@
 				<input type="text" class="form-control" id="gamename" aria-describedby="emailHelp"
 					placeholder="Enter Game Name">
 			</div>
-			<button type="submit" onclick="gameCreate()" class="btn primary" href="#">Submit</button> <!-- (2) added href=# to send the user to the results page of game create-->
+			<a type="submit" onclick="gameCreate()" class="btn primary" href= "#">Submit</a> <!-- (2) Changed the button to an a tag to link to the game create output-->
 		</form>
 		<form>
 			<div class="form-group row">
@@ -110,8 +110,7 @@
 			</div>
 
 		</form>
-		<div id="gameCreate-output"></div>	<!-- (1) output location for gameCreate() response-->
-		</div>
+		<div class = "row" id="gameCreate-output"></div>	<!-- (1) output location for gameCreate() response -->
 	</div>
 	<!--	<div class="container nav" style="width: 70%">-->
 	<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
