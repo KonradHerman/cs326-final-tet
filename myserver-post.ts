@@ -95,7 +95,7 @@ export class MyServer {
 		await response.redirect("html/home.html");
 	}
 	private async loginHandler(request, response) {
-		response.redirect('/home.html');
+		await response.redirect('/home.html');
 	}
 
 	public async registerUser(
