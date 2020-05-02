@@ -23,7 +23,9 @@
   "homepage": "https://github.com/KonradHerman/cs326-final-tet#readme",
   "dependencies": {
     "@types/node": "^13.13.2",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
-    "mongodb": "^3.5.6"
+    "mongodb": "^3.5.6",
+    "passport": "^0.4.1"
   }
 }
