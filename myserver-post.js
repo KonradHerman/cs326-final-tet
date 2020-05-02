@@ -36,17 +36,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 var http = require("http");
 var url = require("url");
 var express = require("express");
+var bcrypt = require("bcrypt");
+var passport = require("passport");
+var flash = require("express-flash");
+var session = require("express-session");
+var initializePassport = require("passport-config");
 var MyServer = /** @class */ (function () {
-    function MyServer(db) {
+    // Accepts two arguments:
+    // udb = user database
+    // gdb = games database
+    function MyServer(udb, gdb) {
         var _this = this;
         // Server stuff: use express instead of http.createServer
         this.server = express();
         this.port = process.env.PORT;
         this.router = express.Router();
-        this.theDatabase = db;
+        this.users = udb;
+        this.games = gdb;
+        this.gameTestArray = Array(); // (1) Initialize test array
+        initializePassport(passport, function (username) { return _this.users.get(username); });
         // from https://enable-cors.org/server_expressjs.html
         this.router.use(function (request, response, next) {
             response.header("Content-Type", "application/json");
@@ -58,24 +72,39 @@ var MyServer = /** @class */ (function () {
         this.server.use("/", express.static("./html"));
         // NEW: handle POST in JSON format
         this.server.use(express.json());
+        //flash
+        this.server.use(flash());
+        this.server.use(session({
+            secret: process.env.SESSION_SECRET,
+            resave: false,
+            saveUninitialized: false
+        }));
+        this.server.use(passport.initialize());
+        this.server.use(passport.session());
+        //login
+        this.router.post("/users/login", passport.authenticate('local'), this.loginHandler.bind(this));
+        //home
+        this.router.post("/home", this.homeHandler.bind(this));
+        //register
+        this.router.post("/register", this.registerHandler.bind(this));
         // Set a single handler for a route.
         this.router.post("/games/create", this.createHandler.bind(this));
         // Set multiple handlers for a route, in sequence.
         this.router.post("/games/readall", [
             //this.errorHandler.bind(this),
-            this.readallHandler.bind(this)
+            this.readallHandler.bind(this),
         ]);
         this.router.post("/games/read", this.readHandler.bind(this));
         this.router.post("/games/update", [
             // this.errorHandler.bind(this),
-            this.updateHandler.bind(this)
+            this.updateHandler.bind(this),
         ]);
         this.router.post("/users/create", this.createUserHandler.bind(this));
         this.router.post("/users/read", this.readUserHandler.bind(this));
         this.router.post("/users/update", this.updateUserHandler.bind(this));
         this.router.post("/users/delete", [
             // this.errorHandler.bind(this),
-            this.deleteHandler.bind(this)
+            this.deleteHandler.bind(this),
         ]);
         // Set a fall-through handler if nothing matches.
         this.router.post("*", function (request, response) { return __awaiter(_this, void 0, void 0, function () {
@@ -87,12 +116,73 @@ var MyServer = /** @class */ (function () {
         // Start up the counter endpoint at '/counter'.
         this.server.use("/counter", this.router);
     }
+    MyServer.prototype.registerHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.registerUser(request.body.email, request.body.name, request.body.password, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.homeHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, response.redirect("html/home.html")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.loginHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, response.redirect('/home.html')];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.registerUser = function (name, email, password, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var hashedPassword, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 3, , 5]);
+                        return [4 /*yield*/, bcrypt.hash(password, 10)];
+                    case 1:
+                        hashedPassword = _b.sent();
+                        return [4 /*yield*/, this.users.put(name, "{name:" + name + ",email:" + email + ", password:" + hashedPassword + " }")];
+                    case 2:
+                        _b.sent();
+                        return [3 /*break*/, 5];
+                    case 3:
+                        _a = _b.sent();
+                        return [4 /*yield*/, response.redirect("/register")];
+                    case 4:
+                        _b.sent();
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
     MyServer.prototype.errorHandler = function (request, response, next) {
         return __awaiter(this, void 0, void 0, function () {
             var value;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.theDatabase.isFound(request.params["userId"] + "-" + request.body.name)];
+                    case 0: return [4 /*yield*/, this.users.isFound(request.params["userId"] + "-" + request.body.name)];
                     case 1:
                         value = _a.sent();
                         //	console.log("result from database.isFound: " + JSON.stringify(value));
@@ -212,11 +302,20 @@ var MyServer = /** @class */ (function () {
     MyServer.prototype.createGame = function (name, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log("creating game named '" + name + "'");
-                //await this.theDatabase.put(name, 0);
-                response.write(JSON.stringify({ result: "created", name: name, id: 39475 }));
-                response.end();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        console.log("creating game named '" + name + "'");
+                        //await this.theDatabase.put(name, 0);
+                        return [4 /*yield*/, this.games.put(name, "{name:" + name + ",own:[],want;{}}")];
+                    case 1:
+                        //await this.theDatabase.put(name, 0);
+                        _a.sent();
+                        this.gameTestArray.push({ name: name, id: this.gameTestArray[this.gameTestArray.length - 1].id + 1, own: [90871, 27461],
+                            want: [16256, 26446] });
+                        response.write(JSON.stringify({ result: "created", name: name, id: 39475 }));
+                        response.end();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -234,10 +333,36 @@ var MyServer = /** @class */ (function () {
             var games;
             return __generator(this, function (_a) {
                 games = [
-                    { name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443] },
-                    { name: "Anomia", id: 23456, own: [59393, 29494], want: [93950, 14054] },
+                    {
+                        name: "Azul",
+                        id: 12345,
+                        own: [90876, 27465],
+                        want: [16254, 26443]
+                    },
+                    {
+                        name: "Anomia",
+                        id: 23456,
+                        own: [59393, 29494],
+                        want: [93950, 14054]
+                    },
                 ];
-                response.write(JSON.stringify({ result: "read", games: games }));
+                // (1) Test class level array as db
+                this.gameTestArray = [
+                    {
+                        name: "Azul",
+                        id: 12345,
+                        own: [90876, 27465],
+                        want: [16254, 26443]
+                    },
+                    {
+                        name: "Anomia",
+                        id: 23456,
+                        own: [59393, 29494],
+                        want: [93950, 14054]
+                    },
+                ];
+                // response.write(JSON.stringify({ result: "read", games: games })); (1) test class level array as db
+                response.write(JSON.stringify({ result: "read", games: this.gameTestArray }));
                 response.end();
                 return [2 /*return*/];
             });
@@ -247,7 +372,12 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var game;
             return __generator(this, function (_a) {
-                game = { name: "Azul", id: 12345, own: [90876, 27465], want: [16254, 26443] };
+                game = {
+                    name: "Azul",
+                    id: 12345,
+                    own: [90876, 27465],
+                    want: [16254, 26443]
+                };
                 response.write(JSON.stringify({ result: "read", game: game }));
                 response.end();
                 return [2 /*return*/];

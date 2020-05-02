@@ -12,6 +12,7 @@ const initializePassport = require("passport-config");
 export class MyServer {
 	private users;
 	private games;
+	private gameTestArray; // (1) TEST ARRAY AS DB
 
 	// Server stuff: use express instead of http.createServer
 	private server = express();
@@ -24,6 +25,7 @@ export class MyServer {
 	constructor(udb, gdb) {
 		this.users = udb;
 		this.games = gdb;
+		this.gameTestArray = Array<object>(); // (1) Initialize test array
 
 		initializePassport(passport, (username) => this.users.get(username));
 		// from https://enable-cors.org/server_expressjs.html
@@ -190,6 +192,10 @@ export class MyServer {
 		await this.games.put(name,
 			`{name:${name},own:[],want;{}}`
 		);
+
+		this.gameTestArray.push({name: name, id: this.gameTestArray[this.gameTestArray.length - 1].id + 1, own: [90871, 27461], // (1) test adding to array
+			want: [16256, 26446],});
+
 		response.write(
 			JSON.stringify({ result: "created", name: name, id: 39475 })
 		);
@@ -221,8 +227,23 @@ export class MyServer {
 				want: [93950, 14054],
 			},
 		];
-
-		response.write(JSON.stringify({ result: "read", games: games }));
+		// (1) Test class level array as db
+		this.gameTestArray = [
+			{
+				name: "Azul",
+				id: 12345,
+				own: [90876, 27465],
+				want: [16254, 26443],
+			},
+			{
+				name: "Anomia",
+				id: 23456,
+				own: [59393, 29494],
+				want: [93950, 14054],
+			},
+		];
+		// response.write(JSON.stringify({ result: "read", games: games })); (1) test class level array as db
+		response.write(JSON.stringify({ result: "read", games: this.gameTestArray })); 
 		response.end();
 	}
 
