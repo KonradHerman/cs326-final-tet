@@ -38,7 +38,7 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("put: key = " + key + ", value = " + value);
-		let result = await collection.inserOne(
+		let result = await collection.insertOne(
 			{ name: key },
 			{ value: value }
 		);
@@ -72,9 +72,9 @@ export class Database {
 
 	public async getAll(): Promise<string> {
 		let db = this.client.db(this.dbName);
-		// let collection = db.collection(this.collectionName);
+		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
-		let result = await db.getCollection(this.collectionName);
+		let result = await collection.find({});
 		console.log("getAll returned" + JSON.stringify(result));
 		if (result) {
 			return result.value;
