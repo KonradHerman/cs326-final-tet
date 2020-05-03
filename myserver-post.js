@@ -307,7 +307,7 @@ var MyServer = /** @class */ (function () {
                         console.log("creating game named '" + name + "'");
                         //await this.theDatabase.put(name, 0);
                         console.log("start");
-                        return [4 /*yield*/, this.games.put(name, '{"name":"' + name + '","own":[],"want":[]}')];
+                        return [4 /*yield*/, this.games.add(name, '{"name":"' + name + '","own":[],"want":[]}')];
                     case 1:
                         _a.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
