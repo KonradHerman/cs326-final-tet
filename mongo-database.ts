@@ -39,10 +39,10 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("add: value = " + value);
 		let val = JSON.parse(value);
-		async function add(v) {
+		async function addDB(v) {
 			return await collection.insertOne(v);
 		}
-		let result = add(val);
+		let result = addDB(val);
 		console.log("result = " + result);
 	}
 
@@ -50,7 +50,10 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		let result = await collection.findOne({ name: key });
+		async function getResults() {
+			return collection.findOne({ name: key}).toArray();
+		}
+		const result = await getResults();
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result.value;
@@ -65,11 +68,10 @@ export class Database {
 		console.log(this.collectionName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
-
-		async function getResults() {
-			return collection.find().toArray();
-		}
-		const result = await getResults();
+		// async function getResults() {
+		// 	return collection.find().toArray();
+		// }
+		const result = await collection.find().toArray();
 		console.log(result);
 		console.log("getAll returned");
 		if (result) {
