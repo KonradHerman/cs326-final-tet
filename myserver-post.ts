@@ -265,6 +265,7 @@ export class MyServer {
 				if(await bcrypt.compare(password, "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS")) {
 					response.write(JSON.stringify({ result: "logged In"}));
 					console.log("logging in");
+					response.redirect("html/home.html");
 					response.end();
 				} else {
 					response.write(JSON.stringify({ result: "Incorrect Password"}));
