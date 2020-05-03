@@ -59,14 +59,13 @@
 	<div class="container">
 		<script>gameReadAll();</script>
 
+		<div class="form-group">
+			<label for="selectGame">Select a game</label>
+			<select class="btn primary dropdown-toggle" id="selectGame">
+			</select>
+		</div>
+
 		<form>
-			<div class="form-group">
-				<label for="selectGame">Select a game</label>
-				<select class="btn primary dropdown-toggle" id="selectGame" data-toggle="dropdown">
-				</select>
-				<div class="dropdown-menu" id="dropdown-output" aria-labelledby="dropdownMenuButton">
-				</div>
-			</div>
 			<div class="form-group">
 				<label for="gameSelect">Or add a game:</label>
 				<input type="text" class="form-control" id="gameSelect" aria-describedby="emailHelp"
@@ -97,7 +96,7 @@
 					<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="delete" value="false">
 					<label class="form-check-label" for="delete">Delete</label>
 				</div>
-				<button type="submit" onclick="gameUpdate()" class="btn primary">Submit</button>
+				<button type="button" onclick="gameUpdate()" class="btn primary">Submit</button>
 			</div>
 
 		</form>
