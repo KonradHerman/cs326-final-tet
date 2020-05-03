@@ -392,7 +392,6 @@ var MyServer = /** @class */ (function () {
                         if (_b.sent()) {
                             response.write(JSON.stringify({ result: "logged In" }));
                             console.log("logging in");
-                            response.redirect("html/home.html");
                             response.end();
                         }
                         else {

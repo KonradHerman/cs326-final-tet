@@ -162,8 +162,10 @@ function userLogin() {
 			else {
 				let out = userName + " logged in";
 				console.log(out);
+				window.location.replace("home.html");
 			}
-		} else {
+		}
+		else {
 			let out = userName + " was unable to login";
 			console.log(out);
 		}
