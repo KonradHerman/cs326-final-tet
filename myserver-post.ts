@@ -241,20 +241,22 @@ export class MyServer {
 	): Promise<void> {
 		const user = this.users.get(name); // waiting on get 
 		if(user == null) {// if user doesnt exist 
-			return response.status(400).send("Cannot find user"); // some other response
+			response.write(JSON.stringify({ result: "user not found"})); // some other response
 		}
-		try {
-			if(await bcrypt.compare(password, user.password)) {
-				response.write(JSON.stringify({ result: "logged In"}));
-				response.redirect("html/home.html");
-				response.end();
-			} else {
-				response.write(JSON.stringify({ result: "Incorrect Password"}));
-				response.end();
+		else {
+			try {
+				if(await bcrypt.compare(password, user.password)) {
+					response.write(JSON.stringify({ result: "logged In"}));
+					console.log("logging in");
+					response.end();
+				} else {
+					response.write(JSON.stringify({ result: "Incorrect Password"}));
+					response.end();
+				}
+			} catch {
+					response.write(JSON.stringify({ result: "error"}));
+					response.end();
 			}
-		} catch {
-				response.write(JSON.stringify({ result: "error"}));
-				response.end();
 		}
 	}
 

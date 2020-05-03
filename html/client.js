@@ -128,10 +128,14 @@ function userCreate() {
 }
 
 function passwordMatcher() {
-	if(password1.equals(password2) == false) {
+	let password1 = document.getElementById("password1").value;
+	let password2 = document.getElementById("password2").value;
+	if(password1 === password2) {
 		document.getElementById("password-match-output").innerHTML += 
 		'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+		return false;
 	}
+	return true;
 }
 
 
