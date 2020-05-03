@@ -76,37 +76,25 @@ var Database = /** @class */ (function () {
     }
     Database.prototype.add = function (value) {
         return __awaiter(this, void 0, void 0, function () {
-            function addDB(v) {
-                return __awaiter(this, void 0, void 0, function () {
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, collection.insertOne(v)];
-                            case 1: return [2 /*return*/, _a.sent()];
-                        }
-                    });
-                });
-            }
             var db, collection, val, result;
             return __generator(this, function (_a) {
-                db = this.client.db(this.dbName);
-                collection = db.collection(this.collectionName);
-                console.log("add: value = " + value);
-                val = JSON.parse(value);
-                result = addDB(val);
-                console.log("result = " + result);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("add: value = " + value);
+                        val = JSON.parse(value);
+                        return [4 /*yield*/, collection.insertOne(value)];
+                    case 1:
+                        result = _a.sent();
+                        console.log("result = " + result);
+                        return [2 /*return*/];
+                }
             });
         });
     };
     Database.prototype.get = function (key) {
         return __awaiter(this, void 0, void 0, function () {
-            function getResults() {
-                return __awaiter(this, void 0, void 0, function () {
-                    return __generator(this, function (_a) {
-                        return [2 /*return*/, collection.findOne({ name: key }).toArray()];
-                    });
-                });
-            }
             var db, collection, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -114,7 +102,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, getResults()];
+                        return [4 /*yield*/, collection.findOne({ name: key }).toArray()];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));
