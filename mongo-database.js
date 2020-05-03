@@ -88,6 +88,20 @@ var Database = /** @class */ (function () {
             });
         });
     };
+    Database.prototype.put = function (key, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, val, result;
+            return __generator(this, function (_a) {
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("add: value = " + value);
+                val = JSON.parse(value);
+                result = collection.updateOne(key, val);
+                console.log("result = " + result);
+                return [2 /*return*/];
+            });
+        });
+    };
     Database.prototype.get = function (key) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
