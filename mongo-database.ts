@@ -43,6 +43,15 @@ export class Database {
 		console.log("result = " + result);
 	}
 
+	public async put(key: string, value: string): Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("add: value = " + value);
+		let val = JSON.parse(value);
+		let result = collection.updateOne(key, val);
+		console.log("result = " + result);
+	}
+
 	public async get(key: string): Promise<string> {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);

@@ -55,12 +55,12 @@ function gameReadAll() {
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
-				document.getElementById("dropdown-output").innerHTML += // (1) changed id output to dropdown-output
-					'<a class="dropdown-item text-primary" id="' +
+				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
+					'<option id="' +
 					element.id +
-					'" href="#">' +
+					'">' +
 					element.name +
-					"</a><br>";
+					"</option>";
 			}
 		} else {
 			console.log("failure to read all");
