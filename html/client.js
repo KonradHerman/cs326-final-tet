@@ -133,7 +133,7 @@ function passwordMatcher() {
 	let password2 = document.getElementById("password2").value;
 	if(password1 === password2) {
 		document.getElementById("password-match-output").innerHTML += 
-		'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+		'<p class="text-primary" style= "color: red;">Passwordtscs do not match</p><br>';
 		return false;
 	}
 	return true;

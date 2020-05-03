@@ -362,6 +362,7 @@ var MyServer = /** @class */ (function () {
                     case 2:
                         _b.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
+                        response.redirect("html/index.html");
                         response.end();
                         return [3 /*break*/, 4];
                     case 3:
@@ -381,16 +382,16 @@ var MyServer = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         user = this.users.get(name);
-                        if (user == null) { // if user doesnt exist 
-                            return [2 /*return*/, response.status(400).send("Cannot find user")]; // some other response
-                        }
-                        _b.label = 1;
+                        if (!(user == null)) return [3 /*break*/, 1];
+                        response.write(JSON.stringify({ result: "user not found" })); // some other response
+                        return [3 /*break*/, 4];
                     case 1:
                         _b.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, bcrypt.compare(password, user.password)];
                     case 2:
                         if (_b.sent()) {
                             response.write(JSON.stringify({ result: "logged In" }));
+                            console.log("logging in");
                             response.end();
                         }
                         else {
