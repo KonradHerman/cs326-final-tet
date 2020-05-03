@@ -202,7 +202,9 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.createGame(request.body.name, response)];
+                    case 0:
+                        console.log(request);
+                        return [4 /*yield*/, this.createGame(request.body.name, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -304,9 +306,9 @@ var MyServer = /** @class */ (function () {
                     case 0:
                         console.log("creating game named '" + name + "'");
                         //await this.theDatabase.put(name, 0);
-                        return [4 /*yield*/, this.games.put(name, "{name:" + name + ",own:[],want:[]}")];
+                        console.log("start");
+                        return [4 /*yield*/, this.games.put(name, '{"name":"' + name + '","own":[],"want":[]}')];
                     case 1:
-                        //await this.theDatabase.put(name, 0);
                         _a.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
                         response.end();
@@ -332,8 +334,7 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.games.getAll()];
                     case 1:
                         games = _a.sent();
-                        console.log(games.data);
-                        response.write(JSON.stringify({ result: "read", games: games.data }));
+                        response.write(JSON.stringify({ result: "read", games: games }));
                         response.end();
                         return [2 /*return*/];
                 }
