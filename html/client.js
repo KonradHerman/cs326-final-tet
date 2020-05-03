@@ -77,8 +77,8 @@ function gameRead() {
 function gameUpdate() {
 	(async () => {
 		//we need to change this element id based on the html page
-		let option = document.getElementById("gameSelect")
-		let gameID = option[option.selectedIndex].id;
+		let drop = document.getElementById("gameSelect")
+		let gameID = drop.options[drop.selectedIndex].id;
 		let userID = document.getElementById("userid").value;
 		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
