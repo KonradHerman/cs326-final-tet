@@ -49,16 +49,9 @@ export class MyServer {
 		// );
 		// this.server.use(passport.initialize());
 		// this.server.use(passport.session());
-		//login
-		this.router.post(
-			"/users/login",
-			passport.authenticate("local"),
-			this.loginHandler.bind(this)
-		);
+
 		//home
 		this.router.post("/home", this.homeHandler.bind(this));
-		//register
-		this.router.post("/register", this.registerHandler.bind(this));
 		// Set a single handler for a route.
 		this.router.post("/games/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
@@ -73,6 +66,7 @@ export class MyServer {
 			this.updateHandler.bind(this),
 		]);
 		this.router.post("/users/create", this.createUserHandler.bind(this));
+		this.router.post("/users/login", this.loginUserHandler.bind(this));
 		this.router.post("/users/read", this.readUserHandler.bind(this));
 		this.router.post("/users/update", this.updateUserHandler.bind(this));
 		this.router.post("/users/delete", [
@@ -86,37 +80,19 @@ export class MyServer {
 		// Start up the counter endpoint at '/counter'.
 		this.server.use("/counter", this.router);
 	}
-	private async registerHandler(request, response): Promise<void> {
-		await this.registerUser(
-			request.body.email,
+
+	private async homeHandler(request, response): Promise<void> {
+		await response.redirect("html/home.html");
+	}
+
+	private async loginUserHandler(request, response): Promise<void> {
+		await this.loginUser(
 			request.body.name,
 			request.body.password,
 			response
 		);
 	}
-	private async homeHandler(request, response): Promise<void> {
-		await response.redirect("html/home.html");
-	}
-	private async loginHandler(request, response): Promise<void> {
-		await response.redirect("/home.html");
-	}
 
-	public async registerUser(
-		name: string,
-		email: string,
-		password: string,
-		response
-	): Promise<void> {
-		try {
-			const hashedPassword = await bcrypt.hash(password, 10);
-			await this.users.put(
-				name,
-				`{name:${name},email:${email}, password:${hashedPassword} }`
-			);
-		} catch {
-			await response.redirect("/register");
-		}
-	}
 	private async errorHandler(request, response, next): Promise<void> {
 		let value: boolean = await this.users.isFound(
 			request.params["userId"] + "-" + request.body.name
@@ -248,12 +224,35 @@ export class MyServer {
 		try {
 			console.log("creating user named '" + name + "'");
 			const hashedPassword = await bcrypt.hash(password, 10); 
-			await this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '"}');
+			await this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '","own":[],"want":[]}');
 			response.write(JSON.stringify({ result: "created", name: name}));
 			response.end();
 		} catch {
-			response.status(500).send();
+			response.write(JSON.stringify({ result: "error"}));
 			response.end();
+		}
+	}
+
+	public async loginUser(
+		name: string,
+		password: string,
+		response
+	): Promise<void> {
+		const user = this.users.get(name); // waiting on get 
+		if(user == null) {// if user doesnt exist 
+			return response.status(400).send("Cannot find user"); // some other response
+		}
+		try {
+			if(await bcrypt.compare(password, user.password)) {
+				response.write(JSON.stringify({ result: "logged In"}));
+				response.end();
+			} else {
+				response.write(JSON.stringify({ result: "Incorrect Password"}));
+				response.end();
+			}
+		} catch {
+				response.write(JSON.stringify({ result: "error"}));
+				response.end();
 		}
 	}
 
