@@ -76,25 +76,19 @@ var Database = /** @class */ (function () {
     }
     Database.prototype.add = function (key, value) {
         return __awaiter(this, void 0, void 0, function () {
-            function add(v) {
-                return __awaiter(this, void 0, void 0, function () {
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, collection.insertOne(v)];
-                            case 1: return [2 /*return*/, _a.sent()];
-                        }
-                    });
-                });
-            }
-            var db, collection, val, result;
+            var db, collection, result;
             return __generator(this, function (_a) {
-                db = this.client.db(this.dbName);
-                collection = db.collection(this.collectionName);
-                console.log("put: key = " + key + ", value = " + value);
-                val = JSON.parse(value);
-                result = add(val);
-                console.log("result = " + result);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("put: key = " + key + ", value = " + value);
+                        return [4 /*yield*/, collection.insertOne({ name: key }, { value: value })];
+                    case 1:
+                        result = _a.sent();
+                        console.log("result = " + result);
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -104,7 +98,7 @@ var Database = /** @class */ (function () {
                 return __awaiter(this, void 0, void 0, function () {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4 /*yield*/, collection.updateOne({ name: key }, v, { upsert: true })];
+                            case 0: return [4 /*yield*/, collection.insertOne(v)];
                             case 1: return [2 /*return*/, _a.sent()];
                         }
                     });

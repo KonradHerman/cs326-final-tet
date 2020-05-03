@@ -38,11 +38,7 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("put: key = " + key + ", value = " + value);
-		let val = JSON.parse(value);
-		async function add(v) {
-			return await collection.insertOne(v);
-		}
-		let result = add(val);
+		let result = await collection.insertOne({ name: key }, { value: value });
 		console.log("result = " + result);
 	}
 
@@ -52,7 +48,7 @@ export class Database {
 		console.log("put: key = " + key + ", value = " + value);
 		let val = JSON.parse(value);
 		async function add(v) {
-			return await collection.updateOne({ name: key }, v, { upsert: true });
+			return await collection.insertOne(v);
 		}
 		let result = add(val);
 		console.log("result = " + result);
