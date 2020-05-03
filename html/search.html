@@ -62,15 +62,14 @@
 		<form>
 			<div class="form-group">
 				<label for="selectGame">Select a game</label>
-				<select class="btn primary dropdown-toggle" type="button" id="selectGame" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
+				<select class="btn primary dropdown-toggle" id="selectGame" data-toggle="dropdown">
 				</select>
 				<div class="dropdown-menu" id="dropdown-output" aria-labelledby="dropdownMenuButton">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="gamename">Or add a game:</label>
-				<input type="text" class="form-control" id="gamename" aria-describedby="emailHelp"
+				<label for="gameSelect">Or add a game:</label>
+				<input type="text" class="form-control" id="gameSelect" aria-describedby="emailHelp"
 					placeholder="Enter Game Name">
 			</div>
 			<button type="submit" onclick="gameCreate()" class="btn primary">Submit</button> <!-- (2) Changed the button to an a tag to link to the game create output-->
@@ -81,15 +80,7 @@
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="userid" placeholder="UsEr1">
 				</div>
-			</div>
-			<div class="form-group row">
-				<label for="gameid" class="col-sm-2 col-form-label">Enter GameID:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="gameid" placeholder="g4M31D">
-				</div>
-			</div>
 			<div class="row">
-
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="own" value="true" checked>
 					<label class="form-check-label" for="own">Own</label>

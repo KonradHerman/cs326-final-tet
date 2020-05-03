@@ -39,7 +39,7 @@ function gameReadAll() {
 			for (const element of j["games"]) {
 				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 					'<option id="' +
-					element.id +
+					element._id +
 					'">' +
 					element.name +
 					"</option>";
@@ -77,7 +77,8 @@ function gameRead() {
 function gameUpdate() {
 	(async () => {
 		//we need to change this element id based on the html page
-		let gameID = document.getElementById("gameid").value;
+		let drop = document.getElementById("gameSelect")
+		let gameID = drop.options[drop.selectedIndex].id;
 		let userID = document.getElementById("userid").value;
 		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
@@ -88,8 +89,8 @@ function gameUpdate() {
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			document.getElementById("final").innerHTML +=
-				" <p>game updated succesfully</p>";
+			// document.getElementById("final").innerHTML +=
+			// 	" <p>game updated succesfully</p>";
 			console.log("game updated successfully");
 			// for (const element of j["games"]) {
 			// 	document.getElementById("output").innerHTML +=
@@ -151,7 +152,7 @@ function userLogin() {
 		const j = await resp.json();
 		if (j["result"] !== "error") {
 			//Success
-			if(j["result"] == "Incorrect Password") {
+			if (j["result"] == "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
 			}
