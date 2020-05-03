@@ -89,8 +89,8 @@ function gameUpdate() {
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			document.getElementById("final").innerHTML +=
-				" <p>game updated succesfully</p>";
+			// document.getElementById("final").innerHTML +=
+			// 	" <p>game updated succesfully</p>";
 			console.log("game updated successfully");
 			// for (const element of j["games"]) {
 			// 	document.getElementById("output").innerHTML +=
