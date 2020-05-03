@@ -37,7 +37,7 @@ export class Database {
 	public async add(key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
-		console.log("add: key = " + key + ", value = " + value);
+		console.log("put: key = " + key + ", value = " + value);
 		let val = JSON.parse(value);
 		async function add(v) {
 			return await collection.insertOne(v);
