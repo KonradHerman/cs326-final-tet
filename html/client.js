@@ -114,7 +114,8 @@ function userCreate() {
 		let img = "no img";
 		const data = { name: userName, email: email, password: password1, img: img, zip: zip };
 		const newURL = url + "/users/create";
-		console.log("logging in: fetching" + newURL);
+		console.log("logging in: fetching");
+		console.log(newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
@@ -129,10 +130,14 @@ function userCreate() {
 }
 
 function passwordMatcher() {
-	if (password1.equals(password2) == false) {
-		document.getElementById("password-match-output").innerHTML +=
-			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+	let password1 = document.getElementById("password1").value;
+	let password2 = document.getElementById("password2").value;
+	if(password1 === password2) {
+		document.getElementById("password-match-output").innerHTML += 
+		'<p class="text-primary" style= "color: red;">Passwordtscs do not match</p><br>';
+		return false;
 	}
+	return true;
 }
 
 
@@ -143,9 +148,11 @@ function userLogin() {
 		let password = document.getElementById("password").value;
 		const data = { name: userName, password: password };
 		const newURL = url + "/users/login";
-		console.log("logging in: fetching" + newURL);
+		console.log("logging in: fetching");
+		console.log(newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
+		console.log(j);
 		if (j["result"] !== "error") {
 			//Success
 			if (j["result"] == "Incorrect Password") {
