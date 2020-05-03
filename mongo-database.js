@@ -123,7 +123,7 @@ var Database = /** @class */ (function () {
                         console.log(this.collectionName);
                         collection = db.collection(this.collectionName);
                         console.log("getting all games");
-                        return [4 /*yield*/, collection.find().toArray()];
+                        return [4 /*yield*/, collection.find().sort({ name: 1 }).toArray()];
                     case 1:
                         result = _a.sent();
                         console.log(result);
