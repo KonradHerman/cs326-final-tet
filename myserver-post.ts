@@ -83,11 +83,11 @@ export class MyServer {
 		});
 
 		this.server.get("/login", (req, res) =>
-			res.sendFile("html/login.html", { root: __dirname })
+			res.sendFile("html/index.html", { root: __dirname })
 		);
 
 		this.server.get("/", connectEnsureLogin.ensureLoggedIn(), (req, res) =>
-			res.sendFile("html/index.html", { root: __dirname })
+			res.sendFile("html/home.html", { root: __dirname })
 		);
 
 		this.server.get(
