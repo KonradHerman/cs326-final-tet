@@ -156,6 +156,7 @@ export class MyServer {
 	private async createUserHandler(request, response): Promise<void> {
 		await this.createUser(
 			request.body.name,
+			request.body.email,
 			request.body.password,
 			request.body.img,
 			request.body.zip,
@@ -233,20 +234,27 @@ export class MyServer {
 		//await this.theDatabase.put(name, value);
 		response.write(JSON.stringify({ result: "updated", game: game }));
 		response.end();
+		
 	}
 
 	public async createUser(
 		name: string,
+		email: string,
 		password: string,
 		img: string,
 		zip: string,
 		response
 	): Promise<void> {
-
-		response.write(
-			JSON.stringify({ result: "created", name: name, id: 17435 })
-		);
-		response.end();
+		try {
+			console.log("creating user named '" + name + "'");
+			const hashedPassword = await bcrypt.hash(password, 10); 
+			await this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '"}');
+			response.write(JSON.stringify({ result: "created", name: name}));
+			response.end();
+		} catch {
+			response.status(500).send();
+			response.end();
+		}
 	}
 
 	public async readUser(id: number, response): Promise<void> {
