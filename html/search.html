@@ -59,15 +59,15 @@
 	<div class="container">
 		<script>gameReadAll();</script>
 
-		<div class="dropdown">
-			<button class="btn primary dropdown-toggle" type=" button" id="dropdownMenuButton" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false">
-				Select a game
-			</button>
-			<div class="dropdown-menu" id="dropdown-output" aria-labelledby="dropdownMenuButton">	<!-- (1)  added a > and changed id to dropdown-output-->
-			</div>
-		</div>
 		<form>
+			<div class="form-group">
+				<label for="selectGame">Select a game</label>
+				<select class="btn primary dropdown-toggle" type="button" id="selectGame" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+				</select>
+				<div class="dropdown-menu" id="dropdown-output" aria-labelledby="dropdownMenuButton">
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="gamename">Or add a game:</label>
 				<input type="text" class="form-control" id="gamename" aria-describedby="emailHelp"

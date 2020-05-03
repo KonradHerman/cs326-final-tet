@@ -252,7 +252,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.createUser(request.body.name, request.body.password, request.body.img, request.body.zip, response)];
+                    case 0: return [4 /*yield*/, this.createUser(request.body.name, request.body.email, request.body.password, request.body.img, request.body.zip, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -307,7 +307,7 @@ var MyServer = /** @class */ (function () {
                         console.log("creating game named '" + name + "'");
                         //await this.theDatabase.put(name, 0);
                         console.log("start");
-                        return [4 /*yield*/, this.games.add(name, '{"name":"' + name + '","own":[],"want":[]}')];
+                        return [4 /*yield*/, this.games.add('{"name":"' + name + '","own":[],"want":[]}')];
                     case 1:
                         _a.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
@@ -367,12 +367,30 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.createUser = function (name, password, img, zip, response) {
+    MyServer.prototype.createUser = function (name, email, password, img, zip, response) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                response.write(JSON.stringify({ result: "created", name: name, id: 17435 }));
-                response.end();
-                return [2 /*return*/];
+            var hashedPassword, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 3, , 4]);
+                        console.log("creating user named '" + name + "'");
+                        return [4 /*yield*/, bcrypt.hash(password, 10)];
+                    case 1:
+                        hashedPassword = _b.sent();
+                        return [4 /*yield*/, this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '"}')];
+                    case 2:
+                        _b.sent();
+                        response.write(JSON.stringify({ result: "created", name: name }));
+                        response.end();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        _a = _b.sent();
+                        response.status(500).send();
+                        response.end();
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
             });
         });
     };

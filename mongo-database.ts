@@ -39,10 +39,16 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("add: value = " + value);
 		let val = JSON.parse(value);
-		async function addDB(v) {
-			return await collection.insertOne(v);
-		}
-		let result = addDB(val);
+		let result = collection.insertOne(val);
+		console.log("result = " + result);
+	}
+
+	public async put(key: string, value: string): Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("add: value = " + value);
+		let val = JSON.parse(value);
+		let result = collection.updateOne(key, val);
 		console.log("result = " + result);
 	}
 
@@ -50,10 +56,7 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		async function getResults() {
-			return collection.findOne({ name: key}).toArray();
-		}
-		const result = await getResults();
+		const result = await collection.findOne({name: key}).toArray();
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result.value;
@@ -68,10 +71,7 @@ export class Database {
 		console.log(this.collectionName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
-		// async function getResults() {
-		// 	return collection.find().toArray();
-		// }
-		const result = await collection.find().toArray();
+		const result = await collection.find().sort({name:1}).toArray();
 		console.log(result);
 		console.log("getAll returned");
 		if (result) {
