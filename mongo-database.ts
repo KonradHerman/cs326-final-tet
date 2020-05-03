@@ -42,7 +42,7 @@ export class Database {
 		// async function addDB(v) {
 		// 	return await collection.insertOne(v);
 		// }
-		let result = await collection.insertOne(val);
+		let result = collection.insertOne(val);
 		console.log("result = " + result);
 	}
 

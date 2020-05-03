@@ -78,18 +78,13 @@ var Database = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, val, result;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("add: value = " + value);
-                        val = JSON.parse(value);
-                        return [4 /*yield*/, collection.insertOne(val)];
-                    case 1:
-                        result = _a.sent();
-                        console.log("result = " + result);
-                        return [2 /*return*/];
-                }
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("add: value = " + value);
+                val = JSON.parse(value);
+                result = collection.insertOne(val);
+                console.log("result = " + result);
+                return [2 /*return*/];
             });
         });
     };
