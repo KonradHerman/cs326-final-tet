@@ -225,14 +225,31 @@ export class MyServer {
 	}
 
 	public async updateGame(
-		game: string,
+		game: number,
 		user: number,
 		own: boolean,
 		add: boolean,
 		response
 	): Promise<void> {
 		//await this.theDatabase.put(name, value);
-		response.write(JSON.stringify({ result: "updated", game: game }));
+		let userObj = this.users.get(user);
+		let gameObj = this.games.get(game);
+		if(own && add){
+			userObj.own.append(game);
+			gameObj.own.append(user);
+		} else if(own){
+			userObj.own = this.removeItem(userObj.own, game);
+			gameObj.own = this.removeItem(gameObj.own, user);
+		} else if(add){
+			userObj.want.append(game);
+			gameObj.want.append(user);
+		} else {
+			userObj.want = this.removeItem(userObj.want, game);
+			gameObj.want = this.removeItem(gameObj.want, user);
+		}
+		this.users.put(user, userObj);
+		this.games.put(game, gameObj);
+		response.write(JSON.stringify({ result: "updated", game: game, user: user }));
 		response.end();
 		
 	}
@@ -281,6 +298,14 @@ export class MyServer {
 	): Promise<void> {
 		response.write(JSON.stringify({ result: "updated", id: id }));
 		response.end();
+	}
+
+	public removeItem(arr, value): Promise<any[]> {
+		let index = arr.indexOf(value);
+		if (index > -1) {
+			arr.splice(index, 1);
+		}
+		return arr;
 	}
 
 	public async deleteUser(id: number, response): Promise<void> {

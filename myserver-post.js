@@ -359,9 +359,29 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.updateGame = function (game, user, own, add, response) {
         return __awaiter(this, void 0, void 0, function () {
+            var userObj, gameObj;
             return __generator(this, function (_a) {
-                //await this.theDatabase.put(name, value);
-                response.write(JSON.stringify({ result: "updated", game: game }));
+                userObj = this.users.get(user);
+                gameObj = this.games.get(game);
+                if (own && add) {
+                    userObj.own.append(game);
+                    gameObj.own.append(user);
+                }
+                else if (own) {
+                    userObj.own = this.removeItem(userObj.own, game);
+                    gameObj.own = this.removeItem(gameObj.own, user);
+                }
+                else if (add) {
+                    userObj.want.append(game);
+                    gameObj.want.append(user);
+                }
+                else {
+                    userObj.want = this.removeItem(userObj.want, game);
+                    gameObj.want = this.removeItem(gameObj.want, user);
+                }
+                this.users.put(user, userObj);
+                this.games.put(game, gameObj);
+                response.write(JSON.stringify({ result: "updated", game: game, user: user }));
                 response.end();
                 return [2 /*return*/];
             });
@@ -420,6 +440,13 @@ var MyServer = /** @class */ (function () {
                 return [2 /*return*/];
             });
         });
+    };
+    MyServer.prototype.removeItem = function (arr, value) {
+        var index = arr.indexOf(value);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+        return arr;
     };
     MyServer.prototype.deleteUser = function (id, response) {
         return __awaiter(this, void 0, void 0, function () {

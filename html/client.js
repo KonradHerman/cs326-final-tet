@@ -57,7 +57,7 @@ function gameReadAll() {
 			for (const element of j["games"]) {
 				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 					'<option id="' +
-					element.id +
+					element._id +
 					'">' +
 					element.name +
 					"</option>";
@@ -95,7 +95,7 @@ function gameRead() {
 function gameUpdate() {
 	(async () => {
 		//we need to change this element id based on the html page
-		let gameID = document.getElementById("gameid").value;
+		let gameID = document.getElementById("gameSelect").options.selectedIndex.id;
 		let userID = document.getElementById("userid").value;
 		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
@@ -120,6 +120,7 @@ function gameUpdate() {
 		}
 	})();
 }
+
 function userDelete() {
 	(async () => {
 		//let userID = document.getElementById("userID").value;
