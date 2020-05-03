@@ -401,7 +401,7 @@ var MyServer = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         _a = _b.sent();
-                        response.write(JSON.stringify({ result: "error" }));
+                        response.write(JSON.stringify({ result: "caught error" }));
                         response.end();
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];

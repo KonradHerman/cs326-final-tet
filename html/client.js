@@ -114,7 +114,8 @@ function userCreate() {
 		let img = "no img";
 		const data = { name: userName, email: email, password: password1, img: img, zip: zip };
 		const newURL = url + "/users/create";
-		console.log("logging in: fetching" + newURL);
+		console.log("logging in: fetching");
+		console.log(newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
@@ -147,7 +148,8 @@ function userLogin() {
 		let password = document.getElementById("password").value;
 		const data = { name: userName, password: password };
 		const newURL = url + "/users/login";
-		console.log("logging in: fetching" + newURL);
+		console.log("logging in: fetching");
+		console.log(newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);

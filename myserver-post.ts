@@ -271,7 +271,7 @@ export class MyServer {
 					response.end();
 				}
 			} catch {
-					response.write(JSON.stringify({ result: "error"}));
+					response.write(JSON.stringify({ result: "caught error"}));
 					response.end();
 			}
 		}
