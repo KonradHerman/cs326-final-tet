@@ -37,6 +37,20 @@
 				<li><a style="color:white" href="search.html">Search</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right navbar-dark ">
+				<li id="welcome-message">
+					<a href="/private">Go to private area</a>
+				</li>
+				<script>
+					const req = new XMLHttpRequest();
+					req.onreadystatechange = function () {
+						if (req.readyState == 4 && req.status == 200) {
+							const user = JSON.parse(req.response).user;
+							document.getElementById("welcome-message").innerText = `Welcome ${user.username}!!`;
+						}
+					};
+					req.open("GET", "https://tet326.herokuapp.com/counter/user", true);
+					req.send();
+				</script>
 				<li class="dropdown">
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						style="color:white">
