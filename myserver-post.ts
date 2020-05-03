@@ -257,12 +257,13 @@ export class MyServer {
 		response
 	): Promise<void> {
 		const user = this.users.get(name); // waiting on get 
+		response.write(JSON.stringify({ result: user }));
 		if(user == null) {// if user doesnt exist 
 			response.write(JSON.stringify({ result: "user not found"})); // some other response
 		}
 		else {
 			try {
-				if(await bcrypt.compare(password, "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS")) {
+				if(await bcrypt.compare(password, user.password)) {
 					response.write(JSON.stringify({ result: "logged In"}));
 					console.log("logging in");
 					response.end();
