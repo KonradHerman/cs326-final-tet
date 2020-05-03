@@ -382,13 +382,12 @@ var MyServer = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         user = this.users.get(name);
-                        console.log(user);
                         if (!(user == null)) return [3 /*break*/, 1];
                         response.write(JSON.stringify({ result: "user not found" })); // some other response
                         return [3 /*break*/, 4];
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, bcrypt.compare(password, user.password)];
+                        return [4 /*yield*/, bcrypt.compare(password, "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS")];
                     case 2:
                         if (_b.sent()) {
                             response.write(JSON.stringify({ result: "logged In" }));

@@ -153,7 +153,7 @@ function userLogin() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);
-		if (j["result"] !== "error") {
+		if (j["result"] !== "caught error") {
 			//Success
 			if (j["result"] == "Incorrect Password") {
 				let out = "Incorrect Password ";
