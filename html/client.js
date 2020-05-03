@@ -136,6 +136,7 @@ function userDelete() {
 		}
 	})();
 }
+
 // NEW: helper method for posting data
 async function postData(url, data) {
 	const resp = await fetch(url, {

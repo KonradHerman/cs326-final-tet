@@ -96,7 +96,7 @@ export class MyServer {
 			(req, res) => res.sendFile("html/private.html", { root: __dirname })
 		);
 
-		this.server.get("/user", connectEnsureLogin.ensureLoggedIn(), (req, res) =>
+		this.server.get("/users", connectEnsureLogin.ensureLoggedIn(), (req, res) =>
 			res.send({ user: req.user })
 		);
 		UserDetails.register({ username: "paul", active: false }, "paul");
@@ -212,7 +212,7 @@ export class MyServer {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
 		console.log("start");
-		await this.games.add(name, '{"name":"' + name + '","own":[],"want":[]}');
+		await this.games.add('{"name":"' + name + '","own":[],"want":[]}');
 		response.write(JSON.stringify({ result: "created", name: name }));
 		response.end();
 	}
@@ -263,6 +263,7 @@ export class MyServer {
 		zip: string,
 		response
 	): Promise<void> {
+
 		response.write(
 			JSON.stringify({ result: "created", name: name, id: 17435 })
 		);
