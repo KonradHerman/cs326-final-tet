@@ -84,7 +84,7 @@ var Database = /** @class */ (function () {
                         collection = db.collection(this.collectionName);
                         console.log("add: value = " + value);
                         val = JSON.parse(value);
-                        return [4 /*yield*/, collection.insertOne(value)];
+                        return [4 /*yield*/, collection.insertOne(val)];
                     case 1:
                         result = _a.sent();
                         console.log("result = " + result);
