@@ -150,6 +150,7 @@ function userLogin() {
 		console.log("logging in: fetching" + newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
+		console.log(j);
 		if (j["result"] !== "error") {
 			//Success
 			if (j["result"] == "Incorrect Password") {
