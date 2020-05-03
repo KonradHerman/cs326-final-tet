@@ -1,17 +1,14 @@
+if (process.env.NODE_ENV !== "production") {
+	require("dotenv").config();
+}
 let http = require("http");
 let url = require("url");
 let express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
-const bodyParser = require("body-parser");
-const expressSession = require("express-session")({
-	secret: "secret",
-	resave: false,
-	saveUninitialized: false,
-});
-const mongoose = require("mongoose");
-const passportLocalMongoose = require("passport-local-mongoose");
+const session = require("express-session");
+const initializePassport = require("./passport-config");
 export class MyServer {
 	private users;
 	private games;
@@ -36,78 +33,32 @@ export class MyServer {
 			response.header("Access-Control-Allow-Headers", "*");
 			next();
 		});
-		this.server.use(bodyParser.json());
-		this.server.use(bodyParser.urlencoded({ extended: true }));
-		this.server.use(expressSession);
-		this.server.use(passport.initialize());
-		this.server.use(passport.session());
-		mongoose.connect(
-			"mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority",
-			{
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-			}
-		);
 
-		const Schema = mongoose.Schema;
-		const UserDetail = new Schema({
-			username: String,
-			password: String,
-		});
-
-		UserDetail.plugin(passportLocalMongoose);
-		const UserDetails = mongoose.model("userInfo", UserDetail, "userInfo");
-		passport.use(UserDetails.createStrategy());
-
-		passport.serializeUser(UserDetails.serializeUser());
-		passport.deserializeUser(UserDetails.deserializeUser());
-		const connectEnsureLogin = require("connect-ensure-login");
-		this.server.post("/login", (req, res, next) => {
-			passport.authenticate("local", (err, user, info) => {
-				if (err) {
-					return next(err);
-				}
-
-				if (!user) {
-					return res.redirect("/login?info=" + info);
-				}
-
-				req.logIn(user, function (err) {
-					if (err) {
-						return next(err);
-					}
-
-					return res.redirect("/");
-				});
-			})(req, res, next);
-		});
-
-		this.server.get("/login", (req, res) =>
-			res.sendFile("html/index.html", { root: __dirname })
-		);
-
-		this.server.get("/", connectEnsureLogin.ensureLoggedIn(), (req, res) =>
-			res.sendFile("html/home.html", { root: __dirname })
-		);
-
-		this.server.get(
-			"/private",
-			connectEnsureLogin.ensureLoggedIn(),
-			(req, res) => res.sendFile("html/private.html", { root: __dirname })
-		);
-
-		this.server.get("/users", connectEnsureLogin.ensureLoggedIn(), (req, res) =>
-			res.send({ user: req.user })
-		);
-		UserDetails.register({ username: "paul", active: false }, "paul");
-		UserDetails.register({ username: "jay", active: false }, "jay");
-		UserDetails.register({ username: "roy", active: false }, "roy");
 		// Serve static pages from a particular path.
 		this.server.use("/", express.static("./html"));
 		// NEW: handle POST in JSON format
 		this.server.use(express.json());
+		//flash
+		this.server.use(flash());
+		// this.server.use(
+		// 	session({
+		// 		secret: process.env.SESSION_SECRET,
+		// 		resave: false,
+		// 		saveUninitialized: false,
+		// 	})
+		// );
+		// this.server.use(passport.initialize());
+		// this.server.use(passport.session());
+		//login
+		this.router.post(
+			"/users/login",
+			passport.authenticate("local"),
+			this.loginHandler.bind(this)
+		);
 		//home
 		this.router.post("/home", this.homeHandler.bind(this));
+		//register
+		this.router.post("/register", this.registerHandler.bind(this));
 		// Set a single handler for a route.
 		this.router.post("/games/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
@@ -135,8 +86,36 @@ export class MyServer {
 		// Start up the counter endpoint at '/counter'.
 		this.server.use("/counter", this.router);
 	}
+	private async registerHandler(request, response): Promise<void> {
+		await this.registerUser(
+			request.body.email,
+			request.body.name,
+			request.body.password,
+			response
+		);
+	}
 	private async homeHandler(request, response): Promise<void> {
 		await response.redirect("html/home.html");
+	}
+	private async loginHandler(request, response): Promise<void> {
+		await response.redirect("/home.html");
+	}
+
+	public async registerUser(
+		name: string,
+		email: string,
+		password: string,
+		response
+	): Promise<void> {
+		try {
+			const hashedPassword = await bcrypt.hash(password, 10);
+			await this.users.put(
+				name,
+				`{name:${name},email:${email}, password:${hashedPassword} }`
+			);
+		} catch {
+			await response.redirect("/register");
+		}
 	}
 	private async errorHandler(request, response, next): Promise<void> {
 		let value: boolean = await this.users.isFound(
