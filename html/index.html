@@ -37,31 +37,20 @@
 			</div>
 			<form action="/counter/login" method="POST">
 				<div class="form-group">
-					<label class=" text-primary" for="username">Username</label>
-					<input type="text" class="form-control text-primary" id="username" aria-describedby="emailHelp">
+					<label class=" text-primary" for="exampleInputEmail1">Email address</label>
+					<input type="email" class="form-control text-primary" id="exampleInputEmail1" aria-describedby="emailHelp">
 					<small id="emailHelp" class="form-text text-primary">We'll never share your email with anyone else
 						;)</small>
 				</div>
 				<div class="form-group">
-					<label class="text-primary" for="password">Password</label>
-					<input type="password" class="form-control text-primary" id="password">
+					<label class="text-primary" for="exampleInputPassword1">Password</label>
+					<input type="password" class="form-control text-primary" id="exampleInputPassword1">
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" class="form-check-input text-primary" id="exampleCheck1">
 					<label class="form-check-label text-primary" for="exampleCheck1">Remeber Me</label>
 				</div>
-				<button type="submit" class="btn primary" value="Submit" required>Submit</button>
-				<label id="error-message"></label>
-				<script>
-					const urlParams = new URLSearchParams(window.location.search);
-					const info = urlParams.get('info');
-
-					if (info) {
-						const errorMessage = document.getElementById("error-message");
-						errorMessage.innerText = info;
-						errorMessage.style.display = "block";
-					}
-				</script>
+				<button type="submit" class="btn primary">Submit</button>
 			</form>
 		</div>
 	</div>

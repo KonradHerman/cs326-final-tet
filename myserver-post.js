@@ -36,20 +36,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 var http = require("http");
 var url = require("url");
 var express = require("express");
 var bcrypt = require("bcrypt");
 var passport = require("passport");
 var flash = require("express-flash");
-var bodyParser = require("body-parser");
-var expressSession = require("express-session")({
-    secret: "secret",
-    resave: false,
-    saveUninitialized: false
-});
-var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
+var session = require("express-session");
+var initializePassport = require("./passport-config");
 var MyServer = /** @class */ (function () {
     // Accepts two arguments:
     // udb = user database
@@ -70,61 +67,27 @@ var MyServer = /** @class */ (function () {
             response.header("Access-Control-Allow-Headers", "*");
             next();
         });
-        this.server.use(bodyParser.json());
-        this.server.use(bodyParser.urlencoded({ extended: true }));
-        this.server.use(expressSession);
-        this.server.use(passport.initialize());
-        this.server.use(passport.session());
-        mongoose.connect("mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority", {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        var Schema = mongoose.Schema;
-        var UserDetail = new Schema({
-            username: String,
-            password: String
-        });
-        UserDetail.plugin(passportLocalMongoose);
-        var UserDetails = mongoose.model("userInfo", UserDetail, "userInfo");
-        passport.use(UserDetails.createStrategy());
-        passport.serializeUser(UserDetails.serializeUser());
-        passport.deserializeUser(UserDetails.deserializeUser());
-        var connectEnsureLogin = require("connect-ensure-login");
-        this.server.post("/login", function (req, res, next) {
-            passport.authenticate("local", function (err, user, info) {
-                if (err) {
-                    return next(err);
-                }
-                if (!user) {
-                    return res.redirect("/login?info=" + info);
-                }
-                req.logIn(user, function (err) {
-                    if (err) {
-                        return next(err);
-                    }
-                    return res.redirect("/");
-                });
-            })(req, res, next);
-        });
-        this.server.get("/login", function (req, res) {
-            return res.sendFile("html/login.html", { root: __dirname });
-        });
-        this.server.get("/", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-            return res.sendFile("html/index.html", { root: __dirname });
-        });
-        this.server.get("/private", connectEnsureLogin.ensureLoggedIn(), function (req, res) { return res.sendFile("html/private.html", { root: __dirname }); });
-        this.server.get("/user", connectEnsureLogin.ensureLoggedIn(), function (req, res) {
-            return res.send({ user: req.user });
-        });
-        UserDetails.register({ username: "paul", active: false }, "paul");
-        UserDetails.register({ username: "jay", active: false }, "jay");
-        UserDetails.register({ username: "roy", active: false }, "roy");
         // Serve static pages from a particular path.
         this.server.use("/", express.static("./html"));
         // NEW: handle POST in JSON format
         this.server.use(express.json());
+        //flash
+        this.server.use(flash());
+        // this.server.use(
+        // 	session({
+        // 		secret: process.env.SESSION_SECRET,
+        // 		resave: false,
+        // 		saveUninitialized: false,
+        // 	})
+        // );
+        // this.server.use(passport.initialize());
+        // this.server.use(passport.session());
+        //login
+        this.router.post("/users/login", passport.authenticate("local"), this.loginHandler.bind(this));
         //home
         this.router.post("/home", this.homeHandler.bind(this));
+        //register
+        this.router.post("/register", this.registerHandler.bind(this));
         // Set a single handler for a route.
         this.router.post("/games/create", this.createHandler.bind(this));
         // Set multiple handlers for a route, in sequence.
@@ -153,6 +116,18 @@ var MyServer = /** @class */ (function () {
         // Start up the counter endpoint at '/counter'.
         this.server.use("/counter", this.router);
     }
+    MyServer.prototype.registerHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.registerUser(request.body.email, request.body.name, request.body.password, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     MyServer.prototype.homeHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -161,6 +136,43 @@ var MyServer = /** @class */ (function () {
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.loginHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, response.redirect("/home.html")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.registerUser = function (name, email, password, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var hashedPassword, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 3, , 5]);
+                        return [4 /*yield*/, bcrypt.hash(password, 10)];
+                    case 1:
+                        hashedPassword = _b.sent();
+                        return [4 /*yield*/, this.users.put(name, "{name:" + name + ",email:" + email + ", password:" + hashedPassword + " }")];
+                    case 2:
+                        _b.sent();
+                        return [3 /*break*/, 5];
+                    case 3:
+                        _a = _b.sent();
+                        return [4 /*yield*/, response.redirect("/register")];
+                    case 4:
+                        _b.sent();
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
