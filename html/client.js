@@ -1,23 +1,5 @@
 const url = "https://tet326.herokuapp.com/counter"; // NOTE NEW URL
 
-function login() {
-	(async () => {
-		let userName = document.getElementById("username").value;
-		let password = document.getElementById("password").value;
-		const data = { name: userName, password: password };
-		const newURL = url + "/users/login";
-		console.log("logging in: fetching" + newURL);
-		const resp = await postData(newURL, data);
-		const j = await resp.json();
-		if (j["result"] !== "error") {
-			let out = userName + "logged in";
-			console.log(out);
-		} else {
-			let out = userName + "couldn't log in";
-			console.log(out);
-		}
-	})();
-}
 
 function gameCreate() {
 	(async () => {
@@ -117,6 +99,65 @@ function gameUpdate() {
 			console.log("failure updating");
 			// document.getElementById("output").innerHTML =
 			// 	"200: " + "hi" + ", " + " not found.</b>";
+		}
+	})();
+}
+
+function userCreate() {
+	(async () => {
+		let userName = document.getElementById("username").value;
+		let email = document.getElementById("email").value;
+		let password1 = document.getElementById("password1").value;
+		let password2 = document.getElementById("password2").value;
+		let zip = "01002";
+		let img = "no img";
+		const data = { name: userName, email: email, password: password1, img: img, zip: zip };
+		const newURL = url + "/users/create";
+		console.log("logging in: fetching" + newURL);
+		const resp = await postData(newURL, data);
+		const j = await resp.json();
+		if (j["result"] !== "error") {
+			//Success
+			let out = userName + " created";
+			console.log(out);
+		} else {
+			let out = userName + " could not be created, an error has occured";
+			console.log(out);
+		}
+	})();
+}
+
+function passwordMatcher() {
+	if (password1.equals(password2) == false) {
+		document.getElementById("password-match-output").innerHTML +=
+			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+	}
+}
+
+
+function userLogin() {
+	(async () => {
+		let userName = document.getElementById("username").value;
+		// let email = document.getElementById("email").value;
+		let password = document.getElementById("password").value;
+		const data = { name: userName, password: password };
+		const newURL = url + "/users/login";
+		console.log("logging in: fetching" + newURL);
+		const resp = await postData(newURL, data);
+		const j = await resp.json();
+		if (j["result"] !== "error") {
+			//Success
+			if (j["result"] == "Incorrect Password") {
+				let out = "Incorrect Password ";
+				console.log(out);
+			}
+			else {
+				let out = userName + " logged in";
+				console.log(out);
+			}
+		} else {
+			let out = userName + " was unable to login";
+			console.log(out);
 		}
 	})();
 }

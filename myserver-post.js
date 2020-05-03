@@ -82,12 +82,8 @@ var MyServer = /** @class */ (function () {
         // );
         // this.server.use(passport.initialize());
         // this.server.use(passport.session());
-        //login
-        this.router.post("/users/login", passport.authenticate("local"), this.loginHandler.bind(this));
         //home
         this.router.post("/home", this.homeHandler.bind(this));
-        //register
-        this.router.post("/register", this.registerHandler.bind(this));
         // Set a single handler for a route.
         this.router.post("/games/create", this.createHandler.bind(this));
         // Set multiple handlers for a route, in sequence.
@@ -100,6 +96,7 @@ var MyServer = /** @class */ (function () {
             this.updateHandler.bind(this),
         ]);
         this.router.post("/users/create", this.createUserHandler.bind(this));
+        this.router.post("/users/login", this.loginUserHandler.bind(this));
         this.router.post("/users/read", this.readUserHandler.bind(this));
         this.router.post("/users/update", this.updateUserHandler.bind(this));
         this.router.post("/users/delete", [
@@ -116,18 +113,6 @@ var MyServer = /** @class */ (function () {
         // Start up the counter endpoint at '/counter'.
         this.server.use("/counter", this.router);
     }
-    MyServer.prototype.registerHandler = function (request, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.registerUser(request.body.email, request.body.name, request.body.password, response)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
     MyServer.prototype.homeHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -140,39 +125,14 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.loginHandler = function (request, response) {
+    MyServer.prototype.loginUserHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, response.redirect("/home.html")];
+                    case 0: return [4 /*yield*/, this.loginUser(request.body.name, request.body.password, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MyServer.prototype.registerUser = function (name, email, password, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            var hashedPassword, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 3, , 5]);
-                        return [4 /*yield*/, bcrypt.hash(password, 10)];
-                    case 1:
-                        hashedPassword = _b.sent();
-                        return [4 /*yield*/, this.users.put(name, "{name:" + name + ",email:" + email + ", password:" + hashedPassword + " }")];
-                    case 2:
-                        _b.sent();
-                        return [3 /*break*/, 5];
-                    case 3:
-                        _a = _b.sent();
-                        return [4 /*yield*/, response.redirect("/register")];
-                    case 4:
-                        _b.sent();
-                        return [3 /*break*/, 5];
-                    case 5: return [2 /*return*/];
                 }
             });
         });
@@ -398,7 +358,7 @@ var MyServer = /** @class */ (function () {
                         return [4 /*yield*/, bcrypt.hash(password, 10)];
                     case 1:
                         hashedPassword = _b.sent();
-                        return [4 /*yield*/, this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '"}')];
+                        return [4 /*yield*/, this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '","own":[],"want":[]}')];
                     case 2:
                         _b.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
@@ -406,7 +366,41 @@ var MyServer = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         _a = _b.sent();
-                        response.status(500).send();
+                        response.write(JSON.stringify({ result: "error" }));
+                        response.end();
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.loginUser = function (name, password, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        user = this.users.get(name);
+                        if (user == null) { // if user doesnt exist 
+                            return [2 /*return*/, response.status(400).send("Cannot find user")]; // some other response
+                        }
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, bcrypt.compare(password, user.password)];
+                    case 2:
+                        if (_b.sent()) {
+                            response.write(JSON.stringify({ result: "logged In" }));
+                            response.end();
+                        }
+                        else {
+                            response.write(JSON.stringify({ result: "Incorrect Password" }));
+                            response.end();
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        _a = _b.sent();
+                        response.write(JSON.stringify({ result: "error" }));
                         response.end();
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
