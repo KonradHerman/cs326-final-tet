@@ -39,9 +39,6 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("add: value = " + value);
 		let val = JSON.parse(value);
-		// async function addDB(v) {
-		// 	return await collection.insertOne(v);
-		// }
 		let result = collection.insertOne(val);
 		console.log("result = " + result);
 	}
@@ -65,7 +62,7 @@ export class Database {
 		console.log(this.collectionName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
-		const result = await collection.find().toArray();
+		const result = await collection.find().sort({name:1}).toArray();
 		console.log(result);
 		console.log("getAll returned");
 		if (result) {
