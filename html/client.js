@@ -111,11 +111,6 @@ function userCreate() {
 		let password2 = document.getElementById("password2").value;
 		let zip = "01002";
 		let img = "no img";
-		if(password1.equals(password2) == false) {
-			document.getElementById("password-match-output").innerHTML += 
-			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
-			console.log("passwords do not match")
-		}
 		const data = { name: userName, email: email, password: password1, img: img, zip: zip };
 		const newURL = url + "/users/create";
 		console.log("logging in: fetching" + newURL);
@@ -131,6 +126,14 @@ function userCreate() {
 		}
 	})();
 }
+
+function passwordMatcher() {
+	if(password1.equals(password2) == false) {
+		document.getElementById("password-match-output").innerHTML += 
+		'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+	}
+}
+
 
 function userLogin() {
 	(async () => {

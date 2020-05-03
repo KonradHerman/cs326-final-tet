@@ -226,6 +226,7 @@ export class MyServer {
 			const hashedPassword = await bcrypt.hash(password, 10); 
 			await this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '","own":[],"want":[]}');
 			response.write(JSON.stringify({ result: "created", name: name}));
+			response.redirect("html/index.html");
 			response.end();
 		} catch {
 			response.write(JSON.stringify({ result: "error"}));
@@ -245,6 +246,7 @@ export class MyServer {
 		try {
 			if(await bcrypt.compare(password, user.password)) {
 				response.write(JSON.stringify({ result: "logged In"}));
+				response.redirect("html/home.html");
 				response.end();
 			} else {
 				response.write(JSON.stringify({ result: "Incorrect Password"}));
