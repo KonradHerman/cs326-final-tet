@@ -256,13 +256,14 @@ export class MyServer {
 		password: string,
 		response
 	): Promise<void> {
-		const user = this.users.get(name); // waiting on get 
-		response.write(JSON.stringify(user));
+		const user = this.users.get(name); // (!) waiting on get
+
 		if(user == null) {// if user doesnt exist 
-			response.write(JSON.stringify({ result: "user not found"})); // some other response
+			response.write(JSON.stringify({ result: "user not found"})); // some other response?
 		}
 		else {
 			try {
+				// the hashing works, just need user.password to return the password in the database as a string
 				if(await bcrypt.compare(password, user.password)) {
 					response.write(JSON.stringify({ result: "logged In"}));
 					console.log("logging in");
