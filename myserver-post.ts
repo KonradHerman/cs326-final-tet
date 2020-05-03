@@ -257,6 +257,7 @@ export class MyServer {
 		response
 	): Promise<void> {
 		const user = this.users.get(name); // waiting on get 
+		console.log(user);
 		if(user == null) {// if user doesnt exist 
 			response.write(JSON.stringify({ result: "user not found"})); // some other response
 		}
