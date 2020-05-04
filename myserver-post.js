@@ -369,7 +369,15 @@ var MyServer = /** @class */ (function () {
                         return [4 /*yield*/, bcrypt.hash(password, 10)];
                     case 1:
                         hashedPassword = _b.sent();
-                        return [4 /*yield*/, this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '","own":[],"want":[]}')];
+                        return [4 /*yield*/, this.users.add('{"name":"' +
+                                name +
+                                '","email":"' +
+                                email +
+                                '","password":"' +
+                                hashedPassword +
+                                '","img":"none","zip":"' +
+                                zip +
+                                '","own":[],"want":[]}')];
                     case 2:
                         _b.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
@@ -395,6 +403,7 @@ var MyServer = /** @class */ (function () {
                         user = this.users.get(name);
                         response.write(user);
                         if (!(user == null)) return [3 /*break*/, 1];
+                        // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         return [3 /*break*/, 4];
                     case 1:
@@ -403,7 +412,8 @@ var MyServer = /** @class */ (function () {
                     case 2:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
-                            response.write(JSON.stringify({ result: "logged In" }));
+                            //response.write(JSON.stringify({ result: "logged In"}));
+                            response.redirect("https://tet326.herokuapp.com/home.html");
                             response.end();
                         }
                         else {
