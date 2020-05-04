@@ -91,13 +91,12 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.push = function (name, key, value) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, val, result;
+            var db, collection, result;
             return __generator(this, function (_a) {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
-                console.log("push: value = " + name);
-                val = JSON.parse(value);
-                result = collection.updateOne({ "name": name }, { $push: { key: val } });
+                console.log("push: value = " + value);
+                result = collection.updateOne({ "name": name }, { $push: { key: value } });
                 console.log("result = " + result);
                 return [2 /*return*/];
             });
@@ -105,13 +104,12 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.pull = function (name, key, value) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, val, result;
+            var db, collection, result;
             return __generator(this, function (_a) {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
-                console.log("pull: value = " + name);
-                val = JSON.parse(value);
-                result = collection.updateOne({ "name": name }, { $pull: { key: val } });
+                console.log("pull: value = " + value);
+                result = collection.updateOne({ "name": name }, { $pull: { key: value } });
                 console.log("result = " + result);
                 return [2 /*return*/];
             });

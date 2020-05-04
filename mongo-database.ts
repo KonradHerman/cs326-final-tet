@@ -47,18 +47,18 @@ export class Database {
 	public async push(name: string, key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
-		console.log("push: value = " + name);
-		let val = JSON.parse(value);
-		let result = collection.updateOne({"name": name}, {$push: {key:val}});
+		console.log("push: value = " + value);
+		// let val = JSON.parse(value);
+		let result = collection.updateOne({"name": name}, {$push: {key:value}});
 		console.log("result = " + result);
 	}
 
 	public async pull(name: string, key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
-		console.log("pull: value = " + name);
-		let val = JSON.parse(value);
-		let result = collection.updateOne({"name": name}, {$pull: {key:val}});
+		console.log("pull: value = " + value);
+		// let val = JSON.parse(value);
+		let result = collection.updateOne({"name": name}, {$pull: {key:value}});
 		console.log("result = " + result);
 	}
 
