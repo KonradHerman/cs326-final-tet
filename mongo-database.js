@@ -110,8 +110,8 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("pull: value = " + value);
-                result = key === "own" ? collection.updateOne({ "name": name }, { $pull: { own: value } }) :
-                    collection.updateOne({ "name": name }, { $pull: { want: value } });
+                result = key === "own" ? collection.updateOne({ "name": name }, { $pull: { own: { $eq: value } } }) :
+                    collection.updateOne({ "name": name }, { $pull: { want: { $eq: value } } });
                 console.log("result = " + JSON.stringify(result));
                 return [2 /*return*/];
             });
