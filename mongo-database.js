@@ -111,7 +111,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ _id: key }).toArray()];
+                        return [4 /*yield*/, collection.findOne({ _id: key })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));

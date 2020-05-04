@@ -1,0 +1,18 @@
+user document
+{
+    _id: string
+    name: string
+    email: string
+    password: string
+    zip: string
+    own: Array
+    want: Array
+}
+
+games document
+{
+    _id: string
+    name: string
+    own: Array
+    want: Array
+}
