@@ -16,7 +16,7 @@ export class Database {
 			this.password = process.env.PASSWORD;
 		}
 		this.uri =
-			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/";
+			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 
 		this.collectionName = collectionName;
 		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
