@@ -84,7 +84,7 @@ function gameUpdate() {
 		let game = drop.options[index];
 		console.log(game);
 		let gameName = game.id;
-		console.log(gameID);
+		console.log(gameName);
 		let userName = document.getElementById("userid").value;
 		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
