@@ -57,7 +57,7 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		const result = await collection.findOne({"_id": this.ObjectID('"'+ key + '"')});
+		const result = await collection.findOne({"_id": "ObjectID("+ key + ")"});
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result;
