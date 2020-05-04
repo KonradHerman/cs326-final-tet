@@ -4,7 +4,7 @@ const url = "https://tet326.herokuapp.com/counter"; // NOTE NEW URL
 function gameCreate() {
 	(async () => {
 		//when creating a game, input id is "gamename"
-		let gameName = document.getElementById("gamename").value;
+		let gameName = document.getElementById("gameCreate").value;
 		console.log(gameName);
 		const data = { name: gameName };
 		const newURL = url + "/games/create"; // used to be ?name=" + counterName; -- (2)
@@ -77,7 +77,7 @@ function gameRead() {
 function gameUpdate() {
 	(async () => {
 		//we need to change this element id based on the html page
-		let drop = document.getElementById("gameSelect");
+		let drop = document.getElementById("selectGame");
 		console.log(drop);
 		let index = drop.selectedIndex;
 		console.log(index);
