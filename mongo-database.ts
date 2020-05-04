@@ -49,14 +49,14 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("push: value = " + value);
 		// let val = JSON.parse(value);
-		// let result = collection.updateOne({"name": name}, {$addToSet: {key:value}});
+		// let result = collection.updateOne({"name": name}, {$addToSet: { key :value}});
 		let result;
 		switch (key) {
 			case "own":
-				result = collection.updateOne({"name": name}, {$addtoSet: { own : value}});
+				result = collection.updateOne({"name": name}, {$addToSet: { own : value}});
 				break;
 			default:
-				result = collection.updateOne({"name": name}, {$addtoSet: { want : value}});
+				result = collection.updateOne({"name": name}, {$addToSet: { want : value}});
 				break;
 		}
 		console.log("result = " + JSON.stringify(result));

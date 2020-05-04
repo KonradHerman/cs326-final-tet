@@ -98,10 +98,10 @@ var Database = /** @class */ (function () {
                 console.log("push: value = " + value);
                 switch (key) {
                     case "own":
-                        result = collection.updateOne({ "name": name }, { $addtoSet: { own: value } });
+                        result = collection.updateOne({ "name": name }, { $addToSet: { own: value } });
                         break;
                     default:
-                        result = collection.updateOne({ "name": name }, { $addtoSet: { want: value } });
+                        result = collection.updateOne({ "name": name }, { $addToSet: { want: value } });
                         break;
                 }
                 console.log("result = " + JSON.stringify(result));
