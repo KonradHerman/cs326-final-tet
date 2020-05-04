@@ -1,10 +1,10 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
 	private secrets;
-	private password: string;
-	private uri: string;
+	private password;
+	private uri;
 	private client;
-	private collectionName: string;
+	private collectionName;
 	private dbName: string = "boredgames";
 
 	constructor(collectionName) {
@@ -16,7 +16,7 @@ export class Database {
 			this.password = process.env.PASSWORD;
 		}
 		this.uri =
-			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/";
 
 		this.collectionName = collectionName;
 		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
