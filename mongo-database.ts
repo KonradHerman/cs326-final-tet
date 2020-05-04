@@ -44,12 +44,21 @@ export class Database {
 		console.log("result = " + result);
 	}
 
-	public async put(key: string, value: string): Promise<void> {
+	public async push(name: string, key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
-		console.log("add: value = " + value);
+		console.log("push: value = " + name);
 		let val = JSON.parse(value);
-		let result = collection.updateOne(key, val);
+		let result = collection.updateOne({"name": name}, {$push: {key:val}});
+		console.log("result = " + result);
+	}
+
+	public async pull(name: string, key: string, value: string): Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("pull: value = " + name);
+		let val = JSON.parse(value);
+		let result = collection.updateOne({"name": name}, {$pull: {key:val}});
 		console.log("result = " + result);
 	}
 
@@ -57,7 +66,7 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		const result = await collection.findOne({"_id": this.ObjectID(key)});
+		const result = await collection.findOne({"name": key});
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result;

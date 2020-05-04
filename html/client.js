@@ -39,7 +39,7 @@ function gameReadAll() {
 			for (const element of j["games"]) {
 				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 					'<option id="' +
-					element._id +
+					element.name +
 					'">' +
 					element.name +
 					"</option>";
@@ -83,13 +83,13 @@ function gameUpdate() {
 		console.log(index);
 		let game = drop.options[index];
 		console.log(game);
-		let gameID = game.id;
+		let gameName = game.id;
 		console.log(gameID);
-		let userID = document.getElementById("userid").value;
+		let userName = document.getElementById("userid").value;
 		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
 		const newURL = url + "/games/update";
-		const data = { game: gameID, user: userID, own: own, add: add };
+		const data = { game: gameName, user: userName, own: own, add: add };
 		console.log("gameUpdate: fetching " + newURL);
 		const resp = await postData(newURL, data);
 		const j = await resp.json();

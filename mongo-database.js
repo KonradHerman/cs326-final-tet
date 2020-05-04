@@ -89,15 +89,29 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.put = function (key, value) {
+    Database.prototype.push = function (name, key, value) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, val, result;
             return __generator(this, function (_a) {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
-                console.log("add: value = " + value);
+                console.log("push: value = " + name);
                 val = JSON.parse(value);
-                result = collection.updateOne(key, val);
+                result = collection.updateOne({ "name": name }, { $push: { key: val } });
+                console.log("result = " + result);
+                return [2 /*return*/];
+            });
+        });
+    };
+    Database.prototype.pull = function (name, key, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, val, result;
+            return __generator(this, function (_a) {
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("pull: value = " + name);
+                val = JSON.parse(value);
+                result = collection.updateOne({ "name": name }, { $pull: { key: val } });
                 console.log("result = " + result);
                 return [2 /*return*/];
             });
@@ -112,7 +126,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ "_id": this.ObjectID(key) })];
+                        return [4 /*yield*/, collection.findOne({ "name": key })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));

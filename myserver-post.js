@@ -319,35 +319,38 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.updateGame = function (game, user, own, add, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var userObj, gameObj;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.users.get(user)];
-                    case 1:
-                        userObj = _a.sent();
-                        return [4 /*yield*/, this.games.get(game)];
+            var key, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        switch (own) {
+                            case true:
+                                key = "own";
+                                break;
+                            default:
+                                key = "want";
+                                break;
+                        }
+                        _a = add;
+                        switch (_a) {
+                            case true: return [3 /*break*/, 1];
+                        }
+                        return [3 /*break*/, 4];
+                    case 1: return [4 /*yield*/, this.users.push(user, key, game)];
                     case 2:
-                        gameObj = _a.sent();
-                        console.log(userObj);
-                        console.log(gameObj);
-                        if (own && add) {
-                            userObj.own.push(game);
-                            gameObj.own.push(user);
-                        }
-                        else if (own) {
-                            userObj.own = this.removeItem(userObj.own, game);
-                            gameObj.own = this.removeItem(gameObj.own, user);
-                        }
-                        else if (add) {
-                            userObj.want.push(game);
-                            gameObj.want.push(user);
-                        }
-                        else {
-                            userObj.want = this.removeItem(userObj.want, game);
-                            gameObj.want = this.removeItem(gameObj.want, user);
-                        }
-                        this.users.put(user, userObj);
-                        this.games.put(game, gameObj);
+                        _b.sent();
+                        return [4 /*yield*/, this.games.push(game, key, user)];
+                    case 3:
+                        _b.sent();
+                        return [3 /*break*/, 7];
+                    case 4: return [4 /*yield*/, this.users.pull(user, key, game)];
+                    case 5:
+                        _b.sent();
+                        return [4 /*yield*/, this.games.pull(user, key, game)];
+                    case 6:
+                        _b.sent();
+                        return [3 /*break*/, 7];
+                    case 7:
                         response.write(JSON.stringify({ result: "updated", game: game, user: user }));
                         response.end();
                         return [2 /*return*/];

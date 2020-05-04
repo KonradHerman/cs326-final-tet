@@ -201,32 +201,31 @@ export class MyServer {
 	}
 
 	public async updateGame(
-		game: number,
-		user: number,
+		game: string,
+		user: string,
 		own: boolean,
 		add: boolean,
 		response
 	): Promise<void> {
-		//await this.theDatabase.put(name, value);
-		let userObj = await this.users.get(user);
-		let gameObj = await this.games.get(game);
-		console.log(userObj);
-		console.log(gameObj);
-		if(own && add) {
-			userObj.own.push(game);
-			gameObj.own.push(user);
-		} else if(own) {
-			userObj.own = this.removeItem(userObj.own, game);
-			gameObj.own = this.removeItem(gameObj.own, user);
-		} else if(add){
-			userObj.want.push(game);
-			gameObj.want.push(user);
-		} else {
-			userObj.want = this.removeItem(userObj.want, game);
-			gameObj.want = this.removeItem(gameObj.want, user);
+		let key: string;
+		switch (own) {
+			case true:
+				key = "own";
+				break;
+			default:
+				key = "want";
+				break;
 		}
-		this.users.put(user, userObj);
-		this.games.put(game, gameObj);
+		switch (add) {
+			case true:
+				await this.users.push(user, key, game);
+				await this.games.push(game, key, user);
+				break
+			default:
+				await this.users.pull(user, key, game);
+				await this.games.pull(user, key, game);
+				break;
+		}
 		response.write(JSON.stringify({ result: "updated", game: game, user: user }));
 		response.end();
 		
