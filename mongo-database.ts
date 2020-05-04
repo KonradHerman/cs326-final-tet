@@ -1,5 +1,6 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
+	private ObjectID = require('mongodb').ObjectId;
 	private uri =
 		"mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 	private client;
@@ -56,7 +57,7 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		const result = await collection.findOne({_id: key});
+		const result = await collection.findOne({"_id": this.ObjectID('"'+ key + '"')});
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result;

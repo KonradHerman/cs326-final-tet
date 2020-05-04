@@ -40,6 +40,7 @@ var Database = /** @class */ (function () {
     function Database(collectionName) {
         var _this = this;
         this.MongoClient = require("mongodb").MongoClient;
+        this.ObjectID = require('mongodb').ObjectId;
         this.uri = "mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
         this.dbName = "boredgames";
         this.collectionName = collectionName;
@@ -111,7 +112,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ _id: key })];
+                        return [4 /*yield*/, collection.findOne({ "_id": this.ObjectID('"' + key + '"') })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));

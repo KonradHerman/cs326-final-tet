@@ -63,17 +63,13 @@
 			<label for="selectGame">Select a game</label>
 			<select class="btn primary dropdown-toggle" id="selectGame">
 			</select>
-		</div>
 
-		<form>
 			<div class="form-group">
 				<label for="gameSelect">Or add a game:</label>
 				<input type="text" class="form-control" id="gameCreate" aria-describedby="emailHelp"
 					placeholder="Enter Game Name">
 			</div>
 			<button type="submit" onclick="gameCreate()" class="btn primary">Submit</button> <!-- (2) Changed the button to an a tag to link to the game create output-->
-		</form>
-		<form>
 			<div class="form-group row">
 				<label for="userid" class="col-sm-2 col-form-label">Enter UserID:</label>
 				<div class="col-sm-10">
@@ -99,7 +95,7 @@
 				<button type="button" onclick="gameUpdate()" class="btn primary">Submit</button>
 			</div>
 
-		</form>
+		</div>
 		<div id="gameCreate-output"></div>	<!-- (1) output location for gameCreate() response -->
 	</div>
 	<!--	<div class="container nav" style="width: 70%">-->
