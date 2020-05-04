@@ -86,11 +86,7 @@ export class MyServer {
 	}
 
 	private async loginUserHandler(request, response): Promise<void> {
-		await this.loginUser(
-			request.body.name,
-			request.body.password,
-			response
-		);
+		await this.loginUser(request.body.name, request.body.password, response);
 	}
 
 	private async errorHandler(request, response, next): Promise<void> {
@@ -220,15 +216,16 @@ export class MyServer {
 			case true:
 				await this.users.push(user, key, game);
 				await this.games.push(game, key, user);
-				break
+				break;
 			default:
 				await this.users.pull(user, key, game);
 				await this.games.pull(game, key, user);
 				break;
 		}
-		response.write(JSON.stringify({ result: "updated", game: game, user: user }));
+		response.write(
+			JSON.stringify({ result: "updated", game: game, user: user })
+		);
 		response.end();
-		
 	}
 
 	public async createUser(
@@ -241,13 +238,23 @@ export class MyServer {
 	): Promise<void> {
 		try {
 			console.log("creating user named '" + name + "'");
-			const hashedPassword = await bcrypt.hash(password, 10); 
-			await this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '","own":[],"want":[]}');
-			response.write(JSON.stringify({ result: "created", name: name}));
+			const hashedPassword = await bcrypt.hash(password, 10);
+			await this.users.add(
+				'{"name":"' +
+					name +
+					'","email":"' +
+					email +
+					'","password":"' +
+					hashedPassword +
+					'","img":"none","zip":"' +
+					zip +
+					'","own":[],"want":[]}'
+			);
+			response.write(JSON.stringify({ result: "created", name: name }));
 			response.redirect("html/index.html");
 			response.end();
 		} catch {
-			response.write(JSON.stringify({ result: "error"}));
+			response.write(JSON.stringify({ result: "error" }));
 			response.end();
 		}
 	}
@@ -259,22 +266,23 @@ export class MyServer {
 	): Promise<void> {
 		const user = this.users.get(name); // (!) waiting on get
 		response.write(user);
-		if(user == null) {// if user doesnt exist 
-			response.write(JSON.stringify({ result: "user not found"})); // some other response?
-		}
-		else {
+		if (user == null) {
+			// if user doesnt exist
+			response.write(JSON.stringify({ result: "user not found" })); // some other response?
+		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
-				if(await bcrypt.compare(password, user.password)) {
-					response.write(JSON.stringify({ result: "logged In"}));
+				if (await bcrypt.compare(password, user.password)) {
+					//response.write(JSON.stringify({ result: "logged In"}));
+					response.redirect("https://tet326.herokuapp.com/home.html");
 					response.end();
 				} else {
-					response.write(JSON.stringify({ result: "Incorrect Password"}));
+					response.write(JSON.stringify({ result: "Incorrect Password" }));
 					response.end();
 				}
 			} catch {
-					response.write(JSON.stringify({ result: "caught error"}));
-					response.end();
+				response.write(JSON.stringify({ result: "caught error" }));
+				response.end();
 			}
 		}
 	}

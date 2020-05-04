@@ -9,17 +9,7 @@ export class Database {
 
 	constructor(collectionName) {
 		// Assign password to uri
-		if (!process.env.PASSWORD) {
-			this.secrets = require('secrets.json');
-			this.password = this.secrets.password;
-		} else {
-			this.password = process.env.PASSWORD;
-		}
-		this.uri =
-			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
-
-		this.collectionName = collectionName;
-		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
+	
 
 		(async () => {
 			await this.client.connect().catch((err) => {
@@ -36,7 +26,17 @@ export class Database {
 		let result = collection.insertOne(val);
 		console.log("result = " + result);
 	}
+	if (!process.env.PASSWORD) {
+			this.secrets = require('secrets.json');
+			this.password = this.secrets.password;
+		} else {
+			this.password = process.env.PASSWORD;
+		}
+		this.uri =
+			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 
+		this.collectionName = collectionName;
+		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
 	public async push(name: string, key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
