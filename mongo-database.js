@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -38,45 +38,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var Database = /** @class */ (function () {
     function Database(collectionName) {
-        // Assign password to uri
         var _this = this;
         this.MongoClient = require("mongodb").MongoClient;
-        this.ObjectID = require('mongodb').ObjectId;
-        this.uri = "mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
         this.dbName = "boredgames";
+        // Assign password to uri
+        if (!process.env.PASSWORD) {
+            this.secrets = require('secrets.json');
+            this.password = this.secrets.password;
+        }
+        else {
+            this.password = process.env.PASSWORD;
+        }
+        this.uri =
+            "mongodb+srv://konrad:" + this.password + "@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
         this.collectionName = collectionName;
         this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
-        // Open up a connection to the client.
-        // The connection is asynchronous, but we can't call await directly
-        // in the constructor, which cannot be async. So, we use "IIFE". Explanation below.
-        /* from https://anthonychu.ca/post/async-await-typescript-nodejs/
-
-      Async/Await and the Async IIFE
-
-      The await keyword can only be used inside of a function
-      marked with the async keyword. [...] One way to do this is
-      with an "async IIFE" (immediately invoked function
-      expression)...
-
-       (async () => {
-       // code goes here
-       })();
-
-    */
-        (function () {
-            return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.client.connect()["catch"](function (err) {
+        (function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.client.connect()["catch"](function (err) {
                             console.log(err);
                         })];
-                        case 1:
-                            _a.sent();
-                            return [2 /*return*/];
-                    }
-                });
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
-        })();
+        }); })();
     }
     Database.prototype.add = function (value) {
         return __awaiter(this, void 0, void 0, function () {
@@ -92,89 +80,125 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype["if"] = function (, process, env, PASSWORD) {
-        this.secrets = require('secrets.json');
-        this.password = this.secrets.password;
+    Database.prototype.push = function (name, key, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("push: value = " + value);
+                result = key === "own" ? collection.updateOne({ "name": name }, { $addToSet: { own: value } }) :
+                    collection.updateOne({ "name": name }, { $addToSet: { want: value } });
+                console.log("result = " + JSON.stringify(result));
+                return [2 /*return*/];
+            });
+        });
+    };
+    Database.prototype.pull = function (name, key, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("pull: value = " + value);
+                result = key === "own" ? collection.updateOne({ "name": name }, { $pull: { own: value } }) :
+                    collection.updateOne({ "name": name }, { $pull: { want: value } });
+                console.log("result = " + JSON.stringify(result));
+                return [2 /*return*/];
+            });
+        });
+    };
+    Database.prototype.get = function (key) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("get: key = " + key);
+                        return [4 /*yield*/, collection.findOne({ "name": key })];
+                    case 1:
+                        result = _a.sent();
+                        console.log("get: returned " + JSON.stringify(result));
+                        if (result) {
+                            return [2 /*return*/, result];
+                        }
+                        else {
+                            return [2 /*return*/, null];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.getAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log(this.dbName);
+                        db = this.client.db(this.dbName);
+                        console.log(this.collectionName);
+                        collection = db.collection(this.collectionName);
+                        console.log("getting all games");
+                        return [4 /*yield*/, collection.find().sort({ name: 1 }).toArray()];
+                    case 1:
+                        result = _a.sent();
+                        console.log(result);
+                        console.log("getAll returned");
+                        if (result) {
+                            return [2 /*return*/, result];
+                        }
+                        else {
+                            return [2 /*return*/, null];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.del = function (key) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("delete: key = " + key);
+                        return [4 /*yield*/, collection.deleteOne({ name: key })];
+                    case 1:
+                        result = _a.sent();
+                        console.log("result = " + result);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.isFound = function (key) {
+        return __awaiter(this, void 0, void 0, function () {
+            var v;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("isFound: key = " + key);
+                        return [4 /*yield*/, this.get(key)];
+                    case 1:
+                        v = _a.sent();
+                        console.log("is found result = " + v);
+                        if (v === null) {
+                            return [2 /*return*/, false];
+                        }
+                        else {
+                            return [2 /*return*/, true];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     return Database;
 }());
 exports.Database = Database;
-{
-    this.password = process.env.PASSWORD;
-}
-this.uri =
-    "mongodb+srv://konrad:" + this.password + "@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
-this.collectionName = collectionName;
-this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
-async;
-push(name, string, key, string, value, string);
-Promise < void  > {
-    let: let, db: db,
-    let: let, collection: collection,
-    console: console, : .log("push: value = " + value),
-    let: let, result: result,
-    console: console, : .log("result = " + JSON.stringify(result))
-};
-async;
-pull(name, string, key, string, value, string);
-Promise < void  > {
-    let: let, db: db,
-    let: let, collection: collection,
-    console: console, : .log("pull: value = " + value),
-    let: let, result: result,
-    console: console, : .log("result = " + JSON.stringify(result))
-};
-async;
-get(key, string);
-Promise < string > {
-    let: let, db: db,
-    let: let, collection: collection,
-    console: console, : .log("get: key = " + key),
-    "const": result = await collection.findOne({ "name": key }),
-    console: console, : .log("get: returned " + JSON.stringify(result)),
-    "if": function (result) {
-        return result;
-    }, "else": {
-        "return": null
-    }
-};
-async;
-getAll();
-Promise < string | null > {
-    console: console, : .log(this.dbName),
-    let: let, db: db,
-    console: console, : .log(this.collectionName),
-    let: let, collection: collection,
-    console: console, : .log("getting all games"),
-    "const": result = await collection.find().sort({ name: 1 }).toArray(),
-    console: console, : .log(result),
-    console: console, : .log("getAll returned"),
-    "if": function (result) {
-        return result;
-    }, "else": {
-        "return": null
-    }
-};
-async;
-del(key, string);
-Promise < void  > {
-    let: let, db: db,
-    let: let, collection: collection,
-    console: console, : .log("delete: key = " + key),
-    let: let, result: result,
-    console: console, : .log("result = " + result)
-};
-async;
-isFound(key, string);
-Promise < boolean > {
-    console: console, : .log("isFound: key = " + key),
-    let: let, v: v,
-    console: console, : .log("is found result = " + v),
-    "if": function (v) { }
-} === null;
-{
-    return false;
-}
-{
-    return true;
-}
