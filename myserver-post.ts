@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config();
-}
+// if (process.env.NODE_ENV !== "production") {
+// 	require("dotenv").config();
+// }
 let http = require("http");
 let url = require("url");
 let express = require("express");
@@ -267,7 +267,7 @@ export class MyServer {
 				// the hashing works, just need user.password to return the password in the database as a string
 				if(await bcrypt.compare(password, user.password)) {
 					//response.write(JSON.stringify({ result: "logged In"}));
-					response.redirect("/home.html");
+					response.redirect("https://tet326.herokuapp.com/home.html");
 					response.end();
 				} else {
 					response.write(JSON.stringify({ result: "Incorrect Password"}));

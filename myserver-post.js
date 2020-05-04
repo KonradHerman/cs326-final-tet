@@ -36,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
-}
+// if (process.env.NODE_ENV !== "production") {
+// 	require("dotenv").config();
+// }
 var http = require("http");
 var url = require("url");
 var express = require("express");
@@ -404,7 +404,7 @@ var MyServer = /** @class */ (function () {
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
                             //response.write(JSON.stringify({ result: "logged In"}));
-                            response.redirect("/home.html");
+                            response.redirect("https://tet326.herokuapp.com/home.html");
                             response.end();
                         }
                         else {
