@@ -256,8 +256,9 @@ export class MyServer {
 		password: string,
 		response
 	): Promise<void> {
-		const user = this.users.get(name)[0]; // (!) waiting on get
-		response.write(JSON.stringify({ user }));
+		const user = this.users.get(name); // (!) waiting on get
+		const strarray = user.toString();
+		response.write(JSON.stringify({ result: strarray }));
 		if(user == null) {// if user doesnt exist 
 			response.write(JSON.stringify({ result: "user not found"})); // some other response?
 		}
