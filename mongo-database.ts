@@ -1,8 +1,9 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
-	private ObjectID = require('mongodb').ObjectId;
+	private secrets;
+	private password;
 	private uri =
-		"mongodb+srv://konrad:6bb5exT8JECYncX1@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+		"mongodb+srv://konrad:"+ password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 	private client;
 	private collectionName: string;
 	private dbName: string = "boredgames";
@@ -10,24 +11,15 @@ export class Database {
 	constructor(collectionName) {
 		this.collectionName = collectionName;
 		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
-		// Open up a connection to the client.
-		// The connection is asynchronous, but we can't call await directly
-		// in the constructor, which cannot be async. So, we use "IIFE". Explanation below.
 
-		/* from https://anthonychu.ca/post/async-await-typescript-nodejs/
+		// Assign password to uri
+		if (!process.env.PASSWORD) {
+			this.secrets = require('secrets.json');
+			this.password = secrets.password;
+		} else {
+			this.password = process.env.PASSWORD;
+		}
 
-	  Async/Await and the Async IIFE
-
-	  The await keyword can only be used inside of a function
-	  marked with the async keyword. [...] One way to do this is
-	  with an "async IIFE" (immediately invoked function
-	  expression)...
-
-	   (async () => {
-	   // code goes here
-	   })();
-
-	*/
 		(async () => {
 			await this.client.connect().catch((err) => {
 				console.log(err);
