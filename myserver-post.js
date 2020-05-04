@@ -393,7 +393,6 @@ var MyServer = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         user = this.users.get(name);
-                        response.write(user);
                         if (!(user == null)) return [3 /*break*/, 1];
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         return [3 /*break*/, 4];
