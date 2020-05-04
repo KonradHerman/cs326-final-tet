@@ -323,6 +323,8 @@ var MyServer = /** @class */ (function () {
             return __generator(this, function (_a) {
                 userObj = this.users.get(user);
                 gameObj = this.games.get(game);
+                console.log(userObj);
+                console.log(gameObj);
                 if (own && add) {
                     userObj.own.push(game);
                     gameObj.own.push(user);

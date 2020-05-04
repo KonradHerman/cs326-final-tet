@@ -210,6 +210,8 @@ export class MyServer {
 		//await this.theDatabase.put(name, value);
 		let userObj = this.users.get(user);
 		let gameObj = this.games.get(game);
+		console.log(userObj);
+		console.log(gameObj);
 		if(own && add) {
 			userObj.own.push(game);
 			gameObj.own.push(user);
