@@ -377,13 +377,12 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.loginUser = function (name, password, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, strarray, _a;
+            var user, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        user = this.users.get(name);
-                        strarray = user.toString();
-                        response.write(JSON.stringify({ result: strarray }));
+                        user = this.users.get(name)[0];
+                        response.write(JSON.stringify({ user: user }));
                         if (!(user == null)) return [3 /*break*/, 1];
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         return [3 /*break*/, 4];
