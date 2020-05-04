@@ -50,15 +50,17 @@ export class Database {
 		console.log("push: value = " + value);
 		// let val = JSON.parse(value);
 		// let result = collection.updateOne({"name": name}, {$addToSet: { key :value}});
-		let result;
-		switch (key) {
-			case "own":
-				result = collection.updateOne({"name": name}, {$addToSet: { own : value}});
-				break;
-			default:
-				result = collection.updateOne({"name": name}, {$addToSet: { want : value}});
-				break;
-		}
+		let result = key==="own" ? collection.updateOne({"name": name}, {$addToSet: { own : value}}):
+			collection.updateOne({"name": name}, {$addToSet: { want : value}});
+		//let result;
+		// switch (key) {
+		// 	case "own":
+		// 		result = collection.updateOne({"name": name}, {$addToSet: { own : value}});
+		// 		break;
+		// 	default:
+		// 		result = collection.updateOne({"name": name}, {$addToSet: { want : value}});
+		// 		break;
+		// }
 		console.log("result = " + JSON.stringify(result));
 	}
 
