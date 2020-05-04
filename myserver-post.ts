@@ -208,8 +208,8 @@ export class MyServer {
 		response
 	): Promise<void> {
 		//await this.theDatabase.put(name, value);
-		let userObj = this.users.get(user);
-		let gameObj = this.games.get(game);
+		let userObj = await this.users.get(user);
+		let gameObj = await this.games.get(game);
 		console.log(userObj);
 		console.log(gameObj);
 		if(own && add) {
