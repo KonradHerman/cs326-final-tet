@@ -8,9 +8,6 @@ export class Database {
 	private dbName: string = "boredgames";
 
 	constructor(collectionName) {
-		this.collectionName = collectionName;
-		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
-
 		// Assign password to uri
 		if (!process.env.PASSWORD) {
 			this.secrets = require('secrets.json');
@@ -20,6 +17,9 @@ export class Database {
 		}
 		this.uri =
 			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+
+		this.collectionName = collectionName;
+		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
 
 		(async () => {
 			await this.client.connect().catch((err) => {
