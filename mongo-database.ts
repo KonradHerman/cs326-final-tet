@@ -1,10 +1,10 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
 	private secrets;
-	private password;
-	private uri;
+	private password: string;
+	private uri: string;
 	private client;
-	private collectionName;
+	private collectionName: string;
 	private dbName: string = "boredgames";
 
 	constructor(collectionName) {
