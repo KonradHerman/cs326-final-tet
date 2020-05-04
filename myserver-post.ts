@@ -223,7 +223,7 @@ export class MyServer {
 				break
 			default:
 				await this.users.pull(user, key, game);
-				await this.games.pull(user, key, game);
+				await this.games.pull(game, key, user);
 				break;
 		}
 		response.write(JSON.stringify({ result: "updated", game: game, user: user }));

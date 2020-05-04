@@ -346,7 +346,7 @@ var MyServer = /** @class */ (function () {
                     case 4: return [4 /*yield*/, this.users.pull(user, key, game)];
                     case 5:
                         _b.sent();
-                        return [4 /*yield*/, this.games.pull(user, key, game)];
+                        return [4 /*yield*/, this.games.pull(game, key, user)];
                     case 6:
                         _b.sent();
                         return [3 /*break*/, 7];

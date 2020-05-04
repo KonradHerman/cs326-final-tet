@@ -57,8 +57,8 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("pull: value = " + value);
-		let result = key==="own" ? collection.updateOne({"name": name}, {$pull: { own : {$eq: value}}}):
-			collection.updateOne({"name": name}, {$pull: { want : {$eq: value}}});
+		let result = key==="own" ? collection.updateOne({"name": name}, {$pull: { own : value}}):
+			collection.updateOne({"name": name}, {$pull: { want : value}});
 		console.log("result = " + JSON.stringify(result));
 	}
 
