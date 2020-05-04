@@ -1,9 +1,9 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
 	private secrets;
-	private password;
+	private password: string;
 	private uri =
-		"mongodb+srv://konrad:"+ password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+		"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 	private client;
 	private collectionName: string;
 	private dbName: string = "boredgames";
@@ -15,7 +15,7 @@ export class Database {
 		// Assign password to uri
 		if (!process.env.PASSWORD) {
 			this.secrets = require('secrets.json');
-			this.password = secrets.password;
+			this.password = this.secrets.password;
 		} else {
 			this.password = process.env.PASSWORD;
 		}
