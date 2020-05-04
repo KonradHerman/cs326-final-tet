@@ -324,16 +324,16 @@ var MyServer = /** @class */ (function () {
                 userObj = this.users.get(user);
                 gameObj = this.games.get(game);
                 if (own && add) {
-                    userObj.own.append(game);
-                    gameObj.own.append(user);
+                    userObj.own.push(game);
+                    gameObj.own.push(user);
                 }
                 else if (own) {
                     userObj.own = this.removeItem(userObj.own, game);
                     gameObj.own = this.removeItem(gameObj.own, user);
                 }
                 else if (add) {
-                    userObj.want.append(game);
-                    gameObj.want.append(user);
+                    userObj.want.push(game);
+                    gameObj.want.push(user);
                 }
                 else {
                     userObj.want = this.removeItem(userObj.want, game);

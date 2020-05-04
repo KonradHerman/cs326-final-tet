@@ -210,15 +210,15 @@ export class MyServer {
 		//await this.theDatabase.put(name, value);
 		let userObj = this.users.get(user);
 		let gameObj = this.games.get(game);
-		if(own && add){
-			userObj.own.append(game);
-			gameObj.own.append(user);
-		} else if(own){
+		if(own && add) {
+			userObj.own.push(game);
+			gameObj.own.push(user);
+		} else if(own) {
 			userObj.own = this.removeItem(userObj.own, game);
 			gameObj.own = this.removeItem(gameObj.own, user);
 		} else if(add){
-			userObj.want.append(game);
-			gameObj.want.append(user);
+			userObj.want.push(game);
+			gameObj.want.push(user);
 		} else {
 			userObj.want = this.removeItem(userObj.want, game);
 			gameObj.want = this.removeItem(gameObj.want, user);
