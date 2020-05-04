@@ -381,8 +381,7 @@ var MyServer = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        user = this.users.get(name)[0];
-                        response.write(JSON.stringify({ user: user }));
+                        user = this.users.get(name);
                         if (!(user == null)) return [3 /*break*/, 1];
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         return [3 /*break*/, 4];
