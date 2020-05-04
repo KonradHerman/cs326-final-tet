@@ -96,7 +96,7 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("push: value = " + value);
-                result = collection.updateOne({ "name": name }, { $push: { key: value } });
+                result = collection.updateOne({ "name": name }, { $addToSet: { key: value } });
                 console.log("result = " + result);
                 return [2 /*return*/];
             });
@@ -109,7 +109,13 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("pull: value = " + value);
-                result = collection.updateOne({ "name": name }, { $pull: { key: value } });
+                switch (key) {
+                    case "own":
+                        result = collection.updateOne({ "name": name }, { $pull: { own: value } });
+                        break;
+                    default:
+                        result = collection.updateOne({ "name": name }, { $pull: { want: value } });
+                }
                 console.log("result = " + result);
                 return [2 /*return*/];
             });
