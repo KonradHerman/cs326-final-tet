@@ -1,3 +1,9 @@
+#Tet Milestone 3
+Konrad Herman, Kash Somani, Doug Silverman
+
+##Database Documents
+
+```
 user document
 {
     _id: string
@@ -16,3 +22,6 @@ games document
     own: Array
     want: Array
 }
+```
+
+##Division of Labor
