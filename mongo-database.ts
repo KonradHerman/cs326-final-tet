@@ -49,8 +49,17 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("push: value = " + value);
 		// let val = JSON.parse(value);
-		let result = collection.updateOne({"name": name}, {$addToSet: {key:value}});
-		console.log("result = " + result);
+		// let result = collection.updateOne({"name": name}, {$addToSet: {key:value}});
+		let result;
+		switch (key) {
+			case "own":
+				result = collection.updateOne({"name": name}, {$addtoSet: { own : value}});
+				break;
+			default:
+				result = collection.updateOne({"name": name}, {$addtoSet: { want : value}});
+				break;
+		}
+		console.log("result = " + JSON.stringify(result));
 	}
 
 	public async pull(name: string, key: string, value: string): Promise<void> {
