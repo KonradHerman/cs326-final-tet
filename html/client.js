@@ -78,6 +78,7 @@ function gameUpdate() {
 	(async () => {
 		//we need to change this element id based on the html page
 		let drop = document.getElementById("gameSelect");
+		console.log(drop);
 		let index = drop.selectedIndex;
 		console.log(index);
 		let game = drop.options[index];
