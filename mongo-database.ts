@@ -48,19 +48,8 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("push: value = " + value);
-		// let val = JSON.parse(value);
-		// let result = collection.updateOne({"name": name}, {$addToSet: { key :value}});
 		let result = key==="own" ? collection.updateOne({"name": name}, {$addToSet: { own : value}}):
 			collection.updateOne({"name": name}, {$addToSet: { want : value}});
-		//let result;
-		// switch (key) {
-		// 	case "own":
-		// 		result = collection.updateOne({"name": name}, {$addToSet: { own : value}});
-		// 		break;
-		// 	default:
-		// 		result = collection.updateOne({"name": name}, {$addToSet: { want : value}});
-		// 		break;
-		// }
 		console.log("result = " + JSON.stringify(result));
 	}
 
@@ -69,15 +58,9 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("pull: value = " + value);
 		// let val = JSON.parse(value);
-		let result;
-		switch (key) {
-			case "own":
-				result = collection.updateOne({"name": name}, {$pull: { own : value}});
-				break;
-			default:
-				result = collection.updateOne({"name": name}, {$pull: { want : value}});
-		}
-		console.log("result = " + result);
+		let result = key==="own" ? collection.updateOne({"name": name}, {$pull: { own : value}}):
+			collection.updateOne({"name": name}, {$pull: { want : value}});
+		console.log("result = " + JSON.stringify(result));
 	}
 
 	public async get(key: string): Promise<string> {

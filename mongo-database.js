@@ -98,15 +98,6 @@ var Database = /** @class */ (function () {
                 console.log("push: value = " + value);
                 result = key === "own" ? collection.updateOne({ "name": name }, { $addToSet: { own: value } }) :
                     collection.updateOne({ "name": name }, { $addToSet: { want: value } });
-                //let result;
-                // switch (key) {
-                // 	case "own":
-                // 		result = collection.updateOne({"name": name}, {$addToSet: { own : value}});
-                // 		break;
-                // 	default:
-                // 		result = collection.updateOne({"name": name}, {$addToSet: { want : value}});
-                // 		break;
-                // }
                 console.log("result = " + JSON.stringify(result));
                 return [2 /*return*/];
             });
@@ -119,14 +110,9 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("pull: value = " + value);
-                switch (key) {
-                    case "own":
-                        result = collection.updateOne({ "name": name }, { $pull: { own: value } });
-                        break;
-                    default:
-                        result = collection.updateOne({ "name": name }, { $pull: { want: value } });
-                }
-                console.log("result = " + result);
+                result = key === "own" ? collection.updateOne({ "name": name }, { $pull: { own: value } }) :
+                    collection.updateOne({ "name": name }, { $pull: { want: value } });
+                console.log("result = " + JSON.stringify(result));
                 return [2 /*return*/];
             });
         });
