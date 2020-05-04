@@ -2,8 +2,7 @@ export class Database {
 	private MongoClient = require("mongodb").MongoClient;
 	private secrets;
 	private password: string;
-	private uri =
-		"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+	private uri: string;
 	private client;
 	private collectionName: string;
 	private dbName: string = "boredgames";
@@ -19,6 +18,8 @@ export class Database {
 		} else {
 			this.password = process.env.PASSWORD;
 		}
+		this.uri =
+			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 
 		(async () => {
 			await this.client.connect().catch((err) => {
