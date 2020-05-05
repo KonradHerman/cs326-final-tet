@@ -201,8 +201,8 @@ function userLogin() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);
+		document.getElementById("login-output").innerHTML = "your username or password is incorrect<br>please try again";
 		if (j["result"] !== "caught error") {
-			//Success
 			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
@@ -210,6 +210,7 @@ function userLogin() {
 				let out = "Username is incorrect";
 				console.log(out);
 			} else {
+				// Success
 				let out = userName + " logged in";
 				window.location.href = j["url"];
 				console.log(out);
