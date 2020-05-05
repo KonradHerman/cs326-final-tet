@@ -256,7 +256,7 @@ async function usersSearch() {
 			}
 			newURL = url + "/users/read/emails";
 			data = { names: str };
-			console.log("emailRead: fetching " + str);
+			console.log("emailRead: fetching ");
 			resp = await postData(newURL, data);
 			j = await resp.json();
 			emailArray = JSON.parse(j.users);
@@ -277,5 +277,5 @@ async function usersSearch() {
 		} else {
 			console.log("failure to read all");
 		}
-	})();
+	});
 }
