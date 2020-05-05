@@ -363,14 +363,34 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.createUser = function (name, email, password, img, zip, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var hashedPassword, _a;
+            var userName, emailUser, hashedPassword, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 3, , 4]);
+                    case 0: return [4 /*yield*/, this.users.get(name)];
+                    case 1:
+                        userName = _b.sent();
+                        return [4 /*yield*/, this.users.getEmail(email)];
+                    case 2:
+                        emailUser = _b.sent();
+                        // const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
+                        console.log("console log works and the thing underneith is user");
+                        console.log(userName);
+                        if (!(userName !== null)) return [3 /*break*/, 3];
+                        // if username doesn't exist
+                        response.write(JSON.stringify({ result: "username in use" }));
+                        response.end();
+                        return [3 /*break*/, 8];
+                    case 3:
+                        if (!(emailUser !== null)) return [3 /*break*/, 4];
+                        // if email doesn't exist
+                        response.write(JSON.stringify({ result: "email in use" }));
+                        response.end();
+                        return [3 /*break*/, 8];
+                    case 4:
+                        _b.trys.push([4, 7, , 8]);
                         console.log("creating user named '" + name + "'");
                         return [4 /*yield*/, bcrypt.hash(password, 10)];
-                    case 1:
+                    case 5:
                         hashedPassword = _b.sent();
                         return [4 /*yield*/, this.users.add('{"name":"' +
                                 name +
@@ -381,18 +401,17 @@ var MyServer = /** @class */ (function () {
                                 '","img":"none","zip":"' +
                                 zip +
                                 '","own":[],"want":[]}')];
-                    case 2:
+                    case 6:
                         _b.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
-                        response.redirect("html/index.html");
                         response.end();
-                        return [3 /*break*/, 4];
-                    case 3:
+                        return [3 /*break*/, 8];
+                    case 7:
                         _a = _b.sent();
                         response.write(JSON.stringify({ result: "error" }));
                         response.end();
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 8];
+                    case 8: return [2 /*return*/];
                 }
             });
         });
