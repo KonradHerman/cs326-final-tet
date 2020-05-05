@@ -188,7 +188,9 @@ export class MyServer {
 
 	public async readGame(name: string, response): Promise<void> {
 		let game = await this.games.get(name);
-		response.write(JSON.stringify({ result: "read", game: game }));
+		console.log(JSON.stringify(game));
+		console.log(JSON.stringify({ result: "read", game: game }));
+		response.write({ result: "read", game: game });
 		response.end();
 	}
 
@@ -237,14 +239,14 @@ export class MyServer {
 			const hashedPassword = await bcrypt.hash(password, 10);
 			await this.users.add(
 				'{"name":"' +
-					name +
-					'","email":"' +
-					email +
-					'","password":"' +
-					hashedPassword +
-					'","img":"none","zip":"' +
-					zip +
-					'","own":[],"want":[]}'
+				name +
+				'","email":"' +
+				email +
+				'","password":"' +
+				hashedPassword +
+				'","img":"none","zip":"' +
+				zip +
+				'","own":[],"want":[]}'
 			);
 			response.write(JSON.stringify({ result: "created", name: name }));
 			response.redirect("html/index.html");
@@ -261,16 +263,25 @@ export class MyServer {
 		response
 	): Promise<void> {
 		const user = this.users.get(name); // (!) waiting on get
-		const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password 
+		// const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
+		response.write(
+			JSON.stringify({ result: "user output", user: user })
+		);
+		response.end();
 		if (user == null) {
 			// if user doesnt exist
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
 		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
-				if(await bcrypt.compare(password, hardcode)) {
-					response.write(JSON.stringify({ result: "logged In"}));
-					response.redirect("https://tet326.herokuapp.com/home.html");
+				if (await bcrypt.compare(password, user.password)) {
+					response.write(
+						JSON.stringify({
+							result: "redirect",
+							url: "https://tet326.herokuapp.com/home.html",
+						})
+					);
+					// heroku build me
 					response.end();
 				} else {
 					response.write(JSON.stringify({ result: "Incorrect Password" }));
