@@ -69,6 +69,7 @@ export class MyServer {
 		this.router.post("/users/create", this.createUserHandler.bind(this));
 		this.router.post("/users/login", this.loginUserHandler.bind(this));
 		this.router.post("/users/read", this.readUserHandler.bind(this));
+		this.router.post("/users/read/emails", this.getEmailsHandler.bind(this));
 		this.router.post("/users/update", this.updateUserHandler.bind(this));
 		this.router.post("/users/delete", [
 			// this.errorHandler.bind(this),
@@ -88,6 +89,9 @@ export class MyServer {
 
 	private async loginUserHandler(request, response): Promise<void> {
 		await this.loginUser(request.body.name, request.body.password, response);
+	}
+	private async getEmailsHandler(request, response): Promise<void> {
+		await this.getEmails(request, response);
 	}
 
 	private async errorHandler(request, response, next): Promise<void> {
@@ -193,6 +197,11 @@ export class MyServer {
 		response.end();
 	}
 
+	public async getEmails(names: string[], response): Promise<void> {
+		let userArray = await this.games.getSome(names);
+		response.write({ result: "read", users: userArray });
+		response.end();
+	}
 	public async updateGame(
 		game: string,
 		user: string,
@@ -243,27 +252,25 @@ export class MyServer {
 			console.log('response to be sent ot user: {result: "username in use"}');
 			response.write(JSON.stringify({ result: "username in use" }));
 			response.end();
-		} 
-		else if (emailUser !== null) {
+		} else if (emailUser !== null) {
 			// if email doesn't exist
 			console.log('response to be sent ot user: {result: "email in use"}');
-			response.write(JSON.stringify({ result: "email in use" })); 
+			response.write(JSON.stringify({ result: "email in use" }));
 			response.end();
-		}
-		else {
+		} else {
 			try {
 				console.log("creating user named '" + name + "'");
 				const hashedPassword = await bcrypt.hash(password, 10);
 				await this.users.add(
 					'{"name":"' +
-					name +
-					'","email":"' +
-					email +
-					'","password":"' +
-					hashedPassword +
-					'","img":"none","zip":"' +
-					zip +
-					'","own":[],"want":[]}'
+						name +
+						'","email":"' +
+						email +
+						'","password":"' +
+						hashedPassword +
+						'","img":"none","zip":"' +
+						zip +
+						'","own":[],"want":[]}'
 				);
 				response.write(JSON.stringify({ result: "created", name: name }));
 

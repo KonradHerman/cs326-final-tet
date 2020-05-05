@@ -240,26 +240,40 @@ function usersSearch() {
 		//we need to change this element id based on the html page
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
-		const newURL = url + "/games/read";
-		const data = { name: gameName };
+		let newURL = url + "/games/read";
+		let data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
-		const resp = await postData(newURL, data);
+		let resp = await postData(newURL, data);
 		console.log(resp);
-		const j = await resp.json();
+		let j = await resp.json();
 		let game = JSON.parse(j.game);
-		const getOwnArray = () => {
-			sum = "";
+	
+		j = await resp.json();
+		const getOwnEmailArray = () => {
+			let str = [];
 			for (const i of game.own) {
-				sum += i;
+				str.push(i)
 			}
-			return sum;
+			newURL = url + "/users/read/emails";
+			data = { names: str };
+			console.log("emailRead: fetching " + str);
+			resp = await postData(newURL, data);
+			j = await resp.json();
+			emailArray = JSON.parse(j.game);
+			let ans = "";
+			for (let i = 0; i < emailArray.length; ++i)
+			{
+				ans += str[i] + " " + emailArray[i];
+				}
+
+			return ans;
 		};
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML =
 				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
 				game.name +
 				'</h5><small>Editor\'s Choice</small></div><p class="mb-1">' +
-				getOwnArray() +
+				getOwnEmailArray() +
 				"</a>";
 		} else {
 			console.log("failure to read all");
