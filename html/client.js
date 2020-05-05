@@ -189,6 +189,8 @@ function userLogin() {
 				console.log(out);
 			} else {
 				// Success
+				document.getElementById("login-output").innerHTML = "Signing you in!";
+				document.getElementById("login-output").style.color = "green";
 				let out = userName + " logged in";
 				window.location.href = j["url"];
 				console.log(out);
