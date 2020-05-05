@@ -126,7 +126,6 @@ function gameUpdate() {
 
 function userCreate() {
 	(async () => {
-		if (!passwordMatcher()) return; // if the passwords dont match do nothing
 		let userName = document.getElementById("username").value;
 		let email = document.getElementById("email").value;
 		let password1 = document.getElementById("password1").value;
@@ -146,27 +145,9 @@ function userCreate() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			if (j["result"] === "username in use") {
-				let out = "username already in use";
-				console.log(out);
-				document.getElementById("badUsername").innerHTML =
-					"THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN";
-				document.getElementById("badUsername").style.color = "red";
-			} else if (j["result"] === "email in use") {
-				let out = "email already in use";
-				console.log(out);
-				document.getElementById("badUsername").innerHTML =
-					"username available!";
-				document.getElementById("badUsername").style.color = "green";
-				document.getElementById("badEmail").innerHTML =
-					"THE EMAIL YOU ENTERED IS ALREADY IN USE";
-				document.getElementById("badEmail").style.color = "red";
-			} else {
-				//Success
-				let out = userName + " created";
-				console.log(out);
-				window.location.href = "https://tet326.herokuapp.com";
-			}
+			//Success
+			let out = userName + " created";
+			console.log(out);
 		} else {
 			let out = userName + " could not be created, an error has occured";
 			console.log(out);
@@ -177,17 +158,12 @@ function userCreate() {
 function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
-	if (password1 !== password2) {
-		document.getElementById("password-match-output").innerHTML =
-			"PASSWORDS DO NOT MATCH";
-		document.getElementById("password-match-output").style.color = "red";
+	if (password1 === password2) {
+		document.getElementById("password-match-output").innerHTML +=
+			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
 		return false;
-	} else {
-		document.getElementById("password-match-output").innerHTML =
-			"passwords match!";
-		document.getElementById("password-match-output").style.color = "green";
-		return true;
 	}
+	return true;
 }
 
 function userLogin() {
@@ -267,21 +243,8 @@ function usersSearch() {
 		const j = await resp.json();
 		console.log(j.game);
 		if (j["result"] !== "error") {
-			document.getElementById("searchuseroutput").innerHTML += (
-				<a
-					href="#"
-					class="list-group-item list-group-item-action flex-column align-items-start active"
-				>
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-					</div>
-					<p class="mb-1">
-						Donec id elit non mi porta gravida at eget metus. Maecenas sed diam
-						eget risus varius blandit.
-					</p>
-					<small>Donec id elit non mi porta.</small>
-				</a>
-			);
+			document.getElementById("searchuseroutput").innerHTML +=
+				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
 		} else {
 			console.log("failure to read all");
 		}
