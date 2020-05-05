@@ -408,7 +408,6 @@ var MyServer = /** @class */ (function () {
                     case 2:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
-                            response.write(JSON.stringify({ result: "logged In" }));
                             response.write(JSON.stringify({ result: "redirect", url: "https://tet326.herokuapp.com/home.html" }));
                             // heroku build me
                             response.end();
