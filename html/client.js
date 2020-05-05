@@ -235,7 +235,7 @@ async function postData(url, data) {
 	});
 	return resp;
 }
-function usersSearch() {
+async function usersSearch() {
 	(async () => {
 		//we need to change this element id based on the html page
 		let drop = document.getElementById("selectGame");
@@ -249,7 +249,7 @@ function usersSearch() {
 		let game = JSON.parse(j.game);
 	
 		j = await resp.json();
-		const getOwnEmailArray = () => {
+		const getOwnEmailArray = (async () => {
 			let str = [];
 			for (const i of game.own) {
 				str.push(i)
@@ -267,7 +267,7 @@ function usersSearch() {
 				}
 
 			return ans;
-		};
+		};)
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML =
 				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
