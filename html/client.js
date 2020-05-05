@@ -75,6 +75,7 @@ function gameRead() {
 		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
+		console.log(resp);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {

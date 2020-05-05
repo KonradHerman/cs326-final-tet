@@ -310,9 +310,10 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.games.get(name)];
                     case 1:
                         game = _a.sent();
+                        console.log(game);
                         console.log(JSON.stringify(game));
-                        console.log(JSON.stringify({ result: "read", game: game }));
-                        response.write({ result: "read", game: game });
+                        console.log(JSON.stringify({ result: "read", game: JSON.stringify(game) }));
+                        response.write({ result: "read", game: JSON.stringify(game) });
                         response.end();
                         return [2 /*return*/];
                 }
@@ -458,13 +459,13 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.removeItem = function (arr, value) {
-        var index = arr.indexOf(value);
-        if (index > -1) {
-            arr.splice(index, 1);
-        }
-        return arr;
-    };
+    // public removeItem(arr, value): Promise<any[]> {
+    // 	let index = arr.indexOf(value);
+    // 	if (index > -1) {
+    // 		arr.splice(index, 1);
+    // 	}
+    // 	return arr;
+    // }
     MyServer.prototype.deleteUser = function (id, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

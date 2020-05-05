@@ -188,9 +188,10 @@ export class MyServer {
 
 	public async readGame(name: string, response): Promise<void> {
 		let game = await this.games.get(name);
+		console.log(game);
 		console.log(JSON.stringify(game));
-		console.log(JSON.stringify({ result: "read", game: game }));
-		response.write({ result: "read", game: game });
+		console.log(JSON.stringify({ result: "read", game: JSON.stringify(game)}));
+		response.write({ result: "read", game: JSON.stringify(game) });
 		response.end();
 	}
 
