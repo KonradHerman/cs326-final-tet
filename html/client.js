@@ -125,6 +125,8 @@ function gameUpdate() {
 
 function userCreate() {
 	(async () => {
+		if(!passwordMatcher())
+			return // if the passwords dont match do nothing
 		let userName = document.getElementById("username").value;
 		let email = document.getElementById("email").value;
 		let password1 = document.getElementById("password1").value;
@@ -147,7 +149,7 @@ function userCreate() {
 			if(j["result"] === "username in use") {
 				let out = "username already in use";
 				console.log(out);
-				document.getElementById("usernameLabel").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
+				document.getElementById("badUsername").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
 			}
 			else if(j["result"] === "email in use") {
 				let out = "email already in use";
