@@ -187,7 +187,7 @@ export class MyServer {
 	}
 
 	public async readGame(name: string, response): Promise<void> {
-		let game = this.games.get(name);
+		let game = await this.games.get(name);
 		response.write(JSON.stringify({ result: "read", game: game }));
 		response.end();
 	}
@@ -302,13 +302,13 @@ export class MyServer {
 		response.end();
 	}
 
-	public removeItem(arr, value): Promise<any[]> {
-		let index = arr.indexOf(value);
-		if (index > -1) {
-			arr.splice(index, 1);
-		}
-		return arr;
-	}
+	// public removeItem(arr, value): Promise<any[]> {
+	// 	let index = arr.indexOf(value);
+	// 	if (index > -1) {
+	// 		arr.splice(index, 1);
+	// 	}
+	// 	return arr;
+	// }
 
 	public async deleteUser(id: number, response): Promise<void> {
 		//await this.theDatabase.del(name);
