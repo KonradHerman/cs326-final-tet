@@ -397,10 +397,8 @@ var MyServer = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         user = this.users.get(name);
-                        if (!(user == null)) return [3 /*break*/, 1];
-                        // if user doesnt exist
-                        response.write(JSON.stringify({ result: "user not found" })); // some other response?
-                        return [3 /*break*/, 4];
+                        // const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password 
+                        return [2 /*return*/, response.write(JSON.stringify({ result: "user output", user: user }))];
                     case 1:
                         _b.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, bcrypt.compare(password, user.password)];
