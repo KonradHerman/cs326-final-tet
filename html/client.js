@@ -245,7 +245,7 @@ function usersSearch() {
 		const resp = await postData(newURL, data);
 		console.log(resp);
 		const j = await resp.json();
-		console.log(j.game.name);
+		console.log(j.game);
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML +=
 				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
