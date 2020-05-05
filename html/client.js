@@ -223,7 +223,8 @@ async function postData(url, data) {
 		method: "POST",
 		mode: "cors",
 		cache: "no-cache",
-		credentials: "same-origin",
+		// credentials: "same-origin",
+		credentials: "omit",
 		headers: {
 			"Content-Type": "application/json",
 		},
