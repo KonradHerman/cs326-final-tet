@@ -404,8 +404,7 @@ var MyServer = /** @class */ (function () {
                     case 0:
                         user = this.users.get(name);
                         // const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
-                        response.write(JSON.stringify({ result: "user output", user: user }));
-                        response.end();
+                        console.log(user);
                         if (!(user == null)) return [3 /*break*/, 1];
                         // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
