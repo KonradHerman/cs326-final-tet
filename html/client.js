@@ -182,8 +182,8 @@ function userLogin() {
 			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
-			} else if (j["result"] === "user output") {
-				let out = j["user"];
+			} else if (j["result"] === "user not found") {
+				let out = "Username is incorrect";
 				console.log(out);
 			} else {
 				let out = userName + " logged in";

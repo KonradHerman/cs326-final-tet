@@ -270,6 +270,7 @@ export class MyServer {
 		if (user == null) {
 			// if user doesnt exist
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
+			response.end();
 		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string

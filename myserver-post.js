@@ -411,6 +411,7 @@ var MyServer = /** @class */ (function () {
                         if (!(user == null)) return [3 /*break*/, 2];
                         // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
+                        response.end();
                         return [3 /*break*/, 5];
                     case 2:
                         _b.trys.push([2, 4, , 5]);

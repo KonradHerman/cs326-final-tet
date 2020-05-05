@@ -62,6 +62,19 @@ export class Database {
 		}
 	}
 
+	public async getEmail(key: string): Promise<string> {
+		let db = this.client.db(this.dbName); // this.level(this.dbFile);
+		let collection = db.collection(this.collectionName);
+		console.log("get: key = " + key);
+		const result = await collection.findOne({"email": key});
+		console.log("get: returned " + JSON.stringify(result));
+		if (result) {
+			return result;
+		} else {
+			return null;
+		}
+	}
+
 	public async getAll(): Promise<string | null> {
 		console.log(this.dbName);
 		let db = this.client.db(this.dbName);
