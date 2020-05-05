@@ -264,7 +264,6 @@ async function usersSearch() {
 			for (let i = 0; i < emailArray.length; ++i) {
 				ans += str[i] + " " + emailArray[i].email;
 			}
-
 			return ans;
 		};
 		if (j["result"] !== "error") {
