@@ -147,10 +147,14 @@ function userCreate() {
 			if(j["result"] === "username in use") {
 				let out = "username already in use";
 				console.log(out);
+				document.getElementById("usernameLabel").innerHTML = "Username has been taken";
+				document.getElementById("usernameLabel").style.color = "red";
 			}
 			else if(j["result"] === "email in use") {
 				let out = "email already in use";
 				console.log(out);
+				document.getElementById("usernameLabel").innerHTML = "Email already in use";
+				document.getElementById("usernameLabel").style.color = "red";
 			}
 			else {
 				//Success
