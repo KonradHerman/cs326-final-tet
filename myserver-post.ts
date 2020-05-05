@@ -242,11 +242,13 @@ export class MyServer {
 		console.log(userName);
 		if (userName !== null) {
 			// if username doesn't exist
+			console.log('response to be sent ot user: {result: "username in use"');
 			response.write(JSON.stringify({ result: "username in use" }));
 			response.end();
 		} 
 		else if (emailUser !== null) {
 			// if email doesn't exist
+			console.log('response to be sent ot user: {result: "email in use"');
 			response.write(JSON.stringify({ result: "email in use" })); 
 			response.end();
 		}
