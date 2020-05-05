@@ -324,7 +324,8 @@ var MyServer = /** @class */ (function () {
                     case 1:
                         game = _a.sent();
                         console.log(game);
-                        response.write({ result: "read", game: game });
+                        console.log("test");
+                        response.write(JSON.stringify({ result: "read", game: JSON.stringify(game) }));
                         response.end();
                         return [2 /*return*/];
                 }

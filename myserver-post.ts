@@ -193,7 +193,8 @@ export class MyServer {
 	public async readGame(name: string, response): Promise<void> {
 		let game = await this.games.get(name);
 		console.log(game);
-		response.write({ result: "read", game: game });
+		console.log("test");
+		response.write(JSON.stringify({ result: "read", game: JSON.stringify(game) }));
 		response.end();
 	}
 

@@ -246,6 +246,7 @@ function usersSearch() {
 		let resp = await postData(newURL, data);
 		console.log(resp);
 		let j = await resp.json();
+		console.log(j);
 		let game = JSON.parse(j.game);
 
 		j = await resp.json();
