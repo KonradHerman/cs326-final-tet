@@ -180,23 +180,24 @@ function userLogin() {
 		console.log("logging in: fetching");
 		console.log(newURL);
 		const resp = await postData(newURL, data);
-		const j = await resp;
+		const j = await resp.json();
 		console.log(j);
-		// if (j["result"] !== "caught error") {
-		// 	//Success
-		// 	if (j["result"] == "Incorrect Password") {
-		// 		let out = "Incorrect Password ";
-		// 		console.log(out);
-		// 	}
-		// 	else {
-		// 		let out = userName + " logged in";
-		// 		console.log(out);
-		// 	}
-		// }
-		// else {
-		// 	let out = userName + " was unable to login";
-		// 	console.log(out);
-		// }
+		if (j["result"] !== "caught error") {
+			//Success
+			if (j["result"] == "Incorrect Password") {
+				let out = "Incorrect Password ";
+				console.log(out);
+			}
+			else {
+				let out = userName + " logged in";
+				window.location.href = j["url"];
+				console.log(out);
+			}
+		}
+		else {
+			let out = userName + " was unable to login";
+			console.log(out);
+		}
 	})();
 }
 
