@@ -191,7 +191,6 @@ function userLogin() {
 			else {
 				let out = userName + " logged in";
 				console.log(out);
-				window.location.replace("home.html");
 			}
 		}
 		else {

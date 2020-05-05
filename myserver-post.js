@@ -90,6 +90,7 @@ var MyServer = /** @class */ (function () {
         this.router.post("/games/readall", 
         //this.errorHandler.bind(this),
         this.readallHandler.bind(this));
+        this.server.get("/home", this.homeHandler.bind(this));
         this.router.post("/games/read", this.readHandler.bind(this));
         this.router.post("/games/update", [
             // this.errorHandler.bind(this),
@@ -117,7 +118,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, response.redirect("html/home.html")];
+                    case 0: return [4 /*yield*/, response.redirect("https://tet326.herokuapp.com")];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -369,7 +370,15 @@ var MyServer = /** @class */ (function () {
                         return [4 /*yield*/, bcrypt.hash(password, 10)];
                     case 1:
                         hashedPassword = _b.sent();
-                        return [4 /*yield*/, this.users.add('{"name":"' + name + '","email":"' + email + '","password":"' + hashedPassword + '","img":"none","zip":"' + zip + '","own":[],"want":[]}')];
+                        return [4 /*yield*/, this.users.add('{"name":"' +
+                                name +
+                                '","email":"' +
+                                email +
+                                '","password":"' +
+                                hashedPassword +
+                                '","img":"none","zip":"' +
+                                zip +
+                                '","own":[],"want":[]}')];
                     case 2:
                         _b.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
@@ -388,23 +397,24 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.loginUser = function (name, password, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, _a;
+            var user, hardcode, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         user = this.users.get(name);
-                        response.write(user);
+                        hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS";
                         if (!(user == null)) return [3 /*break*/, 1];
+                        // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         return [3 /*break*/, 4];
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, bcrypt.compare(password, user.password)];
+                        return [4 /*yield*/, bcrypt.compare(password, hardcode)];
                     case 2:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
-                            //response.write(JSON.stringify({ result: "logged In"}));
-                            response.redirect("https://tet326.herokuapp.com/home.html");
+                            response.write(JSON.stringify({ result: "logged In" }));
+                            // response.redirect("https://tet326.herokuapp.com/home.html");
                             response.end();
                         }
                         else {
