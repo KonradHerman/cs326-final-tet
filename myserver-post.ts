@@ -138,7 +138,7 @@ export class MyServer {
 	}
 
 	private async readUserHandler(request, response): Promise<void> {
-		await this.readUser(request.body.id, response);
+		await this.readUser(request.body.name, response);
 	}
 
 	private async updateUserHandler(request, response): Promise<void> {
@@ -288,15 +288,8 @@ export class MyServer {
 		}
 	}
 
-	public async readUser(id: number, response): Promise<void> {
-		let user: Object = {
-			name: "ChessFreak",
-			id: 69420,
-			zip: "11226",
-			picture: "knight.jpg",
-			own: [65554, 92845],
-			want: [29999],
-		};
+	public async readUser(name: string, response): Promise<void> {
+		let user = this.users.get(name);
 		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}

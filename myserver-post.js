@@ -225,7 +225,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.readUser(request.body.id, response)];
+                    case 0: return [4 /*yield*/, this.readUser(request.body.name, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -432,18 +432,11 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.readUser = function (id, response) {
+    MyServer.prototype.readUser = function (name, response) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
-                user = {
-                    name: "ChessFreak",
-                    id: 69420,
-                    zip: "11226",
-                    picture: "knight.jpg",
-                    own: [65554, 92845],
-                    want: [29999]
-                };
+                user = this.users.get(name);
                 response.write(JSON.stringify({ result: "read", user: user }));
                 response.end();
                 return [2 /*return*/];

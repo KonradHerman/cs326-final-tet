@@ -1,6 +1,5 @@
 export class Database {
 	private MongoClient = require("mongodb").MongoClient;
-	private secrets;
 	private password: string;
 	private uri: string;
 	private client;
@@ -9,12 +8,7 @@ export class Database {
 
 	constructor(collectionName) {
 		// Assign password to uri
-		if (!process.env.PASSWORD) {
-			this.secrets = require('secrets.json');
-			this.password = this.secrets.password;
-		} else {
-			this.password = process.env.PASSWORD;
-		}
+		this.password = process.env.PASSWORD;
 		this.uri =
 			"mongodb+srv://konrad:"+ this.password +"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 

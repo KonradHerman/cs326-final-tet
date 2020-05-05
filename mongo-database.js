@@ -42,13 +42,7 @@ var Database = /** @class */ (function () {
         this.MongoClient = require("mongodb").MongoClient;
         this.dbName = "boredgames";
         // Assign password to uri
-        if (!process.env.PASSWORD) {
-            this.secrets = require('secrets.json');
-            this.password = this.secrets.password;
-        }
-        else {
-            this.password = process.env.PASSWORD;
-        }
+        this.password = process.env.PASSWORD;
         this.uri =
             "mongodb+srv://konrad:" + this.password + "@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
         this.collectionName = collectionName;
