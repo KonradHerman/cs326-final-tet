@@ -272,15 +272,9 @@ export class MyServer {
 		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
-<<<<<<< HEAD
 				if(await bcrypt.compare(password, user.password)) {
 					response.write(JSON.stringify({ result: "logged In"}));
 					// response.redirect("https://tet326.herokuapp.com/home.html");
-=======
-				if (await bcrypt.compare(password, user.password)) {
-					//response.write(JSON.stringify({ result: "logged In"}));
-					response.redirect("https://tet326.herokuapp.com/home.html");
->>>>>>> 7f5ee5139af7cb581ed80b72f861acc18f147b1c
 					response.end();
 				} else {
 					response.write(JSON.stringify({ result: "Incorrect Password" }));
