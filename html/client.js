@@ -245,12 +245,21 @@ function usersSearch() {
 		const resp = await postData(newURL, data);
 		console.log(resp);
 		const j = await resp.json();
-		console.log(JSON.parse(j.game).name);
+		let game = JSON.parse(j.game);
+		const getOwnArray = () => {
+			sum = "";
+			for (const i of game.own) {
+				sum += i;
+			}
+			return sum;
+		};
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML +=
-				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
-				JSON.parse(j.game).name +
-				'</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
+				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				game.name +
+				'</h5><small>Editor\'s Choice</small></div><p class="mb-1">' +
+				getOwnArray() +
+				"</a>";
 		} else {
 			console.log("failure to read all");
 		}
