@@ -126,6 +126,30 @@ var Database = /** @class */ (function () {
             });
         });
     };
+    Database.prototype.getEmail = function (key) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("get: key = " + key);
+                        return [4 /*yield*/, collection.findOne({ "email": key })];
+                    case 1:
+                        result = _a.sent();
+                        console.log("get: returned " + JSON.stringify(result));
+                        if (result) {
+                            return [2 /*return*/, result];
+                        }
+                        else {
+                            return [2 /*return*/, null];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     Database.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;

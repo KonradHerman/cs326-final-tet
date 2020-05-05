@@ -235,26 +235,45 @@ export class MyServer {
 		zip: string,
 		response
 	): Promise<void> {
-		try {
-			console.log("creating user named '" + name + "'");
-			const hashedPassword = await bcrypt.hash(password, 10);
-			await this.users.add(
-				'{"name":"' +
-				name +
-				'","email":"' +
-				email +
-				'","password":"' +
-				hashedPassword +
-				'","img":"none","zip":"' +
-				zip +
-				'","own":[],"want":[]}'
-			);
-			response.write(JSON.stringify({ result: "created", name: name }));
-			response.redirect("html/index.html");
+		const userName = await this.users.get(name); // username searched in database
+		const emailUser = await this.users.getEmail(email);
+		// const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
+		console.log("console log works and the thing underneith is user");
+		console.log(userName);
+		if (userName !== null) {
+			// if username doesn't exist
+			console.log('response to be sent ot user: {result: "username in use"}');
+			response.write(JSON.stringify({ result: "username in use" }));
 			response.end();
-		} catch {
-			response.write(JSON.stringify({ result: "error" }));
+		} 
+		else if (emailUser !== null) {
+			// if email doesn't exist
+			console.log('response to be sent ot user: {result: "email in use"}');
+			response.write(JSON.stringify({ result: "email in use" })); 
 			response.end();
+		}
+		else {
+			try {
+				console.log("creating user named '" + name + "'");
+				const hashedPassword = await bcrypt.hash(password, 10);
+				await this.users.add(
+					'{"name":"' +
+					name +
+					'","email":"' +
+					email +
+					'","password":"' +
+					hashedPassword +
+					'","img":"none","zip":"' +
+					zip +
+					'","own":[],"want":[]}'
+				);
+				response.write(JSON.stringify({ result: "created", name: name }));
+
+				response.end();
+			} catch {
+				response.write(JSON.stringify({ result: "error" }));
+				response.end();
+			}
 		}
 	}
 

@@ -58,14 +58,16 @@
 				<img id="img-upload" />
 			</div>
 			<div class="form-group">
-				<label for="username">Username</label>
+				<label for="username" id= "usernameLabel">Username</label>
 				<input type="username" class="form-control" id="username"
 					required>
+				<span style="color:red" id= "badUsername"></span>
 			</div>
 			<div class="form-group">
-				<label for="email">Email address</label>
+				<label for="email" id= "emailLabel">Email address</label>
 				<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
 					required>
+				<span style= "color: red" id= "badEmail"></span>
 				<small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
 			</div>
 			<div class="form-group">
@@ -75,7 +77,6 @@
 				<input type="password" class="form-control" id="password2" placeholder="Password" required>
 			</div>
 			<div id= "password-match-output"></div> <!-- (1) Passwords dont match response -->
-			<script>passwordMatcher();</script>
 			<div class="container">
 				<div class="row">
 					<input id="searchInput" class="controls" type="text" placeholder="Enter a location">
@@ -88,7 +89,7 @@
 					terms
 					and conditions</label>
 			</div>
-			<button type="submit" onclick= "userCreate()" class="btn primary">Submit</button>
+			<button type="button" onclick= "userCreate(); passwordMatcher()" class="btn primary">Submit</button>
 		</form>
 	</div>
 

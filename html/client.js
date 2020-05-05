@@ -145,9 +145,22 @@ function userCreate() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			//Success
-			let out = userName + " created";
-			console.log(out);
+			if(j["result"] === "username in use") {
+				let out = "username already in use";
+				console.log(out);
+				document.getElementById("usernameLabel").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
+			}
+			else if(j["result"] === "email in use") {
+				let out = "email already in use";
+				console.log(out);
+				document.getElementById("badEmail").innerHTML = "THE EMAIL YOU ENTERED IS ALREADY IN USE";
+			}
+			else {
+				//Success
+				let out = userName + " created";
+				console.log(out);
+				window.location.href = "https://tet326.herokuapp.com"
+			}
 		} else {
 			let out = userName + " could not be created, an error has occured";
 			console.log(out);
@@ -158,8 +171,8 @@ function userCreate() {
 function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
-	if (password1 === password2) {
-		document.getElementById("password-match-output").innerHTML +=
+	if (password1 !== password2) {
+		document.getElementById("password-match-output").innerHTML =
 			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
 		return false;
 	}
