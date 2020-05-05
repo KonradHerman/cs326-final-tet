@@ -187,13 +187,10 @@ export class MyServer {
 	}
 
 	public async readGame(name: string, response): Promise<void> {
-		let game: object = {
-			name: "Azul",
-			id: 12345,
-			own: [90876, 27465],
-			want: [16254, 26443],
-		};
-		response.write(JSON.stringify({ result: "read", game: game }));
+		let game = await this.games.get(name);
+		console.log(JSON.stringify(game));
+		console.log(JSON.stringify({ result: "read", game: game }));
+		response.write({ result: "read", game: game });
 		response.end();
 	}
 
@@ -266,15 +263,16 @@ export class MyServer {
 		response
 	): Promise<void> {
 		const user = this.users.get(name); // (!) waiting on get
-		const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password 
+		const hardcode =
+			"$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
 		if (user == null) {
 			// if user doesnt exist
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
 		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
-				if(await bcrypt.compare(password, hardcode)) {
-					response.write(JSON.stringify({ result: "logged In"}));
+				if (await bcrypt.compare(password, hardcode)) {
+					response.write(JSON.stringify({ result: "logged In" }));
 					// response.redirect("https://tet326.herokuapp.com/home.html");
 					response.end();
 				} else {

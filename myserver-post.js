@@ -306,15 +306,16 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var game;
             return __generator(this, function (_a) {
-                game = {
-                    name: "Azul",
-                    id: 12345,
-                    own: [90876, 27465],
-                    want: [16254, 26443]
-                };
-                response.write(JSON.stringify({ result: "read", game: game }));
-                response.end();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.games.get(name)];
+                    case 1:
+                        game = _a.sent();
+                        console.log(JSON.stringify(game));
+                        console.log(JSON.stringify({ result: "read", game: game }));
+                        response.write({ result: "read", game: game });
+                        response.end();
+                        return [2 /*return*/];
+                }
             });
         });
     };

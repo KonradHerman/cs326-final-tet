@@ -1,6 +1,5 @@
 const url = "https://tet326.herokuapp.com/counter"; // NOTE NEW URL
 
-
 function gameCreate() {
 	(async () => {
 		//when creating a game, input id is "gamename"
@@ -38,11 +37,7 @@ function gameReadAll() {
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
 				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
-					'<option id="' +
-					element.name +
-					'">' +
-					element.name +
-					"</option>";
+					'<option id="' + element.name + '">' + element.name + "</option>";
 			}
 		} else {
 			console.log("failure to read all");
@@ -56,7 +51,7 @@ function userRead() {
 		let userName = "konrad";
 		// ^^^^^^^
 		const newURL = url + "/users/read";
-		const data = { name : userName };
+		const data = { name: userName };
 		console.log("userRead: fetching " + newURL);
 		const resp = await postData(newURL, data);
 		console.log(resp);
@@ -65,7 +60,6 @@ function userRead() {
 		if (j["result"] !== "error") {
 			for (const element of j["games"]) {
 				// document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
-
 			}
 		} else {
 			console.log("failure to read all");
@@ -141,7 +135,13 @@ function userCreate() {
 		let password2 = document.getElementById("password2").value;
 		let zip = "01002";
 		let img = "no img";
-		const data = { name: userName, email: email, password: password1, img: img, zip: zip };
+		const data = {
+			name: userName,
+			email: email,
+			password: password1,
+			img: img,
+			zip: zip,
+		};
 		const newURL = url + "/users/create";
 		console.log("logging in: fetching");
 		console.log(newURL);
@@ -161,14 +161,13 @@ function userCreate() {
 function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
-	if(password1 === password2) {
-		document.getElementById("password-match-output").innerHTML += 
-		'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+	if (password1 === password2) {
+		document.getElementById("password-match-output").innerHTML +=
+			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
 		return false;
 	}
 	return true;
 }
-
 
 function userLogin() {
 	(async () => {
@@ -187,13 +186,11 @@ function userLogin() {
 			if (j["result"] == "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
-			}
-			else {
+			} else {
 				let out = userName + " logged in";
 				console.log(out);
 			}
-		}
-		else {
+		} else {
 			let out = userName + " was unable to login";
 			console.log(out);
 		}
@@ -232,4 +229,39 @@ async function postData(url, data) {
 		body: JSON.stringify(data),
 	});
 	return resp;
+}
+function usersSearchOwn() {
+	(async () => {
+		let drop = document.getElementById("selectGame");
+		let gameName = drop.options[drop.selectedIndex].id;
+		const newURL = url + "/games/read";
+		const data = { name: gameName };
+		console.log("gameRead: fetching " + gameName);
+		const resp = await postData(newURL, data);
+		const j = resp.json();
+		console.log(JSON.stringify(j));
+		if (j["result"] !== "error") {
+			console.log("game read successfully");
+		} else {
+			console.log("failure reading");
+		}
+	})();
+}
+function usersSearchWant() {
+	(async () => {
+		const newURL = url + "/user/add/want";
+		console.log("gameReadAll: fetching " + newURL);
+		const resp = await postData(newURL);
+		console.log(resp);
+		const j = await resp.json();
+		console.log(JSON.stringify(j));
+		if (j["result"] !== "error") {
+			for (const element of j["games"]) {
+				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
+					'<option id="' + element.name + '">' + element.name + "</option>";
+			}
+		} else {
+			console.log("failure to read all");
+		}
+	})();
 }
