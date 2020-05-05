@@ -247,12 +247,12 @@ async function usersSearch() {
 		console.log(resp);
 		let j = await resp.json();
 		let game = JSON.parse(j.game);
-	
+
 		j = await resp.json();
-		const getOwnEmailArray = (async () => {
+		const getOwnEmailArray = async () => {
 			let str = [];
 			for (const i of game.own) {
-				str.push(i)
+				str.push(i);
 			}
 			newURL = url + "/users/read/emails";
 			data = { names: str };
@@ -261,13 +261,12 @@ async function usersSearch() {
 			j = await resp.json();
 			emailArray = JSON.parse(j.game);
 			let ans = "";
-			for (let i = 0; i < emailArray.length; ++i)
-			{
+			for (let i = 0; i < emailArray.length; ++i) {
 				ans += str[i] + " " + emailArray[i];
-				}
+			}
 
 			return ans;
-		};)
+		};
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML =
 				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
