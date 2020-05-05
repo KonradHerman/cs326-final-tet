@@ -239,14 +239,14 @@ export class MyServer {
 			const hashedPassword = await bcrypt.hash(password, 10);
 			await this.users.add(
 				'{"name":"' +
-					name +
-					'","email":"' +
-					email +
-					'","password":"' +
-					hashedPassword +
-					'","img":"none","zip":"' +
-					zip +
-					'","own":[],"want":[]}'
+				name +
+				'","email":"' +
+				email +
+				'","password":"' +
+				hashedPassword +
+				'","img":"none","zip":"' +
+				zip +
+				'","own":[],"want":[]}'
 			);
 			response.write(JSON.stringify({ result: "created", name: name }));
 			response.redirect("html/index.html");
@@ -310,13 +310,13 @@ export class MyServer {
 		response.end();
 	}
 
-	public removeItem(arr, value): Promise<any[]> {
-		let index = arr.indexOf(value);
-		if (index > -1) {
-			arr.splice(index, 1);
-		}
-		return arr;
-	}
+	// public removeItem(arr, value): Promise<any[]> {
+	// 	let index = arr.indexOf(value);
+	// 	if (index > -1) {
+	// 		arr.splice(index, 1);
+	// 	}
+	// 	return arr;
+	// }
 
 	public async deleteUser(id: number, response): Promise<void> {
 		//await this.theDatabase.del(name);
