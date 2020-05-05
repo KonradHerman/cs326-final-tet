@@ -254,7 +254,7 @@ function usersSearch() {
 			return sum;
 		};
 		if (j["result"] !== "error") {
-			document.getElementById("searchuseroutput").innerHTML +=
+			document.getElementById("searchuseroutput").innerHTML =
 				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
 				game.name +
 				'</h5><small>Editor\'s Choice</small></div><p class="mb-1">' +
