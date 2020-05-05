@@ -91,7 +91,7 @@ export class MyServer {
 		await this.loginUser(request.body.name, request.body.password, response);
 	}
 	private async getEmailsHandler(request, response): Promise<void> {
-		await this.getEmails(request, response);
+		await this.getEmails(request.body.names, response);
 	}
 
 	private async errorHandler(request, response, next): Promise<void> {
