@@ -259,7 +259,7 @@ async function usersSearch() {
 			console.log("emailRead: fetching " + str);
 			resp = await postData(newURL, data);
 			j = await resp.json();
-			emailArray = JSON.parse(j.game);
+			emailArray = JSON.parse(j.users);
 			let ans = "";
 			for (let i = 0; i < emailArray.length; ++i) {
 				ans += str[i] + " " + emailArray[i];
