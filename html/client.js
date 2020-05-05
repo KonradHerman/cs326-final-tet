@@ -151,11 +151,15 @@ function userCreate() {
 				let out = "username already in use";
 				console.log(out);
 				document.getElementById("badUsername").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
+				document.getElementById("badUsername").style.color = "red";
 			}
 			else if(j["result"] === "email in use") {
 				let out = "email already in use";
 				console.log(out);
+				document.getElementById("badUsername").innerHTML = "username available!";
+				document.getElementById("badUsername").style.color = "green";
 				document.getElementById("badEmail").innerHTML = "THE EMAIL YOU ENTERED IS ALREADY IN USE";
+				document.getElementById("badEmail").style.color = "red";
 			}
 			else {
 				//Success
@@ -174,11 +178,15 @@ function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
 	if (password1 !== password2) {
-		document.getElementById("password-match-output").innerHTML =
-			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+		document.getElementById("password-match-output").innerHTML = "PASSWORDS DO NOT MATCH";
+		document.getElementById("password-match-output").style.color = "red";
 		return false;
 	}
-	return true;
+	else {
+		document.getElementById("password-match-output").innerHTML = "passwords match!";
+		document.getElementById("password-match-output").style.color = "green";
+		return true;
+	}
 }
 
 function userLogin() {
