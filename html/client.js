@@ -145,22 +145,9 @@ function userCreate() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			if(j["result"] === "username in use") {
-				let out = "username already in use";
-				console.log(out);
-				document.getElementById("usernameLabel").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
-			}
-			else if(j["result"] === "email in use") {
-				let out = "email already in use";
-				console.log(out);
-				document.getElementById("badEmail").innerHTML = "THE EMAIL YOU ENTERED IS ALREADY IN USE";
-			}
-			else {
-				//Success
-				let out = userName + " created";
-				console.log(out);
-				window.location.href = "https://tet326.herokuapp.com"
-			}
+			//Success
+			let out = userName + " created";
+			console.log(out);
 		} else {
 			let out = userName + " could not be created, an error has occured";
 			console.log(out);
@@ -171,8 +158,8 @@ function userCreate() {
 function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
-	if (password1 !== password2) {
-		document.getElementById("password-match-output").innerHTML =
+	if (password1 === password2) {
+		document.getElementById("password-match-output").innerHTML +=
 			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
 		return false;
 	}
@@ -243,36 +230,34 @@ async function postData(url, data) {
 	});
 	return resp;
 }
-function usersSearchOwn() {
+function usersSearch() {
 	(async () => {
+		//we need to change this element id based on the html page
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
 		const newURL = url + "/games/read";
 		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
-		const j = resp.json();
-		console.log(JSON.stringify(j));
-		if (j["result"] !== "error") {
-			console.log("game read successfully");
-		} else {
-			console.log("failure reading");
-		}
-	})();
-}
-function usersSearchWant() {
-	(async () => {
-		const newURL = url + "/user/add/want";
-		console.log("gameReadAll: fetching " + newURL);
-		const resp = await postData(newURL);
 		console.log(resp);
 		const j = await resp.json();
-		console.log(JSON.stringify(j));
+		console.log(j.game);
 		if (j["result"] !== "error") {
-			for (const element of j["games"]) {
-				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
-					'<option id="' + element.name + '">' + element.name + "</option>";
-			}
+			document.getElementById("searchuseroutput").innerHTML += (
+				<a
+					href="#"
+					class="list-group-item list-group-item-action flex-column align-items-start active"
+				>
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">List group item heading</h5>
+					</div>
+					<p class="mb-1">
+						Donec id elit non mi porta gravida at eget metus. Maecenas sed diam
+						eget risus varius blandit.
+					</p>
+					<small>Donec id elit non mi porta.</small>
+				</a>
+			);
 		} else {
 			console.log("failure to read all");
 		}
