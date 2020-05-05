@@ -1,5 +1,5 @@
 # How to Build our project
-- First you must compile the typescript to JS. using `tsc *.ts`
-in the `html` folder.
+- make a `.env` file containing `PASSWORD=<password>`
 - Then you need to deploy your server locally using
-`ts-node server-main.ts`
+`heroku local server-main.ts -p <port>`
+- You can connect to the site using `localhost:<post>`
