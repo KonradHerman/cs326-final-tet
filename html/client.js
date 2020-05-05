@@ -70,14 +70,16 @@ function userRead() {
 function gameRead() {
 	(async () => {
 		//we need to change this element id based on the html page
-		let gameName = document.getElementById("selected").value;
+		// let gameName = document.getElementById("selected").value;
+		let drop = document.getElementById("selectGame");
+		let gameName = drop.options[drop.selectedIndex].id;
 		const newURL = url + "/games/read";
 		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
-		console.log(resp);
 		const j = await resp.json();
-		console.log(JSON.stringify(j));
+		console.log(j.game);
+		console.log(JSON.parse(j.game));
 		if (j["result"] !== "error") {
 			console.log("game read successfully");
 			// for (const element of j["games"]) {

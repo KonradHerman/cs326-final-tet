@@ -63,14 +63,26 @@ export class Database {
 	}
 
 	public async getAll(): Promise<string | null> {
-		console.log(this.dbName);
 		let db = this.client.db(this.dbName);
-		console.log(this.collectionName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting all games");
 		const result = await collection.find().sort({name : 1}).toArray();
 		console.log(result);
 		console.log("getAll returned");
+		if (result) {
+			return result;
+		} else {
+			return null;
+		}
+	}
+
+	public async getSome(key: string, list : string[]): Promise<string | null> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("getting some");
+		const result = await collection.find({name: {$in: list}}).sort({name : 1}).toArray();
+		console.log(result);
+		console.log("getSome returned");
 		if (result) {
 			return result;
 		} else {
