@@ -404,6 +404,7 @@ var MyServer = /** @class */ (function () {
                     case 0:
                         user = this.users.get(name);
                         // const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
+                        console.log("console log works and the thing underneith is user");
                         console.log(user);
                         if (!(user == null)) return [3 /*break*/, 1];
                         // if user doesnt exist

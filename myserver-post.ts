@@ -264,6 +264,7 @@ export class MyServer {
 	): Promise<void> {
 		const user = this.users.get(name); // (!) waiting on get
 		// const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
+		console.log("console log works and the thing underneith is user");
 		console.log(user);
 		if (user == null) {
 			// if user doesnt exist
