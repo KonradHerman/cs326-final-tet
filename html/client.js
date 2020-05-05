@@ -248,7 +248,7 @@ function usersSearch() {
 		console.log(JSON.parse(j.game).name);
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML +=
-				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
 				JSON.parse(j.game).name +
 				'</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
 		} else {
