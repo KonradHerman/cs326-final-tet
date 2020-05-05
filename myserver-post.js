@@ -405,15 +405,15 @@ var MyServer = /** @class */ (function () {
                     case 0:
                         user = this.users.get(name);
                         // const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
-                        response.write(JSON.stringify({ result: "user output", user: user }));
-                        response.end();
+                        console.log("console log works and the thing underneith is user");
+                        console.log(user);
                         if (!(user == null)) return [3 /*break*/, 1];
                         // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         return [3 /*break*/, 4];
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, bcrypt.compare(password, user.password)];
+                        return [4 /*yield*/, bcrypt.compare(password, user["password"])];
                     case 2:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
