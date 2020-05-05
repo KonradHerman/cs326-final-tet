@@ -186,8 +186,12 @@ function userLogin() {
 			if (j["result"] == "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
+			} else if (j["result"] == "user output") {
+				let out = j["user"];
+				console.log(out);
 			} else {
 				let out = userName + " logged in";
+				window.location.href = j["url"];
 				console.log(out);
 			}
 		} else {
@@ -220,8 +224,7 @@ async function postData(url, data) {
 		method: "POST",
 		mode: "cors",
 		cache: "no-cache",
-		// credentials: "same-origin",
-		credentials: "omit",
+		credentials: "same-origin",
 		headers: {
 			"Content-Type": "application/json",
 		},
