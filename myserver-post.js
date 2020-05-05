@@ -306,12 +306,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var game;
             return __generator(this, function (_a) {
-                game = {
-                    name: "Azul",
-                    id: 12345,
-                    own: [90876, 27465],
-                    want: [16254, 26443]
-                };
+                game = this.games.get(name);
                 response.write(JSON.stringify({ result: "read", game: game }));
                 response.end();
                 return [2 /*return*/];
@@ -415,6 +410,7 @@ var MyServer = /** @class */ (function () {
                         if (_b.sent()) {
                             response.write(JSON.stringify({ result: "logged In" }));
                             response.write(JSON.stringify({ result: "redirect", url: "https://tet326.herokuapp.com/home.html" }));
+                            // heroku build me
                             response.end();
                         }
                         else {

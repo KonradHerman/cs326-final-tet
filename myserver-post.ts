@@ -271,6 +271,7 @@ export class MyServer {
 				if(await bcrypt.compare(password, hardcode)) {
 					response.write(JSON.stringify({ result: "logged In"}));
 					response.write(JSON.stringify({ result: "redirect", url: "https://tet326.herokuapp.com/home.html" }));
+					// heroku build me
 					response.end();
 				} else {
 					response.write(JSON.stringify({ result: "Incorrect Password" }));
