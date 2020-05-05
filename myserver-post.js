@@ -336,10 +336,10 @@ var MyServer = /** @class */ (function () {
             var userArray;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.games.getSome(names)];
+                    case 0: return [4 /*yield*/, this.users.getSome(names)];
                     case 1:
                         userArray = _a.sent();
-                        response.write(JSON.stringify({ result: "read", users: userArray }));
+                        response.write({ result: "read", users: userArray });
                         response.end();
                         return [2 /*return*/];
                 }
