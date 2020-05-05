@@ -188,6 +188,10 @@ function userLogin() {
 				let out = "Incorrect Password ";
 				console.log(out);
 			}
+			else if (j["result"] == "user output") {
+				let out = j["user"];
+				console.log(out);
+			}
 			else {
 				let out = userName + " logged in";
 				window.location.href = j["url"];
