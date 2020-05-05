@@ -377,14 +377,14 @@ var MyServer = /** @class */ (function () {
                         console.log(userName);
                         if (!(userName !== null)) return [3 /*break*/, 3];
                         // if username doesn't exist
-                        console.log('response to be sent ot user: {result: "username in use"');
+                        console.log('response to be sent ot user: {result: "username in use"}');
                         response.write(JSON.stringify({ result: "username in use" }));
                         response.end();
                         return [3 /*break*/, 8];
                     case 3:
                         if (!(emailUser !== null)) return [3 /*break*/, 4];
                         // if email doesn't exist
-                        console.log('response to be sent ot user: {result: "email in use"');
+                        console.log('response to be sent ot user: {result: "email in use"}');
                         response.write(JSON.stringify({ result: "email in use" }));
                         response.end();
                         return [3 /*break*/, 8];

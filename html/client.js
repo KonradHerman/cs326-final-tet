@@ -144,18 +144,20 @@ function userCreate() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			if(j["result"] == "username in use") {
+			if(j["result"] === "username in use") {
 				let out = "username already in use";
 				console.log(out);
 			}
-			if(j["result"] == "email in use") {
+			else if(j["result"] === "email in use") {
 				let out = "email already in use";
 				console.log(out);
 			}
-			//Success
-			let out = userName + " created";
-			console.log(out);
-			window.location.href = "https://tet326.herokuapp.com"
+			else {
+				//Success
+				let out = userName + " created";
+				console.log(out);
+				window.location.href = "https://tet326.herokuapp.com"
+			}
 		} else {
 			let out = userName + " could not be created, an error has occured";
 			console.log(out);
