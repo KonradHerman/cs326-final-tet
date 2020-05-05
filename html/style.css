@@ -2,6 +2,10 @@
 	background-color: #ff5722;
 	color: white;
 }
+.inverse {
+	background-color: white;
+	color: #ff5722;
+}
 .nav-dropdown -menu > li > a:hover {
 	background-color: #ff8a65;
 	background-image: none;
