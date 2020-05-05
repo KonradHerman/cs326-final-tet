@@ -401,19 +401,20 @@ var MyServer = /** @class */ (function () {
             var user, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0:
-                        user = this.users.get(name);
+                    case 0: return [4 /*yield*/, this.users.get(name)];
+                    case 1:
+                        user = _b.sent();
                         // const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
                         console.log("console log works and the thing underneith is user");
                         console.log(user);
-                        if (!(user == null)) return [3 /*break*/, 1];
+                        if (!(user == null)) return [3 /*break*/, 2];
                         // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
-                        return [3 /*break*/, 4];
-                    case 1:
-                        _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, bcrypt.compare(password, user["password"])];
+                        return [3 /*break*/, 5];
                     case 2:
+                        _b.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, bcrypt.compare(password, user.password)];
+                    case 3:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
                             response.write(JSON.stringify({
@@ -427,13 +428,13 @@ var MyServer = /** @class */ (function () {
                             response.write(JSON.stringify({ result: "Incorrect Password" }));
                             response.end();
                         }
-                        return [3 /*break*/, 4];
-                    case 3:
+                        return [3 /*break*/, 5];
+                    case 4:
                         _a = _b.sent();
                         response.write(JSON.stringify({ result: "caught error" }));
                         response.end();
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
                 }
             });
         });

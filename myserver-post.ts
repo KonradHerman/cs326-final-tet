@@ -262,7 +262,7 @@ export class MyServer {
 		password: string,
 		response
 	): Promise<void> {
-		const user = this.users.get(name); // (!) waiting on get
+		const user = await this.users.get(name); // (!) waiting on get
 		// const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
 		console.log("console log works and the thing underneith is user");
 		console.log(user);
@@ -272,7 +272,7 @@ export class MyServer {
 		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
-				if (await bcrypt.compare(password, user["password"])) {
+				if (await bcrypt.compare(password, user.password)) {
 					response.write(
 						JSON.stringify({
 							result: "redirect",
