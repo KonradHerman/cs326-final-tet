@@ -262,7 +262,7 @@ async function usersSearch() {
 			emailArray = JSON.parse(j.users);
 			let ans = "";
 			for (let i = 0; i < emailArray.length; ++i) {
-				ans += str[i] + " " + emailArray[i];
+				ans += str[i] + " " + emailArray[i].email;
 			}
 
 			return ans;
