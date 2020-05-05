@@ -183,10 +183,10 @@ function userLogin() {
 		console.log(j);
 		if (j["result"] !== "caught error") {
 			//Success
-			if (j["result"] == "Incorrect Password") {
+			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
-			} else if (j["result"] == "user output") {
+			} else if (j["result"] === "user output") {
 				let out = j["user"];
 				console.log(out);
 			} else {

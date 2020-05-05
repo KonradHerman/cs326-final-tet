@@ -264,9 +264,10 @@ export class MyServer {
 	): Promise<void> {
 		const user = this.users.get(name); // (!) waiting on get
 		// const hardcode = "$2b$10$yTmyWxD1cDNE1z2Th7Ja3e3yFzGQjX1/TJ04xjVNvMmbFLKjxteLS"; // hardcoded password
-		return response.write(
+		response.write(
 			JSON.stringify({ result: "user output", user: user })
 		);
+		response.end();
 		if (user == null) {
 			// if user doesnt exist
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
