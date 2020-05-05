@@ -179,15 +179,19 @@ function userLogin() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);
+		document.getElementById("login-output").innerHTML =
+			"your username or password is incorrect<br>please try again";
 		if (j["result"] !== "caught error") {
-			//Success
 			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
 				console.log(out);
-			} else if (j["result"] === "user output") {
-				let out = j["user"];
+			} else if (j["result"] === "user not found") {
+				let out = "Username is incorrect";
 				console.log(out);
 			} else {
+				// Success
+				document.getElementById("login-output").innerHTML = "Signing you in!";
+				document.getElementById("login-output").style.color = "green";
 				let out = userName + " logged in";
 				window.location.href = j["url"];
 				console.log(out);
@@ -231,36 +235,32 @@ async function postData(url, data) {
 	});
 	return resp;
 }
-function usersSearchOwn() {
+function usersSearch() {
 	(async () => {
+		//we need to change this element id based on the html page
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
 		const newURL = url + "/games/read";
 		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
-		const j = resp.json();
-		console.log(JSON.stringify(j));
-		if (j["result"] !== "error") {
-			console.log("game read successfully");
-		} else {
-			console.log("failure reading");
-		}
-	})();
-}
-function usersSearchWant() {
-	(async () => {
-		const newURL = url + "/user/add/want";
-		console.log("gameReadAll: fetching " + newURL);
-		const resp = await postData(newURL);
 		console.log(resp);
 		const j = await resp.json();
-		console.log(JSON.stringify(j));
-		if (j["result"] !== "error") {
-			for (const element of j["games"]) {
-				document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
-					'<option id="' + element.name + '">' + element.name + "</option>";
+		let game = JSON.parse(j.game);
+		const getOwnArray = () => {
+			sum = "";
+			for (const i of game.own) {
+				sum += i;
 			}
+			return sum;
+		};
+		if (j["result"] !== "error") {
+			document.getElementById("searchuseroutput").innerHTML +=
+				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				game.name +
+				'</h5><small>Editor\'s Choice</small></div><p class="mb-1">' +
+				getOwnArray() +
+				"</a>";
 		} else {
 			console.log("failure to read all");
 		}
