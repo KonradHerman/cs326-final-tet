@@ -411,7 +411,7 @@ var MyServer = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, bcrypt.compare(password, user.password)];
+                        return [4 /*yield*/, bcrypt.compare(password, user["password"])];
                     case 2:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
@@ -457,13 +457,13 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.removeItem = function (arr, value) {
-        var index = arr.indexOf(value);
-        if (index > -1) {
-            arr.splice(index, 1);
-        }
-        return arr;
-    };
+    // public removeItem(arr, value): Promise<any[]> {
+    // 	let index = arr.indexOf(value);
+    // 	if (index > -1) {
+    // 		arr.splice(index, 1);
+    // 	}
+    // 	return arr;
+    // }
     MyServer.prototype.deleteUser = function (id, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

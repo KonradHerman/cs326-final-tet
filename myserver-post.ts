@@ -271,7 +271,7 @@ export class MyServer {
 		} else {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
-				if (await bcrypt.compare(password, user.password)) {
+				if (await bcrypt.compare(password, user["password"])) {
 					response.write(
 						JSON.stringify({
 							result: "redirect",
