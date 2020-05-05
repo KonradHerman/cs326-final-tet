@@ -50,6 +50,29 @@ function gameReadAll() {
 	})();
 }
 
+function userRead() {
+	(async () => {
+		//This needs to be changed if we get auth working.
+		let userName = "konrad";
+		// ^^^^^^^
+		const newURL = url + "/users/read";
+		const data = { name : userName };
+		console.log("userRead: fetching " + newURL);
+		const resp = await postData(newURL, data);
+		console.log(resp);
+		const j = await resp.json();
+		console.log(JSON.stringify(j));
+		if (j["result"] !== "error") {
+			for (const element of j["games"]) {
+				// document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
+
+			}
+		} else {
+			console.log("failure to read all");
+		}
+	})();
+}
+
 function gameRead() {
 	(async () => {
 		//we need to change this element id based on the html page
@@ -140,7 +163,7 @@ function passwordMatcher() {
 	let password2 = document.getElementById("password2").value;
 	if(password1 === password2) {
 		document.getElementById("password-match-output").innerHTML += 
-		'<p class="text-primary" style= "color: red;">Passwordtscs do not match</p><br>';
+		'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
 		return false;
 	}
 	return true;
