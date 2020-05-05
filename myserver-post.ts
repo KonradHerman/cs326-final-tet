@@ -198,8 +198,8 @@ export class MyServer {
 	}
 
 	public async getEmails(names: string[], response): Promise<void> {
-		let userArray = await this.games.getSome(names);
-		response.write(JSON.stringify({ result: "read", users: userArray }));
+		let userArray = await this.users.getSome(names);
+		response.write({ result: "read", users: userArray });
 		response.end();
 	}
 	public async updateGame(
