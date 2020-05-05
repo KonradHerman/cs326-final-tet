@@ -235,9 +235,9 @@ async function postData(url, data) {
 	});
 	return resp;
 }
-async function usersSearch() {
+function usersSearch() {
 	(async () => {
-		//we need to change this element id based on the html page
+		//let userID = document.getElementById("userID").value;
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
 		let newURL = url + "/games/read";
@@ -277,5 +277,5 @@ async function usersSearch() {
 		} else {
 			console.log("failure to read all");
 		}
-	});
+	})();
 }
