@@ -187,12 +187,7 @@ export class MyServer {
 	}
 
 	public async readGame(name: string, response): Promise<void> {
-		let game: object = {
-			name: "Azul",
-			id: 12345,
-			own: [90876, 27465],
-			want: [16254, 26443],
-		};
+		let game = this.games.get(name);
 		response.write(JSON.stringify({ result: "read", game: game }));
 		response.end();
 	}
