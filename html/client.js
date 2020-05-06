@@ -70,15 +70,16 @@ function userRead() {
 function gameRead() {
 	(async () => {
 		//we need to change this element id based on the html page
+		// let gameName = document.getElementById("selected").value;
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
 		const newURL = url + "/games/read";
 		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
-		console.log(resp);
 		const j = await resp.json();
 		console.log(j.game);
+		console.log(JSON.parse(j.game));
 		if (j["result"] !== "error") {
 			console.log("game read successfully");
 			// for (const element of j["games"]) {
@@ -178,7 +179,8 @@ function userLogin() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);
-		document.getElementById("login-output").innerHTML = "your username or password is incorrect<br>please try again";
+		document.getElementById("login-output").innerHTML =
+			"your username or password is incorrect<br>please try again";
 		if (j["result"] !== "caught error") {
 			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
@@ -235,19 +237,42 @@ async function postData(url, data) {
 }
 function usersSearch() {
 	(async () => {
-		//we need to change this element id based on the html page
+		//let userID = document.getElementById("userID").value;
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
-		const newURL = url + "/games/read";
-		const data = { name: gameName };
+		let newURL = url + "/games/read";
+		let data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
-		const resp = await postData(newURL, data);
+		let resp = await postData(newURL, data);
 		console.log(resp);
-		const j = await resp.json();
-		console.log(j.game);
+		let j = await resp.json();
+		let game = JSON.parse(j.game);
+
+		j = await resp.json();
+		const getEmails = async () => {
+			let str = [];
+			for (const i of game.own) {
+				str.push(i);
+			}
+			newURL = url + "/users/read/emails";
+			data = { names: str };
+			console.log("emailRead: fetching ");
+			resp = await postData(newURL, data);
+			j = await resp.json();
+			emailArray = JSON.parse(j.users);
+			let ans = "";
+			for (let i = 0; i < emailArray.length; ++i) {
+				ans += str[i] + " " + emailArray[i].email;
+			}
+			return ans;
+		};
 		if (j["result"] !== "error") {
-			document.getElementById("searchuseroutput").innerHTML +=
-				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
+			document.getElementById("searchuseroutput").innerHTML =
+				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				game.name +
+				'</h5><small>Editor\'s Choice</small></div><p class="mb-1">' +
+				(await getEmails()) +
+				"</a>";
 		} else {
 			console.log("failure to read all");
 		}

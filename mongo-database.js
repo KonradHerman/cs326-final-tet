@@ -44,7 +44,9 @@ var Database = /** @class */ (function () {
         // Assign password to uri
         this.password = process.env.PASSWORD;
         this.uri =
-            "mongodb+srv://konrad:" + this.password + "@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+            "mongodb+srv://konrad:" +
+                this.password +
+                "@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
         this.collectionName = collectionName;
         this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
         (function () { return __awaiter(_this, void 0, void 0, function () {
@@ -81,8 +83,9 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("push: value = " + value);
-                result = key === "own" ? collection.updateOne({ "name": name }, { $addToSet: { own: value } }) :
-                    collection.updateOne({ "name": name }, { $addToSet: { want: value } });
+                result = key === "own"
+                    ? collection.updateOne({ name: name }, { $addToSet: { own: value } })
+                    : collection.updateOne({ name: name }, { $addToSet: { want: value } });
                 console.log("result = " + JSON.stringify(result));
                 return [2 /*return*/];
             });
@@ -95,8 +98,9 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("pull: value = " + value);
-                result = key === "own" ? collection.updateOne({ "name": name }, { $pull: { own: value } }) :
-                    collection.updateOne({ "name": name }, { $pull: { want: value } });
+                result = key === "own"
+                    ? collection.updateOne({ name: name }, { $pull: { own: value } })
+                    : collection.updateOne({ name: name }, { $pull: { want: value } });
                 console.log("result = " + JSON.stringify(result));
                 return [2 /*return*/];
             });
@@ -111,7 +115,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ "name": key })];
+                        return [4 /*yield*/, collection.findOne({ name: key })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));
@@ -135,7 +139,7 @@ var Database = /** @class */ (function () {
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
                         console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ "email": key })];
+                        return [4 /*yield*/, collection.findOne({ email: key })];
                     case 1:
                         result = _a.sent();
                         console.log("get: returned " + JSON.stringify(result));
@@ -156,9 +160,7 @@ var Database = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(this.dbName);
                         db = this.client.db(this.dbName);
-                        console.log(this.collectionName);
                         collection = db.collection(this.collectionName);
                         console.log("getting all games");
                         return [4 /*yield*/, collection.find().sort({ name: 1 }).toArray()];
@@ -166,6 +168,34 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         console.log(result);
                         console.log("getAll returned");
+                        if (result) {
+                            return [2 /*return*/, result];
+                        }
+                        else {
+                            return [2 /*return*/, null];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.getSome = function (key, list) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("getting some");
+                        return [4 /*yield*/, collection
+                                .find({ name: { $in: list } })
+                                .sort({ name: 1 })
+                                .toArray()];
+                    case 1:
+                        result = _a.sent();
+                        console.log(result);
+                        console.log("getSome returned");
                         if (result) {
                             return [2 /*return*/, result];
                         }
