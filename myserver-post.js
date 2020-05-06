@@ -99,7 +99,6 @@ var MyServer = /** @class */ (function () {
         this.router.post("/users/create", this.createUserHandler.bind(this));
         this.router.post("/users/login", this.loginUserHandler.bind(this));
         this.router.post("/users/read", this.readUserHandler.bind(this));
-        this.router.post("/users/read/emails", this.getEmailsHandler.bind(this));
         this.router.post("/users/update", this.updateUserHandler.bind(this));
         this.router.post("/users/delete", [
             // this.errorHandler.bind(this),
@@ -132,18 +131,6 @@ var MyServer = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loginUser(request.body.name, request.body.password, response)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MyServer.prototype.getEmailsHandler = function (request, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getEmails(request.body.names, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -324,22 +311,8 @@ var MyServer = /** @class */ (function () {
                     case 1:
                         game = _a.sent();
                         console.log(game);
-                        response.write({ result: "read", game: game });
-                        response.end();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MyServer.prototype.getEmails = function (names, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            var userArray;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.users.getSome(names)];
-                    case 1:
-                        userArray = _a.sent();
-                        response.write(JSON.stringify({ result: "read", users: userArray }));
+                        console.log(JSON.stringify({ result: "read", game: game }));
+                        response.write(JSON.stringify({ result: "read", game: game }));
                         response.end();
                         return [2 /*return*/];
                 }
