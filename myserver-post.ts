@@ -179,9 +179,11 @@ export class MyServer {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
 		console.log("start");
+		let firstLetter = name.charAt(0);
 		let formatName = name.toLocaleLowerCase();
-		formatName.charAt(0).toUpperCase();
-		let gameAlready = await this.games.isFound(name);
+		formatName = formatName.substr(1);
+		formatName = firstLetter.toUpperCase() + formatName;
+		let gameAlready = await this.games.isFound(formatName);
 		if(!gameAlready) {
 			await this.games.add('{"name":"' + formatName + '","own":[],"want":[]}');
 			response.write(JSON.stringify({ result: "created", name: name }));
@@ -350,7 +352,7 @@ export class MyServer {
 		response.write(JSON.stringify({ result: "read", users: users }));
 		response.end();
 	}
-	
+
 	public async updateUser(
 		id: number,
 		img: string,
