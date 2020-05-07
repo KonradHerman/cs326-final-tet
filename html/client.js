@@ -293,12 +293,10 @@ function usersSearch() {
 		console.log(wanters.users);
 
 		if (j["result"] !== "error") {
-			document.getElementById(
-				"searchuseroutput"
-			).innerHTML = document.getElementById("searchuseroutput").innerHTML =
-				'<div class="primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+			document.getElementById("searchuseroutput").innerHTML =
+				'<div class="primary"><h5 class="mb-1">' +
 				j.game.name +
-				'</h5></div><ul class="list-group col" id="owners"></ul><ul class="list-group col" id="wanters"></ul></div>';
+				'</h5><ul class="list-group col text-primary" id="owners"></ul><ul class="list-group col text-primary" id="wanters"></ul></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
