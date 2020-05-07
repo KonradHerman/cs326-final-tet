@@ -18,10 +18,12 @@ function gameCreate() {
 				document.getElementById("gameCreate-output").innerHTML =
 				'<p class="text-primary">' + out + "</p><br>";
 			}
-			let out = gameName + "created";
-			document.getElementById("gameCreate-output").innerHTML =
+			else {
+				let out = gameName + "created";
+				document.getElementById("gameCreate-output").innerHTML =
 				'<p class="text-primary">' + j.name + "</p><br>";
-			console.log(out);
+				console.log(out);
+			}
 		} else {
 			//error
 			let out = gameName + "not created";

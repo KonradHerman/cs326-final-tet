@@ -73,6 +73,7 @@
 					placeholder="Enter Game Name">
 			</div>
 			<button type="submit" onclick="gameCreate()" class="btn primary">Submit</button>
+			<div id="gameCreate-output"></div> <!-- (1) output location for gameCreate() response -->
 			<!-- (2) Changed the button to an a tag to link to the game create output-->
 			<div class="form-group row">
 				<label for="userid" class="col-sm-2 col-form-label">Enter UserID:</label>
@@ -100,7 +101,6 @@
 				</div>
 
 			</div>
-			<div id="gameCreate-output"></div> <!-- (1) output location for gameCreate() response -->
 		</div>
 		<!--	<div class="container nav" style="width: 70%">-->
 		<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
