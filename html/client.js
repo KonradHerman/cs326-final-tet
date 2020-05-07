@@ -376,7 +376,8 @@ function endSession() {
 		} else {
 			window.setTimeout(function () {
 				sessionStorage.setItem("sessionId", "-1");
-			}, 10000);
+				window.location.href = "https://tet326.herokuapp.com";
+			}, 3600000);
 		}
 	})();
 }
