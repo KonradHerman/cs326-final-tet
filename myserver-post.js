@@ -531,7 +531,7 @@ var MyServer = /** @class */ (function () {
                             response.write(JSON.stringify({ result: "user not found" })); // some other response?
                             response.end();
                         }
-                        if (!(user.sessionId === -1)) return [3 /*break*/, 2];
+                        if (!(user.sessionId === "-1")) return [3 /*break*/, 2];
                         response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
                         response.end();
                         return [3 /*break*/, 5];

@@ -372,7 +372,7 @@ export class MyServer {
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
 			response.end();
 		}
-		if (user.sessionId === -1){
+		if (user.sessionId === "-1"){
 			response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
 			response.end();
 		}
