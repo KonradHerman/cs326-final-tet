@@ -44,6 +44,7 @@
 						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
 							style="color:white">Username
 					</a>
+					<script>fillUser();</script>
 					<ul class="dropdown-menu primary" id="nav-dropdown">
 						<li><a href="profile.html">profile</a></li>
 						<li><a href="#">settings</a></li>
@@ -57,7 +58,7 @@
 	<div class="container nav bg-primary">
 		<script>console.log(sessionStorage.getItem("username"));</script>
 		<script>console.log(sessionStorage.getItem("sessionId"));</script>
-		<script>checkSession();</script>
+		<script>window.setInterval(await checkSession(), 5000);</script>
 		<ul class="nav navbar-nav bg-primary">
 			<li>
 				<h3 class="text-light">Welcome, User <small><a class="text-light" href="profile.html">edit profile</a></small>

@@ -332,3 +332,7 @@ function checkSession() {
 		}
 	})();
 }
+
+function fillUser(){
+	document.getElementById("navbarDropdownMenuLink").innerHTML = sessionStorage.getItem("username");
+}
