@@ -55,15 +55,16 @@ function userRead() {
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			let own = document.getElementById("ownGames").innerHTML;
+			let own;
 			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j.user.own) {
 				console.log(element);
-				own += "<tr>\n<td>" + element + "</td>\n</tr>";
+				own += "<tr><td>" + element + "</td></tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
+			document.getElementById("ownGames").innerHTML += own;
 		} else {
-			console.log("failure to read all");
+			console.log("failure to read");
 		}
 	})();
 }
