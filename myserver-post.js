@@ -515,10 +515,14 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var users;
             return __generator(this, function (_a) {
-                users = this.users.getSome(names);
-                response.write(JSON.stringify({ result: "read", users: users }));
-                response.end();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.users.getSome(names)];
+                    case 1:
+                        users = _a.sent();
+                        response.write(JSON.stringify({ result: "read", users: users }));
+                        response.end();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -562,7 +566,7 @@ var MyServer = /** @class */ (function () {
                             response.end();
                         }
                         console.log(user.sessionId);
-                        if (!(user.sessionId === "-1")) return [3 /*break*/, 2];
+                        if (!(user.sessionId == -1)) return [3 /*break*/, 2];
                         response.write(JSON.stringify({ result: "user not logged in" }));
                         response.end();
                         return [3 /*break*/, 5];
