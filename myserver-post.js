@@ -489,7 +489,7 @@ var MyServer = /** @class */ (function () {
             var user;
             return __generator(this, function (_a) {
                 user = this.users.get(name);
-                response.write(JSON.stringify({ result: "read", user: user }));
+                response.write(JSON.stringify({ result: "read", user: JSON.stringify(user) }));
                 response.end();
                 return [2 /*return*/];
             });
