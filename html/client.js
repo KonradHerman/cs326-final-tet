@@ -301,12 +301,10 @@ function usersSearch() {
 		console.log(wanters.users);
 
 		if (j["result"] !== "error") {
-			document.getElementById(
-				"searchuseroutput"
-			).innerHTML = document.getElementById("searchuseroutput").innerHTML =
-				'<div class="primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+			document.getElementById("searchuseroutput").innerHTML =
+				'<h5 class="mb-1">' +
 				j.game.name +
-				'</h5></div><ul class="list-group col" id="owners"></ul><ul class="list-group col" id="wanters"></ul></div>';
+				'</h5><ul class="list-group col-xs-6 text-primary" id="owners"></ul><ul class="list-group col-xs-6 text-primary" id="wanters"></ul><br>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
@@ -325,7 +323,7 @@ function checkSession() {
 	(async () => {
 		let username = sessionStorage.getItem("username"); // this is already public
 		let sessionId = sessionStorage.getItem("sessionId");
-		if (sessionId === null) {
+		if (sessionId == null) {
 			document.body.innerHTML = "<h1>Your Session has Expired</h1>";
 			window.setTimeout(function () {
 				window.location.href = "https://tet326.herokuapp.com";
@@ -359,6 +357,27 @@ function checkSession() {
 				}, 3000);
 			}
 		}
+	})();
+}
+
+function sessionRunner(){
+	window.setInterval(checkSession(), 10000);
+	window.setTimeout(endSession(), 20000);
+}
+
+function endSession(){
+	(async () => {
+		let sessionId = sessionStorage.getItem("sessionId");
+		if (sessionId == null) {
+			document.body.innerHTML = "<h1>Your Session has Expired</h1>";
+			window.setTimeout(function () {
+				window.location.href = "https://tet326.herokuapp.com";
+			}, 3000);
+		}
+		else{
+			sessionStorage.setItem("sessionId", "-1");
+			sessionStorage.clear();
+		} 
 	})();
 }
 
