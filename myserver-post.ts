@@ -69,8 +69,8 @@ export class MyServer {
 		this.router.post("/users/create", this.createUserHandler.bind(this));
 		this.router.post("/users/login", this.loginUserHandler.bind(this));
 		this.router.post("/users/read", this.readUserHandler.bind(this));
-		this.router.post("/users/read/emails", this.getEmailsHandler.bind(this));
 		this.router.post("/users/update", this.updateUserHandler.bind(this));
+		this.router.post("/users/session", this.sessionUserHandler.bind(this));
 		this.router.post("/users/delete", [
 			// this.errorHandler.bind(this),
 			this.deleteHandler.bind(this),
@@ -89,9 +89,6 @@ export class MyServer {
 
 	private async loginUserHandler(request, response): Promise<void> {
 		await this.loginUser(request.body.name, request.body.password, response);
-	}
-	private async getEmailsHandler(request, response): Promise<void> {
-		await this.getEmails(request.body.names, response);
 	}
 
 	private async errorHandler(request, response, next): Promise<void> {
@@ -130,6 +127,14 @@ export class MyServer {
 		);
 	}
 
+	private async sessionUserHandler(request, response): Promise<void> {
+		await this.sessionUser(
+			request.body.username,
+			request.body.sessionId,
+			response
+		);
+	}
+
 	private async createUserHandler(request, response): Promise<void> {
 		await this.createUser(
 			request.body.name,
@@ -137,6 +142,7 @@ export class MyServer {
 			request.body.password,
 			request.body.img,
 			request.body.zip,
+			request.body.sessionId,
 			response
 		);
 	}
@@ -193,16 +199,11 @@ export class MyServer {
 	public async readGame(name: string, response): Promise<void> {
 		let game = await this.games.get(name);
 		console.log(game);
-		console.log("test");
-		response.write(JSON.stringify({ result: "read", game: JSON.stringify(game) }));
+		console.log(JSON.stringify({ result: "read", game: game }));
+		response.write(JSON.stringify({ result: "read", game: game }));
 		response.end();
 	}
 
-	public async getEmails(names: string[], response): Promise<void> {
-		let userArray = await this.users.getSome(names);
-		response.write(JSON.stringify({ result: "read", users: userArray }));
-		response.end();
-	}
 	public async updateGame(
 		game: string,
 		user: string,
@@ -241,6 +242,7 @@ export class MyServer {
 		password: string,
 		img: string,
 		zip: string,
+		sessionId: string,
 		response
 	): Promise<void> {
 		const userName = await this.users.get(name); // username searched in database
@@ -253,25 +255,29 @@ export class MyServer {
 			console.log('response to be sent ot user: {result: "username in use"}');
 			response.write(JSON.stringify({ result: "username in use" }));
 			response.end();
-		} else if (emailUser !== null) {
+		}
+		else if (emailUser !== null) {
 			// if email doesn't exist
 			console.log('response to be sent ot user: {result: "email in use"}');
 			response.write(JSON.stringify({ result: "email in use" }));
 			response.end();
-		} else {
+		}
+		else {
 			try {
 				console.log("creating user named '" + name + "'");
 				const hashedPassword = await bcrypt.hash(password, 10);
 				await this.users.add(
 					'{"name":"' +
-						name +
-						'","email":"' +
-						email +
-						'","password":"' +
-						hashedPassword +
-						'","img":"none","zip":"' +
-						zip +
-						'","own":[],"want":[]}'
+					name +
+					'","email":"' +
+					email +
+					'","password":"' +
+					hashedPassword +
+					'","img":"none","zip":"' +
+					zip +
+					'","sessionId":"' +
+					sessionId +
+					'","own":[],"want":[]}'
 				);
 				response.write(JSON.stringify({ result: "created", name: name }));
 
@@ -300,10 +306,14 @@ export class MyServer {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
 				if (await bcrypt.compare(password, user.password)) {
+					let sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
+					let hashedSessionId = bcrypt.hash(sessionId, 10);
+					// update user.sessionId = sessionId
 					response.write(
 						JSON.stringify({
 							result: "redirect",
-							url: "https://tet326.herokuapp.com/home.html",
+							username: name,
+							sessionId: hashedSessionId,
 						})
 					);
 					// heroku build me
@@ -351,4 +361,32 @@ export class MyServer {
 		response.write(JSON.stringify({ result: "deleted", id: id }));
 		response.end();
 	}
+
+	public async sessionUser(
+		username: string,
+		sessionId: string,
+		response
+	): Promise<void> {
+		let user = await this.users.getSession(username);
+		if (user == null) {
+			response.write(JSON.stringify({ result: "user not found" })); // some other response?
+			response.end();
+		}
+		else {
+			try {
+				// the hashing works, just need user.password to return the password in the database as a string
+				if (await bcrypt.compare(user.sessionId, sessionId)) {
+					response.write(JSON.stringify({ result: "session valid" }));
+					response.end();
+				} else {
+					response.write(JSON.stringify({ result: "session invalid" }));
+					response.end();
+				}
+			} catch {
+				response.write(JSON.stringify({ result: "error" }));
+				response.end();
+			}
+		}
+	}
+
 }

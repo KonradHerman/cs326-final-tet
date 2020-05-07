@@ -70,16 +70,15 @@ function userRead() {
 function gameRead() {
 	(async () => {
 		//we need to change this element id based on the html page
-		// let gameName = document.getElementById("selected").value;
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
 		const newURL = url + "/games/read";
 		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
+		console.log(resp);
 		const j = await resp.json();
 		console.log(j.game);
-		console.log(JSON.parse(j.game));
 		if (j["result"] !== "error") {
 			console.log("game read successfully");
 			// for (const element of j["games"]) {
@@ -133,12 +132,14 @@ function userCreate() {
 		let password2 = document.getElementById("password2").value;
 		let zip = "01002";
 		let img = "no img";
+		let sessionId = "-1";
 		const data = {
 			name: userName,
 			email: email,
 			password: password1,
 			img: img,
 			zip: zip,
+			sessionId: sessionId,
 		};
 		const newURL = url + "/users/create";
 		console.log("logging in: fetching");
@@ -146,9 +147,26 @@ function userCreate() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		if (j["result"] !== "error") {
-			//Success
-			let out = userName + " created";
-			console.log(out);
+			if (j["result"] === "username in use") {
+				let out = "username already in use";
+				console.log(out);
+				document.getElementById("badUsername").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
+				document.getElementById("badUsername").style.color = "red";
+			}
+			else if (j["result"] === "email in use") {
+				let out = "email already in use";
+				console.log(out);
+				document.getElementById("badUsername").innerHTML = "username available!";
+				document.getElementById("badUsername").style.color = "green";
+				document.getElementById("badEmail").innerHTML = "THE EMAIL YOU ENTERED IS ALREADY IN USE";
+				document.getElementById("badEmail").style.color = "red";
+			}
+			else {
+				//Success
+				let out = userName + " created";
+				console.log(out);
+				window.location.href = "https://tet326.herokuapp.com"
+			}
 		} else {
 			let out = userName + " could not be created, an error has occured";
 			console.log(out);
@@ -179,8 +197,7 @@ function userLogin() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);
-		document.getElementById("login-output").innerHTML =
-			"your username or password is incorrect<br>please try again";
+		document.getElementById("login-output").innerHTML = "your username or password is incorrect<br>please try again";
 		if (j["result"] !== "caught error") {
 			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
@@ -193,7 +210,9 @@ function userLogin() {
 				document.getElementById("login-output").innerHTML = "Signing you in!";
 				document.getElementById("login-output").style.color = "green";
 				let out = userName + " logged in";
-				window.location.href = j["url"];
+				sessionStorage.setItem("username", j["username"]);
+				sessionStorage.setItem("sessionId", j["sessionId"]);
+				window.location.href = "https://tet326.herokuapp.com/home.html"
 				console.log(out);
 			}
 		} else {
@@ -237,46 +256,59 @@ async function postData(url, data) {
 }
 function usersSearch() {
 	(async () => {
-		//let userID = document.getElementById("userID").value;
+		//we need to change this element id based on the html page
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
-		let newURL = url + "/games/read";
-		let data = { name: gameName };
+		const newURL = url + "/games/read";
+		const data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
-		let resp = await postData(newURL, data);
+		const resp = await postData(newURL, data);
 		console.log(resp);
-		let j = await resp.json();
-		console.log(j);
-		let game = JSON.parse(j.game);
-
-		j = await resp.json();
-		const getEmails = async () => {
-			let str = [];
-			for (const i of game.own) {
-				str.push(i);
-			}
-			newURL = url + "/users/read/emails";
-			data = { names: str };
-			console.log("emailRead: fetching ");
-			resp = await postData(newURL, data);
-			j = await resp.json();
-			emailArray = JSON.parse(j.users);
-			let ans = "";
-			for (let i = 0; i < emailArray.length; ++i) {
-				ans += str[i] + " " + emailArray[i].email;
-			}
-
-			return ans;
-		};
+		const j = await resp.json();
+		console.log(j.game);
 		if (j["result"] !== "error") {
-			document.getElementById("searchuseroutput").innerHTML =
-				'<a href="#" class="list-group-item flex-column align-items-start primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
-				game.name +
-				'</h5><small>Editor\'s Choice</small></div><p class="mb-1">' +
-				(await getEmails()) +
-				"</a>";
+			for (let i = 0; i < j["game"]["own"].length; ++i) {
+				document.getElementById("searchuseroutput").innerHTML +=
+					"<a>" + j["game"]["own"][i] + "</a><br>";
+			}
+			document.getElementById("searchuseroutput").innerHTML +=
+				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
 		} else {
 			console.log("failure to read all");
 		}
 	})();
+}
+
+function checkSession() {
+	(async () => {
+		let username = sessionStorage.getItem("username"); // this is already public
+		let sessionId = sessionStorage.getItem("sessionId");
+		if (sessionId === null) {
+			document.body.innerHTML = "<h1>Your Session has Expired</h1>";
+			window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
+		}
+		else {
+			const newURL = url + "/users/session";
+			const data = { username: username, sessionId: sessionId };
+			const resp = await postData(newURL, data);
+			console.log(resp);
+			const j = await resp.json();
+			if (j["result"] !== "error") {
+				if (j["result"] === "user not found") {
+					console.log("session user not found");
+				}
+				else if (j["result" === "session invalid"]) {
+					document.body.innerHTML = "<h1>Your Session is invalid</h1>";
+					window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
+				}
+				else {
+					console.log("session good");
+				}
+			} else {
+				console.log("session error has occurred");
+				window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
+			}
+		}
+	})();
+
 }
