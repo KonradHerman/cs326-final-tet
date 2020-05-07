@@ -283,7 +283,7 @@ function usersSearch() {
 		console.log(owners.users);
 
 		newURL = url + "/users/readsome";
-		names = j.game.own;
+		names = j.game.want;
 		data = { names: names };
 		console.log("read some users: fetching " + names);
 		const respWant = await postData(newURL, data);
@@ -296,7 +296,7 @@ function usersSearch() {
 			).innerHTML = document.getElementById("searchuseroutput").innerHTML =
 				'<div class="primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
 				j.game.name +
-				'</h5></div><ul class="list-group col" id="owners"><ul class="list-group col" id="wanters"></div>';
+				'</h5></div><ul class="list-group col" id="owners"></ul><ul class="list-group col" id="wanters"></ul></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
