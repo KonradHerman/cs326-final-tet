@@ -361,8 +361,8 @@ function checkSession() {
 }
 
 function sessionRunner(){
-	window.setInterval(checkSession(), 10000);
-	window.setTimeout(endSession(), 20000);
+	window.setInterval(checkSession(), 600000);
+	endSession();
 }
 
 function endSession(){
@@ -375,10 +375,18 @@ function endSession(){
 			}, 3000);
 		}
 		else{
-			sessionStorage.setItem("sessionId", "-1");
-			sessionStorage.clear();
+			window.setTimeout(function(){
+				sessionStorage.setItem("sessionId", "-1");
+			}, 3600000);
 		} 
 	})();
+}
+
+function logout(){
+	sessionStorage.clear();
+	window.setTimeout(function() {
+		window.location.href = "https://tet326.herokuapp.com";
+	}, 1000);
 }
 
 function fillUser() {
