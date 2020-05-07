@@ -56,8 +56,8 @@ function userRead() {
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			let own = document.getElementById("ownGames").innerHTML;
-			let want = document.getElementById("wantGames").innerHTML;
-			for (const element of j["own"]) {
+			//let want = document.getElementById("wantGames").innerHTML;
+			for (const element of j.user.own) {
 				own += "<tr>\n<td>" + element + "</td>\n</tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
@@ -352,8 +352,6 @@ function checkSession() {
 	})();
 }
 
-function fillUser() {
-	document.getElementById(
-		"navbarDropdownMenuLink"
-	).innerHTML = sessionStorage.getItem("username");
+function fillUser(){
+	document.getElementById("username-output").innerHTML = sessionStorage.getItem("username");
 }
