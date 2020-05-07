@@ -58,6 +58,7 @@ function userRead() {
 			let own = document.getElementById("ownGames").innerHTML;
 			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j.user.own) {
+				console.log(element);
 				own += "<tr>\n<td>" + element + "</td>\n</tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
@@ -99,7 +100,8 @@ function gameUpdate() {
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
 		console.log(gameName);
-		let userName = document.getElementById("userid").value;
+		let userName = sessionStorage.getItem("username");
+		console.log(userName);
 		let own = document.getElementById("own").checked;
 		let add = document.getElementById("add").checked;
 		const newURL = url + "/games/update";
