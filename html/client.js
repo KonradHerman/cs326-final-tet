@@ -58,10 +58,7 @@ function userRead() {
 			let own = document.getElementById("ownGames").innerHTML;
 			let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j["own"]) {
-				own +=
-					"<tr>\n<td>" +
-					element +
-					"</td>\n</tr>";
+				own += "<tr>\n<td>" + element + "</td>\n</tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
 		} else {
@@ -293,7 +290,7 @@ function usersSearch() {
 				'</h5></div><p class="mb-1" id="usernamesandemails"></p><small>Donec id elit non mi porta.</small></a>';
 			for (let i of j2.users) {
 				document.getElementById(
-					"searchuseroutput"
+					"usernamesandemails"
 				).innerHTML = document.getElementById("usernamesandemails").innerHTML +=
 					i.name + " " + i.email;
 			}
