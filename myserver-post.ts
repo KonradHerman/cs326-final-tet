@@ -70,6 +70,7 @@ export class MyServer {
 		this.router.post("/users/login", this.loginUserHandler.bind(this));
 		this.router.post("/users/read", this.readUserHandler.bind(this));
 		this.router.post("/users/update", this.updateUserHandler.bind(this));
+		this.router.post("/users/session", this.sessionUserHandler.bind(this));
 		this.router.post("/users/delete", [
 			// this.errorHandler.bind(this),
 			this.deleteHandler.bind(this),
@@ -122,6 +123,14 @@ export class MyServer {
 			request.body.user,
 			request.body.own,
 			request.body.add,
+			response
+		);
+	}
+
+	private async sessionUserHandler(request, response): Promise<void> {
+		await this.sessionUser(
+			request.body.username,
+			request.body.sessionId,
 			response
 		);
 	}
@@ -293,10 +302,14 @@ export class MyServer {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
 				if (await bcrypt.compare(password, user.password)) {
+					let sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
+					let hashedSessionId = bcrypt.hash(sessionId, 10);
+					// update user.sessionId = sessionId
 					response.write(
 						JSON.stringify({
 							result: "redirect",
 							username: name,
+							sessionId: hashedSessionId,
 						})
 					);
 					// heroku build me
@@ -344,4 +357,32 @@ export class MyServer {
 		response.write(JSON.stringify({ result: "deleted", id: id }));
 		response.end();
 	}
+
+	public async sessionUser(
+		username: string,
+		sessionId: string, 
+		response
+	): Promise<void> {
+			let user = await this.users.getSession(name);
+			if(user == null) {
+				response.write(JSON.stringify({ result: "user not found" })); // some other response?
+				response.end();
+			}
+			else {
+				try {
+					// the hashing works, just need user.password to return the password in the database as a string
+					if (await bcrypt.compare(user.sessionId, sessionId)) {
+						response.write(JSON.stringify({ result: "session valid" }));
+						response.end();
+					} else {
+						response.write(JSON.stringify({ result: "session invalid" }));
+						response.end();
+					}
+				} catch {
+					response.write(JSON.stringify({ result: "error" }));
+					response.end();
+				}
+			}
+		}
+
 }

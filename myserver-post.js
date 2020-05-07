@@ -100,6 +100,7 @@ var MyServer = /** @class */ (function () {
         this.router.post("/users/login", this.loginUserHandler.bind(this));
         this.router.post("/users/read", this.readUserHandler.bind(this));
         this.router.post("/users/update", this.updateUserHandler.bind(this));
+        this.router.post("/users/session", this.sessionUserHandler.bind(this));
         this.router.post("/users/delete", [
             // this.errorHandler.bind(this),
             this.deleteHandler.bind(this),
@@ -202,6 +203,18 @@ var MyServer = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.updateGame(request.body.game, request.body.user, request.body.own, request.body.add, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.sessionUserHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.sessionUser(request.body.username, request.body.sessionId, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -419,7 +432,7 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.loginUser = function (name, password, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, _a;
+            var user, sessionId, hashedSessionId, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4 /*yield*/, this.users.get(name)];
@@ -439,9 +452,14 @@ var MyServer = /** @class */ (function () {
                     case 3:
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
+                            sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
+                            ;
+                            hashedSessionId = bcrypt.hash(sessionId, 10);
+                            // update user.sessionId = sessionId
                             response.write(JSON.stringify({
                                 result: "redirect",
-                                username: name
+                                username: name,
+                                sessionId: hashedSessionId
                             }));
                             // heroku build me
                             response.end();
@@ -495,6 +513,42 @@ var MyServer = /** @class */ (function () {
                 response.write(JSON.stringify({ result: "deleted", id: id }));
                 response.end();
                 return [2 /*return*/];
+            });
+        });
+    };
+    MyServer.prototype.sessionUser = function (username, sessionId, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.users.getSession(name)];
+                    case 1:
+                        user = _b.sent();
+                        if (!(user == null)) return [3 /*break*/, 2];
+                        response.write(JSON.stringify({ result: "user not found" })); // some other response?
+                        response.end();
+                        return [3 /*break*/, 5];
+                    case 2:
+                        _b.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, bcrypt.compare(user.sessionId, sessionId)];
+                    case 3:
+                        // the hashing works, just need user.password to return the password in the database as a string
+                        if (_b.sent()) {
+                            response.write(JSON.stringify({ result: "session valid" }));
+                            response.end();
+                        }
+                        else {
+                            response.write(JSON.stringify({ result: "session invalid" }));
+                            response.end();
+                        }
+                        return [3 /*break*/, 5];
+                    case 4:
+                        _a = _b.sent();
+                        response.write(JSON.stringify({ result: "error" }));
+                        response.end();
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
             });
         });
     };
