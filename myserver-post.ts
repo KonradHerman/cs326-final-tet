@@ -333,12 +333,11 @@ export class MyServer {
 
 	public async readUser(name: string, response): Promise<void> {
 		let user = await this.users.get(name);
-		console.log();
 		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}
 	public async readSomeUsers(names: string[], response): Promise<void> {
-		let users = this.users.getSome(names);
+		let users = await this.users.getSome(names);
 		response.write(JSON.stringify({ result: "read", users: users }));
 		response.end();
 	}
@@ -377,7 +376,7 @@ export class MyServer {
 		let user = await this.users.get(username);
 		console.log(user);
 		if (user == null) {
-			response.write(JSON.stringify({ result: "user not found" })); 
+			response.write(JSON.stringify({ result: "user not found" }));
 			response.end();
 		}
 		console.log(user.sessionId);

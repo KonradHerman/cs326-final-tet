@@ -10,7 +10,9 @@ export class Database {
 		// Assign password to uri
 		this.password = process.env.PASSWORD;
 		this.uri =
-			"mongodb+srv://konrad:" + this.password + "@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
+			"mongodb+srv://konrad:" +
+			this.password +
+			"@cluster0-oz7gz.mongodb.net/test?retryWrites=true&w=majority";
 
 		this.collectionName = collectionName;
 		this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
@@ -35,7 +37,10 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("putting: value = " + value);
-		let result = collection.updateOne({ name: name }, { $set: { sessionId: value } });
+		let result = collection.updateOne(
+			{ name: name },
+			{ $set: { sessionId: value } }
+		);
 		console.log("result = " + result);
 	}
 
@@ -43,8 +48,10 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("push: value = " + value);
-		let result = key === "own" ? collection.updateOne({ "name": name }, { $addToSet: { own: value } }) :
-			collection.updateOne({ "name": name }, { $addToSet: { want: value } });
+		let result =
+			key === "own"
+				? collection.updateOne({ name: name }, { $addToSet: { own: value } })
+				: collection.updateOne({ name: name }, { $addToSet: { want: value } });
 		console.log("result = " + JSON.stringify(result));
 	}
 
@@ -52,8 +59,10 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("pull: value = " + value);
-		let result = key === "own" ? collection.updateOne({ "name": name }, { $pull: { own: value } }) :
-			collection.updateOne({ "name": name }, { $pull: { want: value } });
+		let result =
+			key === "own"
+				? collection.updateOne({ name: name }, { $pull: { own: value } })
+				: collection.updateOne({ name: name }, { $pull: { want: value } });
 		console.log("result = " + JSON.stringify(result));
 	}
 
@@ -61,7 +70,7 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		const result = await collection.findOne({ "name": key });
+		const result = await collection.findOne({ name: key });
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result;
@@ -74,7 +83,7 @@ export class Database {
 		let db = this.client.db(this.dbName); // this.level(this.dbFile);
 		let collection = db.collection(this.collectionName);
 		console.log("get: key = " + key);
-		const result = await collection.findOne({ "email": key });
+		const result = await collection.findOne({ email: key });
 		console.log("get: returned " + JSON.stringify(result));
 		if (result) {
 			return result;
@@ -99,12 +108,12 @@ export class Database {
 		}
 	}
 
-	public async getSome(key: string, list: string[]): Promise<string | null> {
+	public async getSome(key: string[]): Promise<string | null> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("getting some");
 		const result = await collection
-			.find({ name: { $in: list } }, { password: 0 })
+			.find({ name: { $in: key } }, { password: 0 })
 			.sort({ name: 1 })
 			.toArray();
 		console.log(result);
