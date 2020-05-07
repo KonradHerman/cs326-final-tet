@@ -12,8 +12,14 @@ function gameCreate() {
 		const j = await resp.json();
 		if (j["result"] !== "error") {
 			//success
+			if(j["result"] === "game already in list") {
+				let out = gameName + " already in list";
+				console.log(out);
+				document.getElementById("gameCreate-output").innerHTML =
+				'<p class="text-primary">' + out + "</p><br>";
+			}
 			let out = gameName + "created";
-			document.getElementById("gameCreate-output").innerHTML +=
+			document.getElementById("gameCreate-output").innerHTML =
 				'<p class="text-primary">' + j.name + "</p><br>";
 			console.log(out);
 		} else {
