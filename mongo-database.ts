@@ -35,7 +35,7 @@ export class Database {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
 		console.log("putting: value = " + value);
-		let result = collection.updateOne({ name: name }, { $set: { sesionId: value } });
+		let result = collection.updateOne({ name: name }, { $set: { sessionId: value } });
 		console.log("result = " + result);
 	}
 

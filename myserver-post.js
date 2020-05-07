@@ -558,7 +558,7 @@ var MyServer = /** @class */ (function () {
                             response.end();
                         }
                         console.log(user.sessionId);
-                        if (!(user.sessionId === "-1")) return [3 /*break*/, 2];
+                        if (!(user.sessionId == -1)) return [3 /*break*/, 2];
                         response.write(JSON.stringify({ result: "user not logged in" }));
                         response.end();
                         return [3 /*break*/, 5];

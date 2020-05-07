@@ -380,7 +380,7 @@ export class MyServer {
 			response.end();
 		}
 		console.log(user.sessionId);
-		if (user.sessionId === "-1") {
+		if (user.sessionId == -1) {
 			response.write(JSON.stringify({ result: "user not logged in" }));
 			response.end();
 		} else {
