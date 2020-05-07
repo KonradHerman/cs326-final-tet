@@ -216,8 +216,8 @@ function userLogin() {
 				document.getElementById("login-output").style.color = "green";
 				let out = userName + " logged in";
 				sessionStorage.setItem("username", j["username"]);
-				sessionStorage.setItem("sessionId", j["sessionId"]);
-				console.log(j["sessionId"]);
+				sessionStorage.setItem("sessionId", j.sessionId);
+				console.log(j.sessionId);
 				window.location.href = "https://tet326.herokuapp.com/home.html";
 				console.log(out);
 			}

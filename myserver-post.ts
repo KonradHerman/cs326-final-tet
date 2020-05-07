@@ -374,12 +374,14 @@ export class MyServer {
 		response
 	): Promise<void> {
 		let user = await this.users.get(username);
+		console.log(user);
 		if (user == null) {
-			response.write(JSON.stringify({ result: "user not found" })); // some other response?
+			response.write(JSON.stringify({ result: "user not found" })); 
 			response.end();
 		}
+		console.log(user.sessionId);
 		if (user.sessionId === "-1") {
-			response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
+			response.write(JSON.stringify({ result: "user not logged in" }));
 			response.end();
 		} else {
 			try {
