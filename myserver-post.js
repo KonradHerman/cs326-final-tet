@@ -523,7 +523,7 @@ var MyServer = /** @class */ (function () {
             var user, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.users.getSession(name)];
+                    case 0: return [4 /*yield*/, this.users.getSession(username)];
                     case 1:
                         user = _b.sent();
                         if (!(user == null)) return [3 /*break*/, 2];

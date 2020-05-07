@@ -367,7 +367,7 @@ export class MyServer {
 		sessionId: string, 
 		response
 	): Promise<void> {
-			let user = await this.users.getSession(name);
+			let user = await this.users.getSession(username);
 			if(user == null) {
 				response.write(JSON.stringify({ result: "user not found" })); // some other response?
 				response.end();
