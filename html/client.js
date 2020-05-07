@@ -283,7 +283,7 @@ function usersSearch() {
 		console.log(owners.users);
 
 		newURL = url + "/users/readsome";
-		let names = j.game.own;
+		names = j.game.own;
 		data = { names: names };
 		console.log("read some users: fetching " + names);
 		const respWant = await postData(newURL, data);
@@ -352,6 +352,8 @@ function checkSession() {
 	})();
 }
 
-function fillUser(){
-	document.getElementById("username-output").innerHTML = sessionStorage.getItem("username");
+function fillUser() {
+	document.getElementById("username-output").innerHTML = sessionStorage.getItem(
+		"username"
+	);
 }
