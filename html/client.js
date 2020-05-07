@@ -280,21 +280,32 @@ function usersSearch() {
 		let names = j.game.own;
 		data = { names: names };
 		console.log("read some users: fetching " + names);
-		const resp2 = await postData(newURL, data);
-		const j2 = await resp2.json();
-		console.log(j2.users);
+		const respOwn = await postData(newURL, data);
+		const owners = await respOwn.json();
+		console.log(owners.users);
+
+		newURL = url + "/users/readsome";
+		names = j.game.own;
+		data = { names: names };
+		console.log("read some users: fetching " + names);
+		const respWant = await postData(newURL, data);
+		const wanters = await respWant.json();
+		console.log(wanters.users);
+
 		if (j["result"] !== "error") {
 			document.getElementById(
 				"searchuseroutput"
 			).innerHTML = document.getElementById("searchuseroutput").innerHTML =
-				'<a href="#" class="list-group-item primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				'<div class="primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
 				j.game.name +
-				'</h5></div><p class="mb-1" id="usernamesandemails"></p><small>Donec id elit non mi porta.</small></a>';
-			for (let i of j2.users) {
-				document.getElementById(
-					"usernamesandemails"
-				).innerHTML = document.getElementById("usernamesandemails").innerHTML +=
-					i.name + " " + i.email;
+				'</h5></div><ul class="list-group col" id="owners"><ul class="list-group col" id="wanters"></div>';
+			for (let i of owners.users) {
+				document.getElementById("owners").innerHTML +=
+					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
+			}
+			for (let i of wanters.users) {
+				document.getElementById("wanters").innerHTML +=
+					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
 			}
 		} else {
 			console.log("failure to read all");
@@ -343,6 +354,8 @@ function checkSession() {
 	})();
 }
 
-function fillUser(){
-	document.getElementById("username-output").innerHTML = sessionStorage.getItem("username");
+function fillUser() {
+	document.getElementById("username-output").innerHTML = sessionStorage.getItem(
+		"username"
+	);
 }
