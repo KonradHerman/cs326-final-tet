@@ -504,7 +504,6 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.users.get(name)];
                     case 1:
                         user = _a.sent();
-                        console.log();
                         response.write(JSON.stringify({ result: "read", user: user }));
                         response.end();
                         return [2 /*return*/];

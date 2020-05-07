@@ -52,12 +52,17 @@ function userRead() {
 		const data = { name: userName };
 		console.log("userRead: fetching " + newURL);
 		const resp = await postData(newURL, data);
-		console.log(resp);
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			for (const element of j["games"]) {
-				// document.getElementById("selectGame").innerHTML += // (1) changed id output to dropdown-output
+			let own = document.getElementById("ownGames").innerHTML;
+			let want = document.getElementById("wantGames").innerHTML;
+			for (const element of j["own"]) {
+				own +=
+					"<tr>\n<td>" +
+					element +
+					"</td>\n</tr>";
+				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
 		} else {
 			console.log("failure to read all");

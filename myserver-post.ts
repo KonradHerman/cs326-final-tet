@@ -333,7 +333,6 @@ export class MyServer {
 
 	public async readUser(name: string, response): Promise<void> {
 		let user = await this.users.get(name);
-		console.log();
 		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}
