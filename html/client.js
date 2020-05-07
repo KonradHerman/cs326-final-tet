@@ -294,14 +294,16 @@ function usersSearch() {
 			document.getElementById(
 				"searchuseroutput"
 			).innerHTML = document.getElementById("searchuseroutput").innerHTML =
-				'<a href="#" class="list-group-item primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				'<div class="primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
 				j.game.name +
-				'</h5></div><p class="mb-1" id="owners"></p></a>';
+				'</h5></div><ul class="list-group col" id="owners"><ul class="list-group col" id="wanters"></div>';
 			for (let i of owners.users) {
-				document.getElementById("owners").innerHTML += i.name + " " + i.email;
+				document.getElementById("owners").innerHTML +=
+					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
 			}
 			for (let i of wanters.users) {
-				document.getElementById("wanters").innerHTML += i.name + " " + i.email;
+				document.getElementById("wanters").innerHTML +=
+					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
 			}
 		} else {
 			console.log("failure to read all");
