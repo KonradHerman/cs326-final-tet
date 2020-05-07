@@ -316,7 +316,7 @@ function checkSession() {
 	(async () => {
 		let username = sessionStorage.getItem("username"); // this is already public
 		let sessionId = sessionStorage.getItem("sessionId");
-		if (sessionId === null) {
+		if (sessionId == null) {
 			document.body.innerHTML = "<h1>Your Session has Expired</h1>";
 			window.setTimeout(function () {
 				window.location.href = "https://tet326.herokuapp.com";
@@ -350,6 +350,27 @@ function checkSession() {
 				}, 3000);
 			}
 		}
+	})();
+}
+
+function sessionRunner(){
+	window.setInterval(checkSession(), 10000);
+	window.setTimeout(endSession(), 20000);
+}
+
+function endSession(){
+	(async () => {
+		let sessionId = sessionStorage.getItem("sessionId");
+		if (sessionId == null) {
+			document.body.innerHTML = "<h1>Your Session has Expired</h1>";
+			window.setTimeout(function () {
+				window.location.href = "https://tet326.herokuapp.com";
+			}, 3000);
+		}
+		else{
+			sessionStorage.setItem("sessionId", "-1");
+			sessionStorage.clear();
+		} 
 	})();
 }
 
