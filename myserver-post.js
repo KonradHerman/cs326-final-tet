@@ -299,7 +299,7 @@ var MyServer = /** @class */ (function () {
                         formatName = name.toLocaleLowerCase();
                         formatName = formatName.substr(1);
                         formatName = firstLetter.toUpperCase() + formatName;
-                        return [4 /*yield*/, this.games.isFound(name)];
+                        return [4 /*yield*/, this.games.isFound(formatName)];
                     case 1:
                         gameAlready = _a.sent();
                         if (!!gameAlready) return [3 /*break*/, 3];

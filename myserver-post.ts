@@ -183,7 +183,7 @@ export class MyServer {
 		let formatName = name.toLocaleLowerCase();
 		formatName = formatName.substr(1);
 		formatName = firstLetter.toUpperCase() + formatName;
-		let gameAlready = await this.games.isFound(name);
+		let gameAlready = await this.games.isFound(formatName);
 		if(!gameAlready) {
 			await this.games.add('{"name":"' + formatName + '","own":[],"want":[]}');
 			response.write(JSON.stringify({ result: "created", name: name }));
