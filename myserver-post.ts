@@ -332,8 +332,9 @@ export class MyServer {
 	}
 
 	public async readUser(name: string, response): Promise<void> {
-		let user = this.users.get(name);
-		response.write(JSON.stringify({ result: "read", user: JSON.stringify(user) }));
+		let user = await this.users.get(name);
+		console.log();
+		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}
 	public async readSomeUsers(names: string[], response): Promise<void> {
