@@ -504,6 +504,7 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.users.get(name)];
                     case 1:
                         user = _a.sent();
+                        console.log();
                         response.write(JSON.stringify({ result: "read", user: user }));
                         response.end();
                         return [2 /*return*/];
@@ -560,12 +561,14 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.users.get(username)];
                     case 1:
                         user = _b.sent();
+                        console.log(user);
                         if (user == null) {
-                            response.write(JSON.stringify({ result: "user not found" })); // some other response?
+                            response.write(JSON.stringify({ result: "user not found" }));
                             response.end();
                         }
-                        if (!(user.sessionId === "-1")) return [3 /*break*/, 2];
-                        response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
+                        console.log(user.sessionId);
+                        if (!(user.sessionId == -1)) return [3 /*break*/, 2];
+                        response.write(JSON.stringify({ result: "user not logged in" }));
                         response.end();
                         return [3 /*break*/, 5];
                     case 2:

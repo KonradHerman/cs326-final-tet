@@ -83,7 +83,7 @@ var Database = /** @class */ (function () {
                 db = this.client.db(this.dbName);
                 collection = db.collection(this.collectionName);
                 console.log("putting: value = " + value);
-                result = collection.updateOne({ name: name }, { $set: { sesionId: value } });
+                result = collection.updateOne({ name: name }, { $set: { sessionId: value } });
                 console.log("result = " + result);
                 return [2 /*return*/];
             });

@@ -333,6 +333,7 @@ export class MyServer {
 
 	public async readUser(name: string, response): Promise<void> {
 		let user = await this.users.get(name);
+		console.log();
 		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}
@@ -374,12 +375,14 @@ export class MyServer {
 		response
 	): Promise<void> {
 		let user = await this.users.get(username);
+		console.log(user);
 		if (user == null) {
-			response.write(JSON.stringify({ result: "user not found" })); // some other response?
+			response.write(JSON.stringify({ result: "user not found" }));
 			response.end();
 		}
-		if (user.sessionId === "-1") {
-			response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
+		console.log(user.sessionId);
+		if (user.sessionId == -1) {
+			response.write(JSON.stringify({ result: "user not logged in" }));
 			response.end();
 		} else {
 			try {

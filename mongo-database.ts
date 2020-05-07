@@ -39,7 +39,7 @@ export class Database {
 		console.log("putting: value = " + value);
 		let result = collection.updateOne(
 			{ name: name },
-			{ $set: { sesionId: value } }
+			{ $set: { sessionId: value } }
 		);
 		console.log("result = " + result);
 	}
