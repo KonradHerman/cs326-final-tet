@@ -33,6 +33,14 @@ export class Database {
 		console.log("result = " + result);
 	}
 
+	public async put(name: string, value: string): Promise<void> {
+		let db = this.client.db(this.dbName);
+		let collection = db.collection(this.collectionName);
+		console.log("putting: value = " + value);
+		let result = collection.updateOne({name: name}, {$set: {sesionId: value}});
+		console.log("result = " + result);
+	}
+
 	public async push(name: string, key: string, value: string): Promise<void> {
 		let db = this.client.db(this.dbName);
 		let collection = db.collection(this.collectionName);
@@ -100,7 +108,7 @@ export class Database {
 		let collection = db.collection(this.collectionName);
 		console.log("getting some");
 		const result = await collection
-			.find({ name: { $in: list } })
+			.find({ name: { $in: list } }, {password:0})
 			.sort({ name: 1 })
 			.toArray();
 		console.log(result);
