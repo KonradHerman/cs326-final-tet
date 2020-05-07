@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -87,9 +87,9 @@ var MyServer = /** @class */ (function () {
         // Set a single handler for a route.
         this.router.post("/games/create", this.createHandler.bind(this));
         // Set multiple handlers for a route, in sequence.
-        this.router.post("/games/readall",
-            //this.errorHandler.bind(this),
-            this.readallHandler.bind(this));
+        this.router.post("/games/readall", 
+        //this.errorHandler.bind(this),
+        this.readallHandler.bind(this));
         this.server.get("/home", this.homeHandler.bind(this));
         this.router.post("/games/read", this.readHandler.bind(this));
         this.router.post("/games/update", [
@@ -106,14 +106,12 @@ var MyServer = /** @class */ (function () {
             this.deleteHandler.bind(this),
         ]);
         // Set a fall-through handler if nothing matches.
-        this.router.post("*", function (request, response) {
-            return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    response.send(JSON.stringify({ result: "command-not-found" }));
-                    return [2 /*return*/];
-                });
+        this.router.post("*", function (request, response) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                response.send(JSON.stringify({ result: "command-not-found" }));
+                return [2 /*return*/];
             });
-        });
+        }); });
         // Start up the counter endpoint at '/counter'.
         this.server.use("/counter", this.router);
     }
@@ -326,23 +324,8 @@ var MyServer = /** @class */ (function () {
                     case 1:
                         game = _a.sent();
                         console.log(game);
-                        console.log("test");
-                        response.write(JSON.stringify({ result: "read", game: JSON.stringify(game) }));
-                        response.end();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MyServer.prototype.getEmails = function (names, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            var userArray;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.users.getSome(names)];
-                    case 1:
-                        userArray = _a.sent();
-                        response.write(JSON.stringify({ result: "read", users: userArray }));
+                        console.log(JSON.stringify({ result: "read", game: game }));
+                        response.write(JSON.stringify({ result: "read", game: game }));
                         response.end();
                         return [2 /*return*/];
                 }
@@ -424,16 +407,16 @@ var MyServer = /** @class */ (function () {
                     case 5:
                         hashedPassword = _b.sent();
                         return [4 /*yield*/, this.users.add('{"name":"' +
-                            name +
-                            '","email":"' +
-                            email +
-                            '","password":"' +
-                            hashedPassword +
-                            '","img":"none","zip":"' +
-                            zip +
-                            '","sessionId":"' +
-                            sessionId +
-                            '","own":[],"want":[]}')];
+                                name +
+                                '","email":"' +
+                                email +
+                                '","password":"' +
+                                hashedPassword +
+                                '","img":"none","zip":"' +
+                                zip +
+                                '","sessionId":"' +
+                                sessionId +
+                                '","own":[],"want":[]}')];
                     case 6:
                         _b.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
@@ -472,7 +455,7 @@ var MyServer = /** @class */ (function () {
                         // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
                             sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
-                                ;
+                            ;
                             hashedSessionId = bcrypt.hash(sessionId, 10);
                             // update user.sessionId = sessionId
                             response.write(JSON.stringify({
@@ -540,7 +523,7 @@ var MyServer = /** @class */ (function () {
             var user, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.users.getSession(username)];
+                    case 0: return [4 /*yield*/, this.users.get(username)];
                     case 1:
                         user = _b.sent();
                         if (!(user == null)) return [3 /*break*/, 2];
@@ -551,7 +534,6 @@ var MyServer = /** @class */ (function () {
                         _b.trys.push([2, 4, , 5]);
                         return [4 /*yield*/, bcrypt.compare(user.sessionId, sessionId)];
                     case 3:
-                        // the hashing works, just need user.password to return the password in the database as a string
                         if (_b.sent()) {
                             response.write(JSON.stringify({ result: "session valid" }));
                             response.end();

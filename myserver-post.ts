@@ -367,14 +367,13 @@ export class MyServer {
 		sessionId: string,
 		response
 	): Promise<void> {
-		let user = await this.users.getSession(username);
+		let user = await this.users.get(username);
 		if (user == null) {
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
 			response.end();
 		}
 		else {
 			try {
-				// the hashing works, just need user.password to return the password in the database as a string
 				if (await bcrypt.compare(user.sessionId, sessionId)) {
 					response.write(JSON.stringify({ result: "session valid" }));
 					response.end();

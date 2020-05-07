@@ -177,12 +177,17 @@ function userCreate() {
 function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
-	if (password1 === password2) {
-		document.getElementById("password-match-output").innerHTML +=
-			'<p class="text-primary" style= "color: red;">Passwords do not match</p><br>';
+	if (password1 !== password2) {
+		document.getElementById("password-match-output").innerHTML = "PASSWORDS DO NOT MATCH";
+		document.getElementById("password-match-output").style.color = "red";
 		return false;
 	}
-	return true;
+	else {
+		document.getElementById("password-match-output").innerHTML = "passwords match!";
+		document.getElementById("password-match-output").style.color = "green";
+		return true;
+	}
+
 }
 
 function userLogin() {
@@ -267,7 +272,7 @@ function usersSearch() {
 		const j = await resp.json();
 		console.log(j.game);
 		if (j["result"] !== "error") {
-			for (let i = 0; i < j["game"]["own"].length; ++i) {
+			for (let i = 0; i < j.game.own.length; ++i) {
 				document.getElementById("searchuseroutput").innerHTML +=
 					"<a>" + j["game"]["own"][i] + "</a><br>";
 			}
