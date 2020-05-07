@@ -148,22 +148,23 @@ function userCreate() {
 			if (j["result"] === "username in use") {
 				let out = "username already in use";
 				console.log(out);
-				document.getElementById("badUsername").innerHTML = "THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN"
+				document.getElementById("badUsername").innerHTML =
+					"THE USERNAME YOU ENTERED HAS ALREADY BEEN TAKEN";
 				document.getElementById("badUsername").style.color = "red";
-			}
-			else if (j["result"] === "email in use") {
+			} else if (j["result"] === "email in use") {
 				let out = "email already in use";
 				console.log(out);
-				document.getElementById("badUsername").innerHTML = "username available!";
+				document.getElementById("badUsername").innerHTML =
+					"username available!";
 				document.getElementById("badUsername").style.color = "green";
-				document.getElementById("badEmail").innerHTML = "THE EMAIL YOU ENTERED IS ALREADY IN USE";
+				document.getElementById("badEmail").innerHTML =
+					"THE EMAIL YOU ENTERED IS ALREADY IN USE";
 				document.getElementById("badEmail").style.color = "red";
-			}
-			else {
+			} else {
 				//Success
 				let out = userName + " created";
 				console.log(out);
-				window.location.href = "https://tet326.herokuapp.com"
+				window.location.href = "https://tet326.herokuapp.com";
 			}
 		} else {
 			let out = userName + " could not be created, an error has occured";
@@ -176,16 +177,16 @@ function passwordMatcher() {
 	let password1 = document.getElementById("password1").value;
 	let password2 = document.getElementById("password2").value;
 	if (password1 !== password2) {
-		document.getElementById("password-match-output").innerHTML = "PASSWORDS DO NOT MATCH";
+		document.getElementById("password-match-output").innerHTML =
+			"PASSWORDS DO NOT MATCH";
 		document.getElementById("password-match-output").style.color = "red";
 		return false;
-	}
-	else {
-		document.getElementById("password-match-output").innerHTML = "passwords match!";
+	} else {
+		document.getElementById("password-match-output").innerHTML =
+			"passwords match!";
 		document.getElementById("password-match-output").style.color = "green";
 		return true;
 	}
-
 }
 
 function userLogin() {
@@ -200,7 +201,8 @@ function userLogin() {
 		const resp = await postData(newURL, data);
 		const j = await resp.json();
 		console.log(j);
-		document.getElementById("login-output").innerHTML = "your username or password is incorrect<br>please try again";
+		document.getElementById("login-output").innerHTML =
+			"your username or password is incorrect<br>please try again";
 		if (j["result"] !== "caught error") {
 			if (j["result"] === "Incorrect Password") {
 				let out = "Incorrect Password ";
@@ -216,7 +218,7 @@ function userLogin() {
 				sessionStorage.setItem("username", j["username"]);
 				sessionStorage.setItem("sessionId", j["sessionId"]);
 				console.log(j["sessionId"]);
-				window.location.href = "https://tet326.herokuapp.com/home.html"
+				window.location.href = "https://tet326.herokuapp.com/home.html";
 				console.log(out);
 			}
 		} else {
@@ -264,17 +266,23 @@ function usersSearch() {
 		//we need to change this element id based on the html page
 		let drop = document.getElementById("selectGame");
 		let gameName = drop.options[drop.selectedIndex].id;
-		const newURL = url + "/games/read";
-		const data = { name: gameName };
+		let newURL = url + "/games/read";
+		let data = { name: gameName };
 		console.log("gameRead: fetching " + gameName);
 		const resp = await postData(newURL, data);
-		console.log(resp);
 		const j = await resp.json();
-		console.log(j.game);
+
+		newURL = url + "/users/readsome";
+		let names = j.game.own;
+		data = { names: names };
+		console.log("read some users: fetching " + names);
+		const resp2 = await postData(newURL, data);
+		const j2 = await resp2.json();
+		console.log(j2.users);
 		if (j["result"] !== "error") {
-			for (let i = 0; i < j.game.own.length; ++i) {
+			for (let i of j2.users) {
 				document.getElementById("searchuseroutput").innerHTML +=
-					"<a>" + j["game"]["own"][i] + "</a><br>";
+					"<a>" + i.name + "</a><br>";
 			}
 			document.getElementById("searchuseroutput").innerHTML +=
 				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
@@ -290,9 +298,10 @@ function checkSession() {
 		let sessionId = sessionStorage.getItem("sessionId");
 		if (sessionId === null) {
 			document.body.innerHTML = "<h1>Your Session has Expired</h1>";
-			window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
-		}
-		else {
+			window.setTimeout(function () {
+				window.location.href = "https://tet326.herokuapp.com";
+			}, 3000);
+		} else {
 			const newURL = url + "/users/session";
 			const data = { username: username, sessionId: sessionId };
 			const resp = await postData(newURL, data);
@@ -301,23 +310,25 @@ function checkSession() {
 			if (j["result"] !== "error") {
 				if (j["result"] === "user not found") {
 					console.log("session user not found");
-				}
-				else if (j["result" === "session invalid"]) {
+				} else if (j["result" === "session invalid"]) {
 					document.body.innerHTML = "<h1>Your Session is invalid</h1>";
-					window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
-				}
-				else if (j["result" === "user not logged in"]) {
+					window.setTimeout(function () {
+						window.location.href = "https://tet326.herokuapp.com";
+					}, 3000);
+				} else if (j["result" === "user not logged in"]) {
 					document.body.innerHTML = "<h1>Your Session is invalid</h1>";
-					window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
-				}	
-				else {
+					window.setTimeout(function () {
+						window.location.href = "https://tet326.herokuapp.com";
+					}, 3000);
+				} else {
 					console.log("session good");
 				}
 			} else {
 				console.log("session error has occurred");
-				window.setTimeout(function () { window.location.href = "https://tet326.herokuapp.com" }, 3000);
+				window.setTimeout(function () {
+					window.location.href = "https://tet326.herokuapp.com";
+				}, 3000);
 			}
 		}
 	})();
-
 }

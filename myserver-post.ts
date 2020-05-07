@@ -69,6 +69,7 @@ export class MyServer {
 		this.router.post("/users/create", this.createUserHandler.bind(this));
 		this.router.post("/users/login", this.loginUserHandler.bind(this));
 		this.router.post("/users/read", this.readUserHandler.bind(this));
+		this.router.post("/users/readsome", this.readSomeUsersHandler.bind(this));
 		this.router.post("/users/update", this.updateUserHandler.bind(this));
 		this.router.post("/users/session", this.sessionUserHandler.bind(this));
 		this.router.post("/users/delete", [
@@ -149,6 +150,9 @@ export class MyServer {
 
 	private async readUserHandler(request, response): Promise<void> {
 		await this.readUser(request.body.name, response);
+	}
+	private async readSomeUsersHandler(request, response): Promise<void> {
+		await this.readSomeUsers(request.body.names, response);
 	}
 
 	private async updateUserHandler(request, response): Promise<void> {
@@ -255,29 +259,27 @@ export class MyServer {
 			console.log('response to be sent ot user: {result: "username in use"}');
 			response.write(JSON.stringify({ result: "username in use" }));
 			response.end();
-		}
-		else if (emailUser !== null) {
+		} else if (emailUser !== null) {
 			// if email doesn't exist
 			console.log('response to be sent ot user: {result: "email in use"}');
 			response.write(JSON.stringify({ result: "email in use" }));
 			response.end();
-		}
-		else {
+		} else {
 			try {
 				console.log("creating user named '" + name + "'");
 				const hashedPassword = await bcrypt.hash(password, 10);
 				await this.users.add(
 					'{"name":"' +
-					name +
-					'","email":"' +
-					email +
-					'","password":"' +
-					hashedPassword +
-					'","img":"none","zip":"' +
-					zip +
-					'","sessionId":"' +
-					sessionId +
-					'","own":[],"want":[]}'
+						name +
+						'","email":"' +
+						email +
+						'","password":"' +
+						hashedPassword +
+						'","img":"none","zip":"' +
+						zip +
+						'","sessionId":"' +
+						sessionId +
+						'","own":[],"want":[]}'
 				);
 				response.write(JSON.stringify({ result: "created", name: name }));
 
@@ -306,7 +308,7 @@ export class MyServer {
 			try {
 				// the hashing works, just need user.password to return the password in the database as a string
 				if (await bcrypt.compare(password, user.password)) {
-					let sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
+					let sessionId = (Math.random() * 2147483647).toString(); // largest 32 bit signed integer
 					let hashedSessionId = await bcrypt.hash(sessionId, 10);
 					await this.users.put(name, sessionId);
 					response.write(
@@ -334,7 +336,11 @@ export class MyServer {
 		response.write(JSON.stringify({ result: "read", user: JSON.stringify(user) }));
 		response.end();
 	}
-
+	public async readSomeUsers(names: string[], response): Promise<void> {
+		let users = this.users.getSome(names);
+		response.write(JSON.stringify({ result: "read", users: users }));
+		response.end();
+	}
 	public async updateUser(
 		id: number,
 		img: string,
@@ -372,11 +378,10 @@ export class MyServer {
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
 			response.end();
 		}
-		if (user.sessionId === "-1"){
+		if (user.sessionId === "-1") {
 			response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
 			response.end();
-		}
-		else {
+		} else {
 			try {
 				if (await bcrypt.compare(user.sessionId, sessionId)) {
 					response.write(JSON.stringify({ result: "session valid" }));
@@ -391,5 +396,4 @@ export class MyServer {
 			}
 		}
 	}
-
 }
