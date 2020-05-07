@@ -47,9 +47,7 @@ function gameReadAll() {
 
 function userRead() {
 	(async () => {
-		//This needs to be changed if we get auth working.
-		let userName = "konrad";
-		// ^^^^^^^
+		let userName = sessionStorage.getItem("username");
 		const newURL = url + "/users/read";
 		const data = { name: userName };
 		console.log("userRead: fetching " + newURL);
@@ -259,6 +257,7 @@ async function postData(url, data) {
 	});
 	return resp;
 }
+
 function usersSearch() {
 	(async () => {
 		//we need to change this element id based on the html page
