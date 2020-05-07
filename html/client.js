@@ -55,7 +55,7 @@ function userRead() {
 		const j = await resp.json();
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
-			let own;
+			let own = "";
 			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j.user.own) {
 				console.log(element);
