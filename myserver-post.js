@@ -296,7 +296,7 @@ var MyServer = /** @class */ (function () {
                         response.end();
                         return [3 /*break*/, 4];
                     case 3:
-                        response.write(JSON.stringify({ result: "game already in list" }));
+                        response.write(JSON.stringify({ result: "game already in list", name: name }));
                         response.end();
                         _a.label = 4;
                     case 4: return [2 /*return*/];
@@ -562,12 +562,12 @@ var MyServer = /** @class */ (function () {
                         user = _b.sent();
                         console.log(user);
                         if (user == null) {
-                            response.write(JSON.stringify({ result: "user not found" }));
+                            response.write(JSON.stringify({ result: "session invalid" }));
                             response.end();
                         }
                         console.log(user.sessionId);
                         if (!(user.sessionId == -1)) return [3 /*break*/, 2];
-                        response.write(JSON.stringify({ result: "user not logged in" }));
+                        response.write(JSON.stringify({ result: "session invalid" }));
                         response.end();
                         return [3 /*break*/, 5];
                     case 2:

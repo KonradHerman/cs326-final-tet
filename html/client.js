@@ -342,14 +342,7 @@ function checkSession() {
 			console.log(resp);
 			const j = await resp.json();
 			if (j["result"] !== "error") {
-				if (j["result"] === "user not found") {
-					console.log("session user not found");
-				} else if (j["result" === "session invalid"]) {
-					document.body.innerHTML = "<h1>Your Session is invalid</h1>";
-					window.setTimeout(function () {
-						window.location.href = "https://tet326.herokuapp.com";
-					}, 3000);
-				} else if (j["result" === "user not logged in"]) {
+				if (j["result" === "session invalid"]) {
 					document.body.innerHTML = "<h1>Your Session is invalid</h1>";
 					window.setTimeout(function () {
 						window.location.href = "https://tet326.herokuapp.com";
@@ -383,7 +376,8 @@ function endSession() {
 		} else {
 			window.setTimeout(function () {
 				sessionStorage.setItem("sessionId", "-1");
-			}, 10000);
+				window.location.href = "https://tet326.herokuapp.com";
+			}, 3600000);
 		}
 	})();
 }

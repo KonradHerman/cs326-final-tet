@@ -184,7 +184,7 @@ export class MyServer {
 			response.end();
 		}
 		else {
-			response.write(JSON.stringify({ result: "game already in list"}));
+			response.write(JSON.stringify({ result: "game already in list", name: name}));
 			response.end();
 		}
 	}
@@ -382,12 +382,12 @@ export class MyServer {
 		let user = await this.users.get(username);
 		console.log(user);
 		if (user == null) {
-			response.write(JSON.stringify({ result: "user not found" }));
+			response.write(JSON.stringify({ result: "session invalid" }));
 			response.end();
 		}
 		console.log(user.sessionId);
 		if (user.sessionId == -1) {
-			response.write(JSON.stringify({ result: "user not logged in" }));
+			response.write(JSON.stringify({ result: "session invalid" }));
 			response.end();
 		} else {
 			try {
