@@ -56,13 +56,20 @@ function userRead() {
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			let own = "";
+			let want = "";
 			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j.user.own) {
 				console.log(element);
 				own += "<tr><td>" + element + "</td></tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
+			for (const element of j.user.want) {
+				console.log(element);
+				want += "<tr><td>" + element + "</td></tr>";
+				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
+			}
 			document.getElementById("ownGames").innerHTML += own;
+			document.getElementById("wantGames").innerHTML += want;
 		} else {
 			console.log("failure to read");
 		}
