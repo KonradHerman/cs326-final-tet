@@ -74,6 +74,19 @@ var Database = /** @class */ (function () {
             });
         });
     };
+    Database.prototype.put = function (name, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                db = this.client.db(this.dbName);
+                collection = db.collection(this.collectionName);
+                console.log("putting: value = " + value);
+                result = collection.updateOne({ name: name }, { $set: { sesionId: value } });
+                console.log("result = " + result);
+                return [2 /*return*/];
+            });
+        });
+    };
     Database.prototype.push = function (name, key, value) {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
@@ -166,6 +179,34 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         console.log(result);
                         console.log("getAll returned");
+                        if (result) {
+                            return [2 /*return*/, result];
+                        }
+                        else {
+                            return [2 /*return*/, null];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.getSome = function (key, list) {
+        return __awaiter(this, void 0, void 0, function () {
+            var db, collection, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        db = this.client.db(this.dbName);
+                        collection = db.collection(this.collectionName);
+                        console.log("getting some");
+                        return [4 /*yield*/, collection
+                                .find({ name: { $in: list } }, { password: 0 })
+                                .sort({ name: 1 })
+                                .toArray()];
+                    case 1:
+                        result = _a.sent();
+                        console.log(result);
+                        console.log("getSome returned");
                         if (result) {
                             return [2 /*return*/, result];
                         }

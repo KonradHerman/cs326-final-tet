@@ -447,36 +447,37 @@ var MyServer = /** @class */ (function () {
                         // if user doesnt exist
                         response.write(JSON.stringify({ result: "user not found" })); // some other response?
                         response.end();
-                        return [3 /*break*/, 5];
+                        return [3 /*break*/, 8];
                     case 2:
-                        _b.trys.push([2, 4, , 5]);
+                        _b.trys.push([2, 7, , 8]);
                         return [4 /*yield*/, bcrypt.compare(password, user.password)];
                     case 3:
-                        // the hashing works, just need user.password to return the password in the database as a string
-                        if (_b.sent()) {
-                            sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
-                            ;
-                            hashedSessionId = bcrypt.hash(sessionId, 10);
-                            // update user.sessionId = sessionId
-                            response.write(JSON.stringify({
-                                result: "redirect",
-                                username: name,
-                                sessionId: hashedSessionId
-                            }));
-                            // heroku build me
-                            response.end();
-                        }
-                        else {
-                            response.write(JSON.stringify({ result: "Incorrect Password" }));
-                            response.end();
-                        }
-                        return [3 /*break*/, 5];
+                        if (!_b.sent()) return [3 /*break*/, 5];
+                        sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
+                        ;
+                        hashedSessionId = bcrypt.hash(sessionId, 10);
+                        return [4 /*yield*/, this.users.put(name, sessionId)];
                     case 4:
+                        _b.sent();
+                        response.write(JSON.stringify({
+                            result: "redirect",
+                            username: name,
+                            sessionId: hashedSessionId
+                        }));
+                        // heroku build me
+                        response.end();
+                        return [3 /*break*/, 6];
+                    case 5:
+                        response.write(JSON.stringify({ result: "Incorrect Password" }));
+                        response.end();
+                        _b.label = 6;
+                    case 6: return [3 /*break*/, 8];
+                    case 7:
                         _a = _b.sent();
                         response.write(JSON.stringify({ result: "caught error" }));
                         response.end();
-                        return [3 /*break*/, 5];
-                    case 5: return [2 /*return*/];
+                        return [3 /*break*/, 8];
+                    case 8: return [2 /*return*/];
                 }
             });
         });
@@ -526,8 +527,12 @@ var MyServer = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.users.get(username)];
                     case 1:
                         user = _b.sent();
-                        if (!(user == null)) return [3 /*break*/, 2];
-                        response.write(JSON.stringify({ result: "user not found" })); // some other response?
+                        if (user == null) {
+                            response.write(JSON.stringify({ result: "user not found" })); // some other response?
+                            response.end();
+                        }
+                        if (!(user.sessionId === -1)) return [3 /*break*/, 2];
+                        response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
                         response.end();
                         return [3 /*break*/, 5];
                     case 2:

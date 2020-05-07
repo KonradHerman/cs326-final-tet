@@ -308,7 +308,7 @@ export class MyServer {
 				if (await bcrypt.compare(password, user.password)) {
 					let sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
 					let hashedSessionId = bcrypt.hash(sessionId, 10);
-					// update user.sessionId = sessionId
+					await this.users.put(name, sessionId);
 					response.write(
 						JSON.stringify({
 							result: "redirect",
@@ -370,6 +370,10 @@ export class MyServer {
 		let user = await this.users.get(username);
 		if (user == null) {
 			response.write(JSON.stringify({ result: "user not found" })); // some other response?
+			response.end();
+		}
+		if (user.sessionId === -1){
+			response.write(JSON.stringify({ result: "user not logged in" })); // some other response?
 			response.end();
 		}
 		else {
