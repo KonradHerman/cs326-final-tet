@@ -208,7 +208,8 @@ function userLogin() {
 				document.getElementById("login-output").innerHTML = "Signing you in!";
 				document.getElementById("login-output").style.color = "green";
 				let out = userName + " logged in";
-				window.location.href = j["url"];
+				sessionStorage.setItem("username", j["username"]);
+				window.location.href = "https://tet326.herokuapp.com/home.html"
 				console.log(out);
 			}
 		} else {

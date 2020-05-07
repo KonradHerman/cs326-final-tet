@@ -441,7 +441,7 @@ var MyServer = /** @class */ (function () {
                         if (_b.sent()) {
                             response.write(JSON.stringify({
                                 result: "redirect",
-                                url: "https://tet326.herokuapp.com/home.html"
+                                username: name
                             }));
                             // heroku build me
                             response.end();

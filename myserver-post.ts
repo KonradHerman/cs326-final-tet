@@ -296,7 +296,7 @@ export class MyServer {
 					response.write(
 						JSON.stringify({
 							result: "redirect",
-							url: "https://tet326.herokuapp.com/home.html",
+							username: name,
 						})
 					);
 					// heroku build me
