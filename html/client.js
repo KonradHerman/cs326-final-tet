@@ -58,10 +58,7 @@ function userRead() {
 			let own = document.getElementById("ownGames").innerHTML;
 			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j["own"]) {
-				own +=
-					"<tr>\n<td>" +
-					element +
-					"</td>\n</tr>";
+				own += "<tr>\n<td>" + element + "</td>\n</tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
 		} else {
@@ -285,12 +282,18 @@ function usersSearch() {
 		const j2 = await resp2.json();
 		console.log(j2.users);
 		if (j["result"] !== "error") {
+			document.getElementById(
+				"searchuseroutput"
+			).innerHTML = document.getElementById("searchuseroutput").innerHTML =
+				'<a href="#" class="list-group-item primary"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' +
+				j.game.name +
+				'</h5></div><p class="mb-1" id="usernamesandemails"></p><small>Donec id elit non mi porta.</small></a>';
 			for (let i of j2.users) {
-				document.getElementById("searchuseroutput").innerHTML +=
-					"<a>" + i.name + "</a><br>";
+				document.getElementById(
+					"usernamesandemails"
+				).innerHTML = document.getElementById("usernamesandemails").innerHTML +=
+					i.name + " " + i.email;
 			}
-			document.getElementById("searchuseroutput").innerHTML +=
-				'<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>';
 		} else {
 			console.log("failure to read all");
 		}
@@ -336,4 +339,10 @@ function checkSession() {
 			}
 		}
 	})();
+}
+
+function fillUser() {
+	document.getElementById(
+		"navbarDropdownMenuLink"
+	).innerHTML = sessionStorage.getItem("username");
 }
