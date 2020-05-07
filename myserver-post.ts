@@ -142,6 +142,7 @@ export class MyServer {
 			request.body.password,
 			request.body.img,
 			request.body.zip,
+			request.body.sessionId,
 			response
 		);
 	}
@@ -241,6 +242,7 @@ export class MyServer {
 		password: string,
 		img: string,
 		zip: string,
+		sessionId: string,
 		response
 	): Promise<void> {
 		const userName = await this.users.get(name); // username searched in database
@@ -273,6 +275,8 @@ export class MyServer {
 					hashedPassword +
 					'","img":"none","zip":"' +
 					zip +
+					'","sessionId":"' +
+					sessionId +
 					'","own":[],"want":[]}'
 				);
 				response.write(JSON.stringify({ result: "created", name: name }));

@@ -284,7 +284,7 @@ function checkSession() {
 	let username = sessionStorage.getItem("username"); // this is already public
 	let sessionId = sessionStorage.getItem("sessionId");
 	if(sessionId === null) {
-		document.innerHTML = "<h1>Your Session has Expired</h1>";
+		document.body.innerHTML = "<h1>Your Session has Expired</h1>";
 		window.setTimeout(function(){window.location.href = "https://tet326.herokuapp.com"}, 3000);
 	}
 	else{
@@ -298,7 +298,7 @@ function checkSession() {
 				console.log("session user not found");
 			}
 			else if(j["result" === "session invalid"]){
-				document.innerHTML = "<h1>Your Session is invalid</h1>";
+				document.body.innerHTML = "<h1>Your Session is invalid</h1>";
 				window.setTimeout(function(){window.location.href = "https://tet326.herokuapp.com"}, 3000);
 			}
 			else{

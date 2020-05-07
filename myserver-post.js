@@ -226,7 +226,7 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.createUser(request.body.name, request.body.email, request.body.password, request.body.img, request.body.zip, response)];
+                    case 0: return [4 /*yield*/, this.createUser(request.body.name, request.body.email, request.body.password, request.body.img, request.body.zip, request.body.sessionId, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -373,7 +373,7 @@ var MyServer = /** @class */ (function () {
             });
         });
     };
-    MyServer.prototype.createUser = function (name, email, password, img, zip, response) {
+    MyServer.prototype.createUser = function (name, email, password, img, zip, sessionId, response) {
         return __awaiter(this, void 0, void 0, function () {
             var userName, emailUser, hashedPassword, _a;
             return __generator(this, function (_b) {
@@ -414,6 +414,8 @@ var MyServer = /** @class */ (function () {
                                 hashedPassword +
                                 '","img":"none","zip":"' +
                                 zip +
+                                '","sessionId":"' +
+                                sessionId +
                                 '","own":[],"want":[]}')];
                     case 6:
                         _b.sent();
