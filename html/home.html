@@ -44,7 +44,7 @@
 						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
 							style="color:white"><span id = "username-output">Username</span>
 					</a>
-					<script>fillUser();</script>
+					<script>fillUser("username-output");</script>
 					<ul class="dropdown-menu primary" id="nav-dropdown">
 						<li><a href="profile.html">profile</a></li>
 						<li><a href="#">settings</a></li>
@@ -61,7 +61,8 @@
 		<script>sessionRunner()</script>
 		<ul class="nav navbar-nav bg-primary">
 			<li>
-				<h3 class="text-light">Welcome, User</h3>
+				<script>fillUser("welcome");</script>
+				<h3 class="text-light">Welcome, <span id="welcome">User</span></h3>
 			</li>
 			<!--            <div class="nav-col">-->
 			<!--                <h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>-->
