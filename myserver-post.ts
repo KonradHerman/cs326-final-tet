@@ -173,9 +173,20 @@ export class MyServer {
 		console.log("creating game named '" + name + "'");
 		//await this.theDatabase.put(name, 0);
 		console.log("start");
-		await this.games.add('{"name":"' + name + '","own":[],"want":[]}');
-		response.write(JSON.stringify({ result: "created", name: name }));
-		response.end();
+		let firstLetter = name.charAt(0);
+		let formatName = name.toLocaleLowerCase();
+		formatName = formatName.substr(1);
+		formatName = firstLetter.toUpperCase() + formatName;
+		let gameAlready = await this.games.isFound(formatName);
+		if(!gameAlready) {
+			await this.games.add('{"name":"' + formatName + '","own":[],"want":[]}');
+			response.write(JSON.stringify({ result: "created", name: name }));
+			response.end();
+		}
+		else {
+			response.write(JSON.stringify({ result: "game already in list"}));
+			response.end();
+		}
 	}
 
 	public async errorCounter(name: string, response): Promise<void> {
@@ -335,6 +346,7 @@ export class MyServer {
 		response.write(JSON.stringify({ result: "read", users: users }));
 		response.end();
 	}
+
 	public async updateUser(
 		id: number,
 		img: string,

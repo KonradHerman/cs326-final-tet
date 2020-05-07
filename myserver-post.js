@@ -274,18 +274,32 @@ var MyServer = /** @class */ (function () {
     };
     MyServer.prototype.createGame = function (name, response) {
         return __awaiter(this, void 0, void 0, function () {
+            var firstLetter, formatName, gameAlready;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log("creating game named '" + name + "'");
                         //await this.theDatabase.put(name, 0);
                         console.log("start");
-                        return [4 /*yield*/, this.games.add('{"name":"' + name + '","own":[],"want":[]}')];
+                        firstLetter = name.charAt(0);
+                        formatName = name.toLocaleLowerCase();
+                        formatName = formatName.substr(1);
+                        formatName = firstLetter.toUpperCase() + formatName;
+                        return [4 /*yield*/, this.games.isFound(formatName)];
                     case 1:
+                        gameAlready = _a.sent();
+                        if (!!gameAlready) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.games.add('{"name":"' + formatName + '","own":[],"want":[]}')];
+                    case 2:
                         _a.sent();
                         response.write(JSON.stringify({ result: "created", name: name }));
                         response.end();
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 3:
+                        response.write(JSON.stringify({ result: "game already in list" }));
+                        response.end();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
                 }
             });
         });

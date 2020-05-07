@@ -58,60 +58,56 @@
 	</nav>
 	<div class="container">
 		<script>gameReadAll();</script>
+		<div class="row">
 
-		<div class="form-group">
 			<label for="selectGame">Select a game</label>
 			<select class="btn primary dropdown-toggle" id="selectGame">
 			</select>
 			<div class="btn primary" onclick="usersSearch();" id="showown">Show users who own / want</div>
-			<div class=" container list-group primary" id="searchuseroutput">
-
+			<div class="container primary flex p-2" id="searchuseroutput">
 			</div>
+		</div>
+		<div class="row">
 			<div class="form-group">
 				<label for="gameCreate">Or add a game:</label>
 				<input type="text" class="form-control" id="gameCreate" aria-describedby="emailHelp"
 					placeholder="Enter Game Name">
 			</div>
 			<button type="submit" onclick="gameCreate()" class="btn primary">Submit</button>
-			<!-- (2) Changed the button to an a tag to link to the game create output-->
-			<div class="form-group row">
-				<label for="userid" class="col-sm-2 col-form-label">Enter UserID:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="userid" placeholder="UsEr1">
-				</div><br><br>
-				<div class="row">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="own" value="true" checked>
-						<label class="form-check-label" for="own">Own</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="want" value="false">
-						<label class="form-check-label" for="want">Want</label>
-					</div>
-					<div class="form-check form-check">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="add" value="true" checked>
-						<label class="form-check-label" for="add">Add</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="delete" value="false">
-						<label class="form-check-label" for="delete">Delete</label>
-					</div>
-					<button type="button" onclick="gameUpdate()" class="btn primary">Submit</button>
-				</div>
-
-			</div>
-			<div id="gameCreate-output"></div> <!-- (1) output location for gameCreate() response -->
 		</div>
-		<!--	<div class="container nav" style="width: 70%">-->
-		<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
-		<!--			style="width: 90%; margin-top: 15px; display: inline-block;" onclick="gameReadAll()">-->
+		<!-- (2) Changed the button to an a tag to link to the game create output-->
 
-		<!--			<option dataToken="59392">Test Game</option>-->
-		<!--			<option dataToken="3456">Game</option>-->
-		<!--			<option dataToken="39433">Test</option>-->
-		<!--		</select>-->
-		<!--		<button type="submit" class="btn btn-default">Add Game</button>-->
-		<!--	</div>-->
+		<div class="row">
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="own" value="true" checked>
+				<label class="form-check-label" for="own">Own</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="want" value="false">
+				<label class="form-check-label" for="want">Want</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="add" value="true" checked>
+				<label class="form-check-label" for="add">Add</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="delete" value="false">
+				<label class="form-check-label" for="delete">Delete</label>
+			</div>
+			<button type="button" onclick="gameUpdate()" class="btn primary">Submit</button>
+		</div>
+		<div id="gameCreate-output"></div> <!-- (1) output location for gameCreate() response -->
+	</div>
+	<!--	<div class="container nav" style="width: 70%">-->
+	<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
+	<!--			style="width: 90%; margin-top: 15px; display: inline-block;" onclick="gameReadAll()">-->
+
+	<!--			<option dataToken="59392">Test Game</option>-->
+	<!--			<option dataToken="3456">Game</option>-->
+	<!--			<option dataToken="39433">Test</option>-->
+	<!--		</select>-->
+	<!--		<button type="submit" class="btn btn-default">Add Game</button>-->
+	<!--	</div>-->
 
 
 </body>

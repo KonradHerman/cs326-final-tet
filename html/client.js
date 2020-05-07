@@ -12,10 +12,17 @@ function gameCreate() {
 		const j = await resp.json();
 		if (j["result"] !== "error") {
 			//success
-			let out = gameName + "created";
-			document.getElementById("gameCreate-output").innerHTML +=
-				'<p class="text-primary">' + j.name + "</p><br>";
-			console.log(out);
+			if (j["result"] === "game already in list") {
+				let out = gameName + " already in list";
+				console.log(out);
+				document.getElementById("gameCreate-output").innerHTML =
+					'<p class="text-primary">' + out + "</p><br>";
+			} else {
+				let out = gameName + "created";
+				document.getElementById("gameCreate-output").innerHTML =
+					'<p class="text-primary">' + j.name + "</p><br>";
+				console.log(out);
+			}
 		} else {
 			//error
 			let out = gameName + "not created";
@@ -302,9 +309,9 @@ function usersSearch() {
 
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML =
-				'<div class="row flex p-2"><h5 class="flex p-2">' +
+				'<div class="row flex p-2"><div class="text-center"><h4 class="flex p-2">' +
 				j.game.name +
-				'</h5></div><div class=row><ul class="list-group col-xs-6 text-primary flex p-2" id="owners"></ul><ul class="list-group col-xs-6 text-primary flex p-2" id="wanters"></ul></div>';
+				'</h4></div></div><div class=row><div class="col-xs-6"><h5 class="text-center">Owners</h5><ul class="list-group text-primary flex p-2" id="owners"></ul></div><div class="col-xs-6"><h5 class="text-center">Wanters</h5><ul class="list-group text-primary flex p-2" id="wanters"></ul></div></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
