@@ -377,7 +377,7 @@ function endSession(){
 		else{
 			window.setTimeout(function(){
 				sessionStorage.setItem("sessionId", "-1");
-			}, 3600000);
+			}, 10000);
 		} 
 	})();
 }
