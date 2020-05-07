@@ -307,7 +307,7 @@ export class MyServer {
 				// the hashing works, just need user.password to return the password in the database as a string
 				if (await bcrypt.compare(password, user.password)) {
 					let sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
-					let hashedSessionId = bcrypt.hash(sessionId, 10);
+					let hashedSessionId = await bcrypt.hash(sessionId, 10);
 					await this.users.put(name, sessionId);
 					response.write(
 						JSON.stringify({
