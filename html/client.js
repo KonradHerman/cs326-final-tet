@@ -297,7 +297,7 @@ function usersSearch() {
 			document.getElementById("searchuseroutput").innerHTML =
 				'<div class="primary"><h5 class="mb-1">' +
 				j.game.name +
-				'</h5><ul class="list-group col text-primary" id="owners"></ul><ul class="list-group col text-primary" id="wanters"></ul></div>';
+				'</h5><ul class="list-group col-xs-6 text-primary" id="owners"></ul><ul class="list-group col-xs-6 text-primary" id="wanters"></ul></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
