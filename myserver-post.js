@@ -99,6 +99,7 @@ var MyServer = /** @class */ (function () {
         this.router.post("/users/create", this.createUserHandler.bind(this));
         this.router.post("/users/login", this.loginUserHandler.bind(this));
         this.router.post("/users/read", this.readUserHandler.bind(this));
+        this.router.post("/users/readsome", this.readSomeUsersHandler.bind(this));
         this.router.post("/users/update", this.updateUserHandler.bind(this));
         this.router.post("/users/session", this.sessionUserHandler.bind(this));
         this.router.post("/users/delete", [
@@ -239,6 +240,18 @@ var MyServer = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.readUser(request.body.name, response)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MyServer.prototype.readSomeUsersHandler = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.readSomeUsers(request.body.names, response)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -453,8 +466,7 @@ var MyServer = /** @class */ (function () {
                         return [4 /*yield*/, bcrypt.compare(password, user.password)];
                     case 3:
                         if (!_b.sent()) return [3 /*break*/, 6];
-                        sessionId = (Math.random() * 2147483647).toString() // largest 32 bit signed integer
-                        ;
+                        sessionId = (Math.random() * 2147483647).toString();
                         return [4 /*yield*/, bcrypt.hash(sessionId, 10)];
                     case 4:
                         hashedSessionId = _b.sent();
@@ -490,6 +502,17 @@ var MyServer = /** @class */ (function () {
             return __generator(this, function (_a) {
                 user = this.users.get(name);
                 response.write(JSON.stringify({ result: "read", user: user }));
+                response.end();
+                return [2 /*return*/];
+            });
+        });
+    };
+    MyServer.prototype.readSomeUsers = function (names, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var users;
+            return __generator(this, function (_a) {
+                users = this.users.getSome(names);
+                response.write(JSON.stringify({ result: "read", users: users }));
                 response.end();
                 return [2 /*return*/];
             });
