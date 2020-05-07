@@ -302,9 +302,9 @@ function usersSearch() {
 
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML =
-				'<div class="row"><h5 class="p-2">' +
+				'<div class="row flex p-2"><h5 class="flex p-2">' +
 				j.game.name +
-				'</h5></div><div class=row><ul class="list-group col-xs-6 text-primary p-2" id="owners"></ul><ul class="list-group col-xs-6 text-primary p-2" id="wanters"></ul></div>';
+				'</h5></div><div class=row><ul class="list-group col-xs-6 text-primary flex p-2" id="owners"></ul><ul class="list-group col-xs-6 text-primary flex p-2" id="wanters"></ul></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
