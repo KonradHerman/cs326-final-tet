@@ -56,7 +56,7 @@ function userRead() {
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			let own = document.getElementById("ownGames").innerHTML;
-			let want = document.getElementById("wantGames").innerHTML;
+			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j["own"]) {
 				own +=
 					"<tr>\n<td>" +
