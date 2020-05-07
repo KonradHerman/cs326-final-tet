@@ -295,9 +295,9 @@ function usersSearch() {
 
 		if (j["result"] !== "error") {
 			document.getElementById("searchuseroutput").innerHTML =
-				'<h5 class="mb-1">' +
+				'<div class="row"><h5 class="m-2">' +
 				j.game.name +
-				'</h5><ul class="list-group col-xs-6 text-primary" id="owners"></ul><ul class="list-group col-xs-6 text-primary" id="wanters"></ul><br>';
+				'</h5></div><div class=row><ul class="list-group col-xs-6 text-primary m-2" id="owners"></ul><ul class="list-group col-xs-6 text-primary m-2" id="wanters"></ul></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
 					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
@@ -353,12 +353,12 @@ function checkSession() {
 	})();
 }
 
-function sessionRunner(){
+function sessionRunner() {
 	window.setInterval(checkSession(), 10000);
 	window.setTimeout(endSession(), 20000);
 }
 
-function endSession(){
+function endSession() {
 	(async () => {
 		let sessionId = sessionStorage.getItem("sessionId");
 		if (sessionId == null) {
@@ -366,11 +366,10 @@ function endSession(){
 			window.setTimeout(function () {
 				window.location.href = "https://tet326.herokuapp.com";
 			}, 3000);
-		}
-		else{
+		} else {
 			sessionStorage.setItem("sessionId", "-1");
 			sessionStorage.clear();
-		} 
+		}
 	})();
 }
 
