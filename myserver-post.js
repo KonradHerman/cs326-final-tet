@@ -500,10 +500,14 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
-                user = this.users.get(name);
-                response.write(JSON.stringify({ result: "read", user: user }));
-                response.end();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.users.get(name)];
+                    case 1:
+                        user = _a.sent();
+                        response.write(JSON.stringify({ result: "read", user: user }));
+                        response.end();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -511,10 +515,14 @@ var MyServer = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var users;
             return __generator(this, function (_a) {
-                users = this.users.getSome(names);
-                response.write(JSON.stringify({ result: "read", users: users }));
-                response.end();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.users.getSome(names)];
+                    case 1:
+                        users = _a.sent();
+                        response.write(JSON.stringify({ result: "read", users: users }));
+                        response.end();
+                        return [2 /*return*/];
+                }
             });
         });
     };

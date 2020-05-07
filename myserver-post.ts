@@ -332,12 +332,12 @@ export class MyServer {
 	}
 
 	public async readUser(name: string, response): Promise<void> {
-		let user = this.users.get(name);
+		let user = await this.users.get(name);
 		response.write(JSON.stringify({ result: "read", user: user }));
 		response.end();
 	}
 	public async readSomeUsers(names: string[], response): Promise<void> {
-		let users = this.users.getSome(names);
+		let users = await this.users.getSome(names);
 		response.write(JSON.stringify({ result: "read", users: users }));
 		response.end();
 	}
