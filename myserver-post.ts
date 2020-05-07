@@ -51,7 +51,6 @@ export class MyServer {
 		// this.server.use(passport.session());
 
 		//home
-		this.router.post("/home", this.homeHandler.bind(this));
 		// Set a single handler for a route.
 		this.router.post("/games/create", this.createHandler.bind(this));
 		// Set multiple handlers for a route, in sequence.
@@ -60,7 +59,6 @@ export class MyServer {
 			//this.errorHandler.bind(this),
 			this.readallHandler.bind(this)
 		);
-		this.server.get("/home", this.homeHandler.bind(this));
 		this.router.post("/games/read", this.readHandler.bind(this));
 		this.router.post("/games/update", [
 			// this.errorHandler.bind(this),
@@ -81,11 +79,7 @@ export class MyServer {
 			response.send(JSON.stringify({ result: "command-not-found" }));
 		});
 		// Start up the counter endpoint at '/counter'.
-		this.server.use("/counter", this.router);
-	}
-
-	private async homeHandler(request, response): Promise<void> {
-		await response.redirect("https://tet326.herokuapp.com");
+		this.server.use("/api", this.router);
 	}
 
 	private async loginUserHandler(request, response): Promise<void> {
