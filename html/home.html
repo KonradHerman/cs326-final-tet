@@ -24,6 +24,7 @@
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="style.css">
+	<script>userRead()</script>
 </head>
 
 <body class="bg-primary">
@@ -55,6 +56,7 @@
 	</nav>
 	<div class="container nav bg-primary">
 		<script>console.log(sessionStorage.getItem("username"));</script>
+		<script>console.log(sessionStorage.getItem("sessionId"));</script>
 		<script>checkSession();</script>
 		<ul class="nav navbar-nav bg-primary">
 			<li>
