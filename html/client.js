@@ -56,13 +56,20 @@ function userRead() {
 		console.log(JSON.stringify(j));
 		if (j["result"] !== "error") {
 			let own = "";
+			let want = "";
 			//let want = document.getElementById("wantGames").innerHTML;
 			for (const element of j.user.own) {
 				console.log(element);
 				own += "<tr><td>" + element + "</td></tr>";
 				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
 			}
+			for (const element of j.user.want) {
+				console.log(element);
+				want += "<tr><td>" + element + "</td></tr>";
+				// document.getElEmentById("selectGame").innerHTML += // (1) changed id output to dropdown-output
+			}
 			document.getElementById("ownGames").innerHTML += own;
+			document.getElementById("wantGames").innerHTML += want;
 		} else {
 			console.log("failure to read");
 		}
@@ -354,8 +361,8 @@ function checkSession() {
 }
 
 function sessionRunner() {
-	window.setInterval(checkSession(), 10000);
-	window.setTimeout(endSession(), 20000);
+	window.setInterval(checkSession(), 600000);
+	endSession();
 }
 
 function endSession() {
@@ -367,10 +374,18 @@ function endSession() {
 				window.location.href = "https://tet326.herokuapp.com";
 			}, 3000);
 		} else {
-			sessionStorage.setItem("sessionId", "-1");
-			sessionStorage.clear();
+			window.setTimeout(function () {
+				sessionStorage.setItem("sessionId", "-1");
+			}, 10000);
 		}
 	})();
+}
+
+function logout() {
+	sessionStorage.clear();
+	window.setTimeout(function () {
+		window.location.href = "https://tet326.herokuapp.com";
+	}, 1000);
 }
 
 function fillUser() {
