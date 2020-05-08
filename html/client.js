@@ -314,11 +314,13 @@ function usersSearch() {
 				'</h4></div></div><div class=row><div class="col-xs-6"><h5 class="text-center">Owners</h5><ul class="list-group text-primary flex p-2" id="owners"></ul></div><div class="col-xs-6"><h5 class="text-center">Looking to Play</h5><ul class="list-group text-primary flex p-2" id="wanters"></ul></div></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
-					' <li class="list-group-item">' + i.name + " <b>" + i.zip + "</b> (" + i.email + ")</li>";
+					' <li class="list-group-item">' + i.name + ' <b>' + i.zip + '</b> (<a href="mailto:' + i.email + '">'+
+					i.email + '</a>)</li>';
 			}
 			for (let i of wanters.users) {
 				document.getElementById("wanters").innerHTML +=
-					' <li class="list-group-item">' + i.name + " <b>" + i.zip + "</b> (" + i.email + ")</li>";
+					' <li class="list-group-item">' + i.name + ' <b>' + i.zip + '</b> (<a href="mailto:' + i.email + '">'+
+					i.email + '</a>)</li>';
 			}
 		} else {
 			console.log("failure to read all");
