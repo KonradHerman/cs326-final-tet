@@ -9,9 +9,13 @@
 Overview:BoredGames is a web-app developed to help board game enthusiasts connect with each other. Functionalities of our website include: user specific games (sorted by owned and wanted), contact information of users who play a specific game (also sorted by owned or wanted), and their zip code.
 Uniqueness: Our application provides a medium of connection for people who own / want to play board games which is unique in itself. This also implies that the functionality of our application is unique.
 User Interface: A final up-to-date list/table describing your application’s user interface. This should include the name of the UI view and its purpose. You should include a screenshot of each of your UI views.
+![Login](imgs/loginf.png)
 Login - this page provides the user with an interface to enter their username / passwords (both of which have form inputs) so that the user can securely log into the website
+![Register](imgs/register.png)
 Create Account - this page provides us with a way to create a new account (in case you don't have one already!). There are input fields for username, password, email and zip code so that we can use this information for pages to come.
+![home](imgs/homef.png)
 Home - the Home page provides users where they can see the games they own, as well as the games they want to play
+![search](imgs/searchf.png)
 Search - This is the key webpage on the site. It enables the user to add a game to their owned / want to play list
 
 ## API
@@ -264,11 +268,14 @@ games document
 
 ## URL Routes/Mappings
 
-URL Routes/Mappings: A final up-to-date table of all the URL routes that your application supports and a short description of what those routes are used for. You should also indicate any authentication and permissions on those routes.
+| URL                                              | Permission            | Description                                           |
+|--------------------------------------------------|-----------------------|-------------------------------------------------------|
+| https://tet326.herokuapp.com/                    | any                   | Login page                                            |
+| https://tet326.herokuapp.com/create-account.html | any                   | Register an account                                   |
+| https://tet326.herokuapp.com/home.html           | must be authenticated | Home page displaying the users games.                 |
+| https://tet326.herokuapp.com/search.html         | must be authenticated | Search page where users can find new games and users. |
 
 ## Authentication
-
-Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
 
 In order to access the website, users must login first. If a user does not currently have an account they can create one from the create-account.html page.
 
@@ -286,18 +293,20 @@ Every user has a session ID. When an account is first created this value is sent
 
 ## Division of Labor
 
-Division of Labor: A breakdown of the division of labor for each team member — that is, saying who did what, for the entire project. Remember that everyone is expected to contribute roughly equally to each phase of the project. We expect to see similar numbers and kinds of GitHub commits by each student.
-
-1. All the labor was divided as equally as possible
-2. Most methods have multiple contributors
+1. All the labor was divided as equally as possible.
+    - That being said, Konrad specialized most in backend database configuration.
+    - Doug put a good amount of time in getting authentication and sessions to work.
+    - and Kash was very influential in the design language and front end design.
+2. Most methods have multiple contributors.
 3. All 3 members have been involved in writing CSS, Client side JS, Backend TS, and Deployment on Heroku.
 4. There was no "splitting of work" for any of the components. A group effort was prioritized even for the smallest components.
 5. For components not involving collaboration, github provides an extensive documentation for each method.
 
 ## Conclusion
 
-Conclusion:
 This project started off with us developing the front-end and then working towards the back end. This seemed counterintuitive to us as a team and would have preferred to start with the back-end and database operations.
-We also wished that we could have a better understanding of SQL or any relational database ealrier, as we realized too late that MongoDB wasn't the ideal choice for developing our back-end.
+We also wished that we could have a better understanding of SQL or any relational database earlier, as we realized too late that MongoDB wasn't the ideal choice for developing our back-end.
 Overall, this project was a great learning experience for us as a team, as well as for our individual development as future software engineers.
 A bunch of technical hurdles we have faced included: local heroku bugs, issues with using a non-relational database, CSS and HTML being annoying, among other things.
+At first we believe we were expected to implement a messaging service, however, given that Authentication proved do be rather difficult and was later made non mandatory,
+we decided to put more effort into getting that to work since it would be necessary for messaging.
