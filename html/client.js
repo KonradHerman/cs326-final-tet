@@ -389,8 +389,8 @@ function logout() {
 	}, 1000);
 }
 
-function fillUser() {
-	document.getElementById("username-output").innerHTML = sessionStorage.getItem(
+function fillUser(htmlID) {
+	document.getElementById(htmlID).innerHTML = sessionStorage.getItem(
 		"username"
 	);
 }
