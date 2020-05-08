@@ -9,6 +9,10 @@
 Overview:BoredGames is a web-app developed to help board game enthusiasts connect with each other. Functionalities of our website include: user specific games (sorted by owned and wanted), contact information of users who play a specific game (also sorted by owned or wanted), and their zip code.
 Uniqueness: Our application provides a medium of connection for people who own / want to play board games which is unique in itself. This also implies that the functionality of our application is unique.
 User Interface: A final up-to-date list/table describing your application’s user interface. This should include the name of the UI view and its purpose. You should include a screenshot of each of your UI views.
+Login - this page provides the user with an interface to enter their username / passwords (both of which have form inputs) so that the user can securely log into the website
+Create Account - this page provides us with a way to create a new account (in case you don't have one already!). There are input fields for username, password, email and zip code so that we can use this information for pages to come.
+Home - the Home page provides users where they can see the games they own, as well as the games they want to play
+Search - This is the key webpage on the site. It enables the user to add a game to their owned / want to play list
 
 ## API
 
