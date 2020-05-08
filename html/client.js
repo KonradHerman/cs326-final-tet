@@ -311,14 +311,14 @@ function usersSearch() {
 			document.getElementById("searchuseroutput").innerHTML =
 				'<div class="row flex p-2"><div class="text-center"><h4 class="flex p-2">' +
 				j.game.name +
-				'</h4></div></div><div class=row><div class="col-xs-6"><h5 class="text-center">Owners</h5><ul class="list-group text-primary flex p-2" id="owners"></ul></div><div class="col-xs-6"><h5 class="text-center">Wanters</h5><ul class="list-group text-primary flex p-2" id="wanters"></ul></div></div>';
+				'</h4></div></div><div class=row><div class="col-xs-6"><h5 class="text-center">Owners</h5><ul class="list-group text-primary flex p-2" id="owners"></ul></div><div class="col-xs-6"><h5 class="text-center">Looking to Play</h5><ul class="list-group text-primary flex p-2" id="wanters"></ul></div></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
-					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
+					' <li class="list-group-item">' + i.name + " <b>" + i.zip + "</b> (" + i.email + ")</li>";
 			}
 			for (let i of wanters.users) {
 				document.getElementById("wanters").innerHTML +=
-					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
+					' <li class="list-group-item">' + i.name + " <b>" + i.zip + "</b> (" + i.email + ")</li>";
 			}
 		} else {
 			console.log("failure to read all");
