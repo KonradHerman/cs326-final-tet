@@ -41,10 +41,10 @@
 				<li class="dropdown">
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						style="color:white">
-						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
-							style="color:white" id = "username-output">Username
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;">
+						<span id = "username-output">Username</span>
 					</a>
-					<script>fillUser("username-output");</script>
+					<!-- <script>fillUser("username-output");</script> -->
 					<ul class="dropdown-menu primary" id="nav-dropdown">
 						<li><a href="profile.html">profile</a></li>
 						<li><a href="#">settings</a></li>
@@ -58,7 +58,7 @@
 	<div class="container nav bg-primary">
 		<script>console.log(sessionStorage.getItem("username"));</script>
 		<script>console.log(sessionStorage.getItem("sessionId"));</script>
-		<script>sessionRunner()</script>
+		<!-- <script>sessionRunner()</script> -->
 		<ul class="nav navbar-nav bg-primary">
 			<li>
 				<script>fillUser("welcome");</script>

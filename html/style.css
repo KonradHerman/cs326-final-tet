@@ -38,6 +38,18 @@
 #navbarDropdownMenuLink {
 	overflow: visible;
 }
+.nav .open > a, .nav .open > a:focus{
+	background-color: transparent;
+}
+
+.nav > li > a:focus, .nav > li > a:hover{
+	background-color: transparent;
+	color: #263238;
+}
+
+#navbarDropdownMenuLink:hover a{
+	color: #263238;
+}
 
 /* .btn-file {
   overflow: hidden;
