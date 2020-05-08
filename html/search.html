@@ -29,22 +29,21 @@
 </head>
 
 <body class="bg-primary">
-<!--	<script>sessionRunner()</script>-->
 	<nav class="navbar navbar-dark">
 		<div class="container-fluid navbar-dark ">
 			<div class="navbar-header navbar-dark ">
 				<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a style="color:white" href="home.html">Home</a></li>
-				<li><a style="color:white" href="search.html">Search</a></li>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="search.html">Search</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right navbar-dark ">
 				<li class="dropdown">
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						style="color:white">
-						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
-							style="color:white" id="username-output">Username
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;">
+						<span id="username-output">Username</span>
 					</a>
 					<script>fillUser("username-output");</script>
 					<ul class="dropdown-menu primary" id="nav-dropdown">
@@ -111,7 +110,7 @@
 	<!--		<button type="submit" class="btn btn-default">Add Game</button>-->
 	<!--	</div>-->
 
-
+	<script>sessionRunner()</script>
 </body>
 
 </html>
