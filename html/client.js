@@ -147,7 +147,7 @@ function userCreate() {
 		let email = document.getElementById("email").value;
 		let password1 = document.getElementById("password1").value;
 		let password2 = document.getElementById("password2").value;
-		let zip = "01002";
+		let zip = document.getElementById("zip").value;
 		let img = "no img";
 		let sessionId = "-1";
 		const data = {
