@@ -83,14 +83,12 @@ var MyServer = /** @class */ (function () {
         // this.server.use(passport.initialize());
         // this.server.use(passport.session());
         //home
-        this.router.post("/home", this.homeHandler.bind(this));
         // Set a single handler for a route.
         this.router.post("/games/create", this.createHandler.bind(this));
         // Set multiple handlers for a route, in sequence.
         this.router.post("/games/readall", 
         //this.errorHandler.bind(this),
         this.readallHandler.bind(this));
-        this.server.get("/home", this.homeHandler.bind(this));
         this.router.post("/games/read", this.readHandler.bind(this));
         this.router.post("/games/update", [
             // this.errorHandler.bind(this),
@@ -114,20 +112,8 @@ var MyServer = /** @class */ (function () {
             });
         }); });
         // Start up the counter endpoint at '/counter'.
-        this.server.use("/counter", this.router);
+        this.server.use("/api", this.router);
     }
-    MyServer.prototype.homeHandler = function (request, response) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, response.redirect("https://tet326.herokuapp.com")];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
     MyServer.prototype.loginUserHandler = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -310,7 +296,7 @@ var MyServer = /** @class */ (function () {
                         response.end();
                         return [3 /*break*/, 4];
                     case 3:
-                        response.write(JSON.stringify({ result: "game already in list" }));
+                        response.write(JSON.stringify({ result: "game already in list", name: name }));
                         response.end();
                         _a.label = 4;
                     case 4: return [2 /*return*/];
@@ -576,12 +562,12 @@ var MyServer = /** @class */ (function () {
                         user = _b.sent();
                         console.log(user);
                         if (user == null) {
-                            response.write(JSON.stringify({ result: "user not found" }));
+                            response.write(JSON.stringify({ result: "session invalid" }));
                             response.end();
                         }
                         console.log(user.sessionId);
                         if (!(user.sessionId == -1)) return [3 /*break*/, 2];
-                        response.write(JSON.stringify({ result: "user not logged in" }));
+                        response.write(JSON.stringify({ result: "session invalid" }));
                         response.end();
                         return [3 /*break*/, 5];
                     case 2:

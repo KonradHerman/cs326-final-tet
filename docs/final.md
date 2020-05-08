@@ -17,25 +17,25 @@ This will allow us to create new games. The user will put in the games name and 
 
 | Parameter | Description                      | Example              |
 | --------- | -------------------------------- | -------------------- |
-| name      | (required) The name of the game. | `name:Secret Hitler` |
+| name      | (required) The name of the game. | `name:Monopoly`      |
 
 #### Responses
 
 The Games API returns response data in a JSON object. Details below.
 
-| Key    | Value Type | Description                                               |
-| ------ | ---------- | --------------------------------------------------------- |
-| result | string     | The type of operation status: one of "created" or "error" |
-| name   | string     | The name of the game created.                             |
+| Key    | Value Type | Description                                                                         |
+| ------ | ---------- | ----------------------------------------------------------------------------------- |
+| result | string     | The type of operation status: one of "created" or "game already in list" or "error" |
+| name   | string     | The name of the game created.                                                       |
 
 ### Read Game
-This will allow us to create new games. The user will put in the games name and a new game will be created with that name.
+This function reads a game from the games database and sends a response to the client
 #### Endpoint URI and Parameters
 `{server:port}/games/read`
 
-| Parameter | Description                    | Example     |
-| --------- | ------------------------------ | ----------- |
-| game      | (required) The id of the game. | game: 19484 |
+| Parameter | Description                      | Example          |
+| --------- | -------------------------------- | ---------------- |
+| name      | (required) The name of the game. | name: "Monopoly" |
 
 #### Responses
 
@@ -44,8 +44,8 @@ The Games API returns response data in a JSON object. Details below.
 | Key    | Value Type | Description                                            |
 | ------ | ---------- | ------------------------------------------------------ |
 | result | string     | The type of operation status: one of "read" or "error" |
-| name   | string     | The name of the game.                                  |
 | id     | number     | The id of the game.                                    |
+| name   | string     | The name of the game.                                  |
 | own    | array      | Array of users who own the game.                       |
 | want   | array      | Array of users who want to play the game.              |
 
@@ -66,7 +66,7 @@ The Games API returns response data in a JSON object. Details below.
 | games  | array      | An array of objects containing all the games and their data. |
 
 ### Update
-This lets us update the games to add users to either the own or want array using a POST request.
+This lets us update the games to add users to either the own or want array.
 #### Endpoint URI and Parameters
 `{server:port}/games/update`
 
@@ -74,8 +74,8 @@ All parameters are required.
 
 | Parameter | Description                                                               | Example        |
 | --------- | ------------------------------------------------------------------------- | -------------- |
-| game      | The id of the game to update.                                             | id : 12345     |
-| user      | The user id to add/remove from the games collection.                      | user_id : 5678 |
+| game      | The name of the game to update.                                           | id : 12345     |
+| user      | The username to add/remove from the games collection.                     | user_id : 5678 |
 | own       | Boolean value to determine whether we are updating the own or want array. | own : true     |
 | add       | Boolean value to determine whether we are adding or removing the user.    | add : true     |
 
@@ -84,7 +84,7 @@ All parameters are required.
 | Key    | Value Type | Description                                               |
 | ------ | ---------- | --------------------------------------------------------- |
 | result | string     | The type of operation status: one of "updated" or "error" |
-| id     | number     | The id of updated game.                                   |
+| id     | number     | The name of updated game.                                 |
 
 ## Users API Documentation
 
@@ -94,19 +94,60 @@ This is called when a user creates an account.
 #### Endpoint URI and Parameters
 `{server:port}/users/create`
 
-| Parameter | Description                            | Example              |
-| --------- | -------------------------------------- | -------------------- |
-| name      | (required)The user's desired username. | username : ChessWhiz |
-| password  | (required)A users desired password.    | password : Pword123  |
-| img       | User's profile picture.                | img : rook.jpg       |
-| zip       | (required)Users zip code.              | zip : 01002          |
+| Parameter  | Description                                      | Example              |
+| ---------- | ------------------------------------------------ | -------------------- |
+| name       | (required)The user's desired username.           | username : ChessWhiz |
+| password   | (required)A users desired password.              | password : Pword123  |
+| img        | User's profile picture.                          | img : rook.jpg       |
+| zip        | (required)User's zip code.                       | zip : 01002          |
+| sesssionId | User's session ID (used for auth)(default is -1) | sessionId: -1        |
 
 #### Responses
-| Key | Value Type | Description |
-|--------|------------|-----------------------------------------------------------|
-| result | string | The type of operation status: one of "created" or "error" |
-| name | string | The user's name. |
-| id | number | The id of created user. |
+
+| Key    | Value Type | Description                                                            |
+|--------|------------|------------------------------------------------------------------------|
+| result | string | operation status: "username in use", "email in use", "created", or "error" |
+| name   | string | The user's name. (only returned with result created)                       |
+
+### Login
+This is called when a user wants to login. A hashed session ID is given to the user after a successful login. This value corresponds to one that is stored in the database. After 2 hours the session ID is set to -1 and no longer valid. The user will be required to login again and will receive a new session ID.
+
+#### Endpoint URI and Parameters
+`{server:port}/users/login`
+
+| Parameter  | Description                                      | Example              |
+| ---------- | ------------------------------------------------ | -------------------- |
+| name       | (required)The user's username.                   | username : ChessWhiz |
+| password   | (required)The user's password.                   | password : Pword123  |
+
+#### Responses
+
+The User API returns response data in a JSON object. Details below.
+
+| Key         | Value Type | Description                                                            |
+|-------------|------------|------------------------------------------------------------------------|
+| result      | string     | operation status: "redirect", "Incorrect Password", "caught error"     |
+| name        | string     | The user's name. (only returned with result: redirect)                 |
+| sessionId   | string     | The hashed sessionId of the user (only returned with result: redirect) |
+
+### Session
+This is called whenever a webpage is routed to. The purpose of this function is to make sure a user is signed in before routing to pages that require user information. This function checks the hashed session idea that is locally stored by the user against the valid session id that is stored on the server. If they are a match, the user will be able to continue to use the website. If they are not a match, the user is routed to the login page. After 2 hours the session ID is set to -1 and no longer valid. The user will be required to login again and will receive a new session ID.
+
+#### Endpoint URI and Parameters
+`{server:port}/users/session`
+
+| Parameter  | Description                             | Example                                                                    |
+| ---------- | --------------------------------------- | -------------------------------------------------------------------------- |
+| name       | (required)The user's username.          | username : ChessWhiz                                                       |
+| sessionId  | (required)The user's current session ID | sessionId : "$2b$10$GemtZfLuXJmaS0Dk3/.RFutF2yekXJMCp1t3jS.7K4l1d1SNSUe6y" |
+
+#### Responses
+
+The User API returns response data in a JSON object.
+
+| Key         | Value Type | Description                                                   |
+|-------------|------------|---------------------------------------------------------------|
+| result      | string     | operation status: "session invalid", "session valid", "error" |
 
 ### Read
 This will generally be called when viewing a user profile.
@@ -120,14 +161,14 @@ This will generally be called when viewing a user profile.
 
 #### Responses
 | Key | Value Type | Description |
-|---------|------------|-----------------------------------------------------------|
-| result | string | The type of operation status: one of "read" or "error". |
-| name | string | The user's name. |
-| id | number | The user id. |
-| zip | string | The user's zip code. |
-| picture | file | The users profile picture. |
-| own | array | Array containing the IDs of games owned by the user. |
-| want | array | Array containing the IDs of games the user wants to play. |
+|---------|--------|-----------------------------------------------------------|
+| result  | string | The type of operation status: one of "read" or "error".   |
+| id      | number | The user id.                                              |
+| name    | string | The user's name.                                          |
+| zip     | string | The user's zip code.                                      |
+| picture | file   | The users profile picture.                                |
+| own     | array  | Array containing the IDs of games owned by the user.      |
+| want    | array  | Array containing the IDs of games the user wants to play. |
 
 ### Update
 This is used to update a user's picture, location, or games.
@@ -137,7 +178,7 @@ This is used to update a user's picture, location, or games.
 
 | Parameter | Description                                                          | Example        |
 | --------- | -------------------------------------------------------------------- | -------------- |
-| id        | (required)The user's id.                                             | id : 1234      |
+| name      | (required)The user's name.                                           | id : 1234      |
 | img       | A new profile picture for the user.                                  | img: panda.png |
 | zip       | A new location for the user.                                         | zip: 11215     |
 | add       | Whether user is adding or removing a game from the list.             | add: false     |
@@ -145,10 +186,9 @@ This is used to update a user's picture, location, or games.
 | game      | The id of the game being added or removed.                           | game: 69392    |
 
 #### Responses
-| Key | Value Type | Description |
+| Key    | Value Type | Description                                               |
 |--------|------------|-----------------------------------------------------------|
-| result | string | The type of operation status: one of "updated" or "error" |
-| id | number | The id of created user. |
+| result | string     | The type of operation status: one of "updated" or "error" |
 
 ### Delete
 This is used when a user wants to delete their account.
@@ -156,15 +196,14 @@ This is used when a user wants to delete their account.
 #### Endpoint URI and Parameters
 `{server:port}/users/delete`
 
-| Parameter | Description              | Example   |
-| --------- | ------------------------ | --------- |
-| id        | (required)The user's id. | id : 1234 |
+| Parameter | Description               | Example      |
+| --------- | ------------------------- | ------------ |
+| name        | (required)The username. | name : Emery |
 
 #### Responses
-| Key | Value Type | Description |
-|--------|------------|-----------------------------------------------------------|
-| result | string | The type of operation status: one of "deleted" or "error" |
-| id | number | The id of created user. |
+| Key    | Value Type | Description                                           |
+|--------|------------|-------------------------------------------------------|
+| result | string     | The type of operation status: one of "deleted" or "error" |
 
 ## Database
 Database: A final up-to-date representation of your database including a brief description of each of the entities in your data model and their relationships if any.

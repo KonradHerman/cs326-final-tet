@@ -29,7 +29,7 @@
 </head>
 
 <body class="bg-primary">
-
+	<script>sessionRunner()</script>
 	<nav class="navbar navbar-dark">
 		<div class="container-fluid navbar-dark ">
 			<div class="navbar-header navbar-dark ">
@@ -44,12 +44,10 @@
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						style="color:white">
 						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
-							style="color:white">Username
+							style="color:white" id="username-output">Username
 					</a>
+					<script>fillUser("username-output");</script>
 					<ul class="dropdown-menu primary" id="nav-dropdown">
-						<li><a href="profile.html">profile</a></li>
-						<li><a href="#">settings</a></li>
-						<li><a href="#">messages</a></li>
 						<li><a href="#">log out</a></li>
 					</ul>
 				</li>
