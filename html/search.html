@@ -67,37 +67,38 @@
 			<div class="container primary flex p-2" id="searchuseroutput">
 			</div>
 		</div>
+
+		<!-- (2) Changed the button to an a tag to link to the game create output-->
+
 		<div class="row">
+			<div class="col">
+				<label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="own" value="true"
+						checked>Own</label>
+
+				<label class="radio-inline"><input class="radio-inline" type="radio" name="inlineRadioOptions" id="want"
+						value="false">Want</label>
+			</div>
+			<div class="col">
+				<label class="radio-inline"><input class="radio-inline" type="radio" name="inlineRadioOptions2" id="add"
+						value="true" checked>Add</label>
+				<label class="radio-inline"><input class="radio-inline" type="radio" name="inlineRadioOptions2" id="delete"
+						value="false">Delete</label>
+			</div>
+			<button type="button" onclick="gameUpdate()" class="btn primary col-xs-2">Add Game to your
+				Profile</button>
+
+		</div>
+		<div id="gameCreate-output"></div>
+		<div class="row ">
 			<div class="form-group">
 				<label for="gameCreate">Or add a game:</label>
 				<input type="text" class="form-control" id="gameCreate" aria-describedby="emailHelp"
 					placeholder="Enter Game Name">
 			</div>
-			<button type="submit" onclick="gameCreate()" class="btn primary">Submit</button>
-		</div>
-		<!-- (2) Changed the button to an a tag to link to the game create output-->
-
-		<div class="row">
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="own" value="true" checked>
-				<label class="form-check-label" for="own">Own</label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="inlineRadioOptions" id="want" value="false">
-				<label class="form-check-label" for="want">Want</label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="add" value="true" checked>
-				<label class="form-check-label" for="add">Add</label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="inlineRadioOptions2" id="delete" value="false">
-				<label class="form-check-label" for="delete">Delete</label>
-			</div>
-			<button type="button" onclick="gameUpdate()" class="btn primary">Submit</button>
-		</div>
-		<div id="gameCreate-output"></div> <!-- (1) output location for gameCreate() response -->
+			<button type="submit" onclick="gameCreate()" class="btn primary col-xs-2">Add Game to our Library</button>
+		</div> <!-- (1) output location for gameCreate() response -->
 	</div>
+
 	<!--	<div class="container nav" style="width: 70%">-->
 	<!--		<select class="selectpicker w-100" id="output" data-live-search="true"-->
 	<!--			style="width: 90%; margin-top: 15px; display: inline-block;" onclick="gameReadAll()">-->
