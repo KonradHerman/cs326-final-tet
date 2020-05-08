@@ -147,7 +147,7 @@ function userCreate() {
 		let email = document.getElementById("email").value;
 		let password1 = document.getElementById("password1").value;
 		let password2 = document.getElementById("password2").value;
-		let zip = "01002";
+		let zip = document.getElementById("zip").value;
 		let img = "no img";
 		let sessionId = "-1";
 		const data = {
@@ -311,14 +311,16 @@ function usersSearch() {
 			document.getElementById("searchuseroutput").innerHTML =
 				'<div class="row flex p-2"><div class="text-center"><h4 class="flex p-2">' +
 				j.game.name +
-				'</h4></div></div><div class=row><div class="col-xs-6"><h5 class="text-center">Owners</h5><ul class="list-group text-primary flex p-2" id="owners"></ul></div><div class="col-xs-6"><h5 class="text-center">Wanters</h5><ul class="list-group text-primary flex p-2" id="wanters"></ul></div></div>';
+				'</h4></div></div><div class=row><div class="col-xs-6"><h5 class="text-center">Owners</h5><ul class="list-group text-primary flex p-2" id="owners"></ul></div><div class="col-xs-6"><h5 class="text-center">Looking to Play</h5><ul class="list-group text-primary flex p-2" id="wanters"></ul></div></div>';
 			for (let i of owners.users) {
 				document.getElementById("owners").innerHTML +=
-					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
+					' <li class="list-group-item">' + i.name + ' <b>' + i.zip + '</b> (<a href="mailto:' + i.email + '">'+
+					i.email + '</a>)</li>';
 			}
 			for (let i of wanters.users) {
 				document.getElementById("wanters").innerHTML +=
-					' <li class="list-group-item">' + i.name + " " + i.email + "</li>";
+					' <li class="list-group-item">' + i.name + ' <b>' + i.zip + '</b> (<a href="mailto:' + i.email + '">'+
+					i.email + '</a>)</li>';
 			}
 		} else {
 			console.log("failure to read all");
@@ -389,8 +391,8 @@ function logout() {
 	}, 1000);
 }
 
-function fillUser(output) {
-	document.getElementById(output).innerHTML = sessionStorage.getItem(
+function fillUser(htmlID) {
+	document.getElementById(htmlID).innerHTML = sessionStorage.getItem(
 		"username"
 	);
 }

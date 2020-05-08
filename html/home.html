@@ -34,21 +34,18 @@
 				<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a style="color:white" href="home.html">Home</a></li>
-				<li><a style="color:white" href="search.html">Search</a></li>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="search.html">Search</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right navbar-dark ">
 				<li class="dropdown">
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						style="color:white">
-						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
-							style="color:white" id = "username-output">Username
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;">
+						<span id = "username-output">Username</span>
 					</a>
 					<script>fillUser("username-output");</script>
 					<ul class="dropdown-menu primary" id="nav-dropdown">
-						<li><a href="profile.html">profile</a></li>
-						<li><a href="#">settings</a></li>
-						<li><a href="#">messages</a></li>
 						<li><a href="#" onclick = "logout();">log out</a></li>
 					</ul>
 				</li>
@@ -58,11 +55,10 @@
 	<div class="container nav bg-primary">
 		<script>console.log(sessionStorage.getItem("username"));</script>
 		<script>console.log(sessionStorage.getItem("sessionId"));</script>
-		<script>sessionRunner()</script>
 		<ul class="nav navbar-nav bg-primary">
 			<li>
-				<script>fillUser("welcome");</script>
 				<h3 class="text-light">Welcome, <span id="welcome">User</span></h3>
+				<script>fillUser("welcome");</script>
 			</li>
 			<!--            <div class="nav-col">-->
 			<!--                <h3>Welcome, User <small><a href="profile.html">edit profile</a></small></h3>-->
@@ -111,6 +107,7 @@
 			</div>
 		</div>
 	</div>
+	<script>sessionRunner()</script>
 </body>
 
 </html>

@@ -29,26 +29,25 @@
 </head>
 
 <body class="bg-primary">
-	<script>sessionRunner()</script>
 	<nav class="navbar navbar-dark">
 		<div class="container-fluid navbar-dark ">
 			<div class="navbar-header navbar-dark ">
 				<span class="navbar-brand" href="#" style="font-size: 20pt;">BoredGames</span>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a style="color:white" href="home.html">Home</a></li>
-				<li><a style="color:white" href="search.html">Search</a></li>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="search.html">Search</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right navbar-dark ">
 				<li class="dropdown">
 					<a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						style="color:white">
-						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;"
-							style="color:white" id="username-output">Username
+						<img src="default-user.png" alt="Profile Picture" style="width: 25px; height: 25px; margin-right: 5px;">
+						<span id="username-output">Username</span>
 					</a>
 					<script>fillUser("username-output");</script>
 					<ul class="dropdown-menu primary" id="nav-dropdown">
-						<li><a href="#">log out</a></li>
+						<li><a href="#" onclick="logout();">log out</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -68,28 +67,31 @@
 
 		<!-- (2) Changed the button to an a tag to link to the game create output-->
 
-		<div class="row">
-			<div class="col">
-				<label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="own" value="true"
+		<div class="flex-row">
+			<div class="col-xs-1" style="position: relative">
+				<label class="radio"><input class="radio" type="radio" name="inlineRadioOptions" id="own" value="true"
 						checked>Own</label>
 
-				<label class="radio-inline"><input class="radio-inline" type="radio" name="inlineRadioOptions" id="want"
+				<label class="radio"><input class="radio" type="radio" name="inlineRadioOptions" id="want"
 						value="false">Want</label>
 			</div>
-			<div class="col">
-				<label class="radio-inline"><input class="radio-inline" type="radio" name="inlineRadioOptions2" id="add"
+			<div class="col-xs-1">
+				<label class="radio"><input class="radio" type="radio" name="inlineRadioOptions2" id="add"
 						value="true" checked>Add</label>
-				<label class="radio-inline"><input class="radio-inline" type="radio" name="inlineRadioOptions2" id="delete"
+				<label class="radio"><input class="radio" type="radio" name="inlineRadioOptions2" id="delete"
 						value="false">Delete</label>
 			</div>
-			<button type="button" onclick="gameUpdate()" class="btn primary col-xs-2">Add Game to your
-				Profile</button>
 
 		</div>
-		<div id="gameCreate-output"></div>
-		<div class="row ">
+		<br><br><br><br>
+		<div class="row">
+			<button type="button" onclick="gameUpdate()" class="btn primary col-xs-2">Add Game to your Profile</button>
+		</div>
+		<br>
+		<div class="row">
 			<div class="form-group">
-				<label for="gameCreate">Or add a game:</label>
+				<p>Cant find your game?</p>
+				<label for="gameCreate">Add a new one!</label>
 				<input type="text" class="form-control" id="gameCreate" aria-describedby="emailHelp"
 					placeholder="Enter Game Name">
 			</div>
@@ -108,7 +110,7 @@
 	<!--		<button type="submit" class="btn btn-default">Add Game</button>-->
 	<!--	</div>-->
 
-
+	<script>sessionRunner()</script>
 </body>
 
 </html>

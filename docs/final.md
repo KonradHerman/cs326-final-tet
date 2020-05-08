@@ -20,7 +20,7 @@ This will allow us to create new games. The user will put in the games name and 
 
 #### Endpoint URI and Parameters
 
-`{server:port}/games/create`
+`https://tet326.herokuapp.com/api/games/create`
 
 | Parameter | Description                      | Example         |
 | --------- | -------------------------------- | --------------- |
@@ -41,7 +41,7 @@ This function reads a game from the games database and sends a response to the c
 
 #### Endpoint URI and Parameters
 
-`{server:port}/games/read`
+`https://tet326.herokuapp.com/api/games/read`
 
 | Parameter | Description                      | Example          |
 | --------- | -------------------------------- | ---------------- |
@@ -65,7 +65,7 @@ This gives us an array of all the games collection.
 
 #### Endpoint URI and Parameters
 
-`{server:port}/games/readall`
+`https://tet326.herokuapp.com/api/games/readall`
 
 No parameters.
 
@@ -78,13 +78,13 @@ The Games API returns response data in a JSON object. Details below.
 | result | string     | The type of operation status: one of "read" or "error"       |
 | games  | array      | An array of objects containing all the games and their data. |
 
-### Update
+### Update Game and User
 
 This lets us update the games to add users to either the own or want array.
 
 #### Endpoint URI and Parameters
 
-`{server:port}/games/update`
+`https://tet326.herokuapp.com/api/games/update`
 
 All parameters are required.
 
@@ -102,15 +102,13 @@ All parameters are required.
 | result | string     | The type of operation status: one of "updated" or "error" |
 | id     | number     | The name of updated game.                                 |
 
-## Users API Documentation
-
-### Create
+### Create User
 
 This is called when a user creates an account.
 
 #### Endpoint URI and Parameters
 
-`{server:port}/users/create`
+`https://tet326.herokuapp.com/api/users/create`
 
 | Parameter  | Description                                      | Example              |
 | ---------- | ------------------------------------------------ | -------------------- |
@@ -133,7 +131,7 @@ This is called when a user wants to login. A hashed session ID is given to the u
 
 #### Endpoint URI and Parameters
 
-`{server:port}/users/login`
+`https://tet326.herokuapp.com/api/users/login`
 
 | Parameter | Description                    | Example              |
 | --------- | ------------------------------ | -------------------- |
@@ -156,7 +154,7 @@ This is called whenever a webpage is routed to. The purpose of this function is 
 
 #### Endpoint URI and Parameters
 
-`{server:port}/users/session`
+`https://tet326.herokuapp.com/api/users/session`
 
 | Parameter | Description                             | Example                                                                     |
 | --------- | --------------------------------------- | --------------------------------------------------------------------------- |
@@ -171,17 +169,17 @@ The User API returns response data in a JSON object.
 | ------ | ---------- | ------------------------------------------------------------- |
 | result | string     | operation status: "session invalid", "session valid", "error" |
 
-### Read
+### Read User
 
 This will generally be called when viewing a user profile.
 
 #### Endpoint URI and Parameters
 
-`{server:port}/users/read`
+`https://tet326.herokuapp.com/api/users/read`
 
-| Parameter | Description                      | Example                            |
-| --------- | -------------------------------- | ---------------------------------- |
-| id        | (required)The desired user's id. | `{server:port}/users/read?id=1234` |
+| Parameter | Description                      | Example                                               |
+| --------- | -------------------------------- | ----------------------------------------------------- |
+| id        | (required)The desired user's id. | `https://tet326.herokuapp.com/api/users/read?id=1234` |
 
 #### Responses
 
@@ -195,13 +193,13 @@ This will generally be called when viewing a user profile.
 | own     | array      | Array containing the IDs of games owned by the user.      |
 | want    | array      | Array containing the IDs of games the user wants to play. |
 
-### Update
+### Update User
 
 This is used to update a user's picture, location, or games.
 
 #### Endpoint URI and Parameters
 
-`{server:port}/users/update`
+`https://tet326.herokuapp.com/api/users/update`
 
 | Parameter | Description                                                          | Example        |
 | --------- | -------------------------------------------------------------------- | -------------- |
@@ -218,13 +216,13 @@ This is used to update a user's picture, location, or games.
 | ------ | ---------- | --------------------------------------------------------- |
 | result | string     | The type of operation status: one of "updated" or "error" |
 
-### Delete
+### Delete User
 
 This is used when a user wants to delete their account.
 
 #### Endpoint URI and Parameters
 
-`{server:port}/users/delete`
+`https://tet326.herokuapp.com/api/users/delete`
 
 | Parameter | Description             | Example      |
 | --------- | ----------------------- | ------------ |
@@ -238,7 +236,27 @@ This is used when a user wants to delete their account.
 
 ## Database
 
-Database: A final up-to-date representation of your database including a brief description of each of the entities in your data model and their relationships if any.
+```
+user document
+{
+    _id: string
+    name: string
+    email: string
+    password: string
+    zip: string
+    sessionId: string
+    own: Array
+    want: Array
+}
+
+games document
+{
+    _id: string
+    name: string
+    own: Array
+    want: Array
+}
+```
 
 ## URL Routes/Mappings
 
