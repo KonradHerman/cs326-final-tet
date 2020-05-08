@@ -41,14 +41,24 @@
 .nav .open > a, .nav .open > a:focus{
 	background-color: transparent;
 }
+.nav > li > a:focus, .nav > li:hover > a{
+	color: #263238;
+}
+.nav > li > a:focus, .nav > li > a{
+	color: #e0f2f1;
+}
 
-.nav > li > a:focus, .nav > li > a:hover{
-	background-color: transparent;
+.dropdown:hover > a > span{
 	color: #263238;
 }
 
-#navbarDropdownMenuLink:hover a{
+
+.dropdown > a:focus > span{
 	color: #263238;
+}
+
+.nav > li > a:focus, .nav > li > a:hover{
+	background-color: transparent;
 }
 
 /* .btn-file {
