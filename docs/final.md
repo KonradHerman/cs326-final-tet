@@ -213,6 +213,7 @@ user document
     email: string
     password: string
     zip: string
+    sessionId: string
     own: Array
     want: Array
 }
